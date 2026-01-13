@@ -186,6 +186,132 @@ For packets larger than 8 bytes:
 | 7 | 75 Kbit/s |
 | 8 | 100 Kbit/s |
 
+## Multi-VESC CAN Setup Guide
+
+### Overview
+
+Connect multiple VESCs via CAN bus for dual/quad motor setups. One VESC acts as master (connected to VESC Tool), others are slaves.
+
+### Physical Wiring
+
+```
+VESC 1 (Master)          VESC 2 (Slave)          VESC 3 (Slave)
+┌─────────────┐          ┌─────────────┐          ┌─────────────┐
+│   CAN H ────┼──────────┼── CAN H ────┼──────────┼── CAN H     │
+│   CAN L ────┼──────────┼── CAN L ────┼──────────┼── CAN L     │
+│   GND ──────┼──────────┼── GND ──────┼──────────┼── GND       │
+└─────────────┘          └─────────────┘          └─────────────┘
+      │                                                  │
+      └── 120Ω                                    120Ω ──┘
+      Termination                              Termination
+      (first device)                          (last device)
+```
+
+**Wire colors (common):**
+- CAN H (High): Yellow or White
+- CAN L (Low): Green or Brown
+- GND: Black
+
+### Termination Resistors
+
+- **Required:** 120Ω resistor at each END of the CAN bus
+- **Location:** First and last VESC only
+- Many VESCs have built-in switchable termination
+- If missing: solder 120Ω between CAN H and CAN L
+
+### CAN ID Configuration
+
+Each VESC needs a unique ID:
+
+| VESC | ID | Role |
+|------|----|----|
+| Master | 0 | Connected to VESC Tool, main control |
+| Slave 1 | 1 | Second motor |
+| Slave 2 | 2 | Third motor |
+| Slave 3 | 3 | Fourth motor |
+
+**To set CAN ID:**
+1. Connect to VESC via USB
+2. Go to App Settings → General
+3. Set "Controller ID" (0-254)
+4. Write configuration
+
+### Baud Rate Configuration
+
+All VESCs must use the same baud rate:
+
+1. Go to App Settings → CAN
+2. Set "CAN Baud Rate" (default: 500 Kbit/s)
+3. Set the same rate on ALL connected VESCs
+
+**Recommended baud rates:**
+- 500 Kbit/s - Standard, reliable
+- 1 Mbit/s - High speed, short cables only
+
+### Status Message Broadcasting
+
+Enable status messages for telemetry:
+
+1. App Settings → CAN
+2. Enable "Send CAN Status"
+3. Set "CAN Status Rate" (e.g., 50 Hz)
+4. Choose which status messages to broadcast (1-6)
+
+### Master/Slave Configuration
+
+**On Master VESC:**
+```
+App Settings → CAN:
+- CAN Mode: Master
+- CAN Controller ID: 0
+- Send CAN Status: Enabled
+- CAN Status Rate: 50 Hz
+```
+
+**On Slave VESCs:**
+```
+App Settings → CAN:
+- CAN Mode: Slave
+- CAN Controller ID: 1, 2, 3...
+- Send CAN Status: Enabled (for telemetry)
+```
+
+### Dual Motor Differential Control
+
+For dual motor setups (e-skate, EUC):
+
+1. **Master VESC:** Configure input (PPM, ADC, etc.)
+2. **App Settings → General:** Enable "Multiple ESCs over CAN"
+3. Set "Target VESC ID" to slave ID
+4. Configure torque/speed distribution in "Dual Motor" settings
+
+### Common Issues and Solutions
+
+| Issue | Cause | Solution |
+|-------|-------|----------|
+| No communication | Wiring issue | Check CAN H-H, L-L connections |
+| Intermittent | Missing termination | Add 120Ω at bus ends |
+| One VESC not responding | Wrong ID | Verify unique IDs, reconnect USB |
+| Noise/glitches | EMI interference | Use twisted pair, add ferrite |
+| "CAN not responding" | Baud mismatch | Set same baud rate on all |
+
+### Debugging CAN Connection
+
+In VESC Tool terminal:
+```
+can_scan          # Scan for devices
+can_list          # List connected devices
+can_send_sid ID DATA  # Send test message
+```
+
+### Wiring Best Practices
+
+1. **Keep cables short** (<2m total bus length recommended)
+2. **Use twisted pair** for CAN H and CAN L
+3. **Run CAN separate** from high-current motor wires
+4. **Add ferrite cores** if experiencing noise
+5. **Ensure good ground** connection between all VESCs
+
 ## BLE Protocol
 
 ### GATT Service

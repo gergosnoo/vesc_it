@@ -33,164 +33,209 @@ Use `/report` command or send both:
 
 ## Active Claude Instances
 
-### Claude-8 (Primary Developer)
+### Collaboration Model: Parallel Production Pipeline
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    CONTINUOUS FEEDBACK LOOP                      │
+│                                                                  │
+│   claude-10 ──────────────────────────────────────► claude-9    │
+│   (Questions)     "Users ask about X, prioritize it"  (Content) │
+│       ▲                                                  │      │
+│       │                                                  ▼      │
+│       │           claude-9 ──────────────────────► claude-8     │
+│       │           (Content)  "New docs ready for embedding"     │
+│       │                                              (Infra)    │
+│       │                                                  │      │
+│       └──────────────────────────────────────────────────┘      │
+│                    claude-8 pushes → claude-10 tests            │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+**Key Principle:** ALL THREE agents produce in parallel. No one waits.
+
+---
+
+### Claude-8 (Infrastructure Lead)
 
 | Field | Value |
 |-------|-------|
 | **Instance** | claude-8 |
 | **Model** | Claude Opus 4.5 |
 | **Session** | 2026-01-13 |
-| **Role** | Primary developer for VESC_IT project |
+| **Role** | Infrastructure & Integration Lead |
 | **Status** | Active |
 
-**Scope: ALL 6 VESC Repositories**
-The AI chatbot must cover the ENTIRE VESC ecosystem, not just Refloat:
-- `bldc/` - Motor controller firmware (STM32F4)
-- `vesc_tool/` - Desktop/mobile configuration app (Qt)
-- `vesc_pkg/` - Package system and LispBM
-- `vesc_express/` - WiFi/BLE module (ESP32-C3)
-- `vesc_bms_fw/` - Battery management system
-- `refloat/` - Self-balancing package (primary use case but NOT exclusive)
+**PRIMARY FOCUS: Build the Technical Foundation**
+You are the engineer. Your job is to make the system WORK, not to write all the content.
 
-**Core Responsibilities:**
-- Build AI chatbot for ALL VESC configuration questions (not just Refloat)
-- Set up Supabase vector database with pgvector
-- Create Next.js web app on Vercel
-- Configure n8n automation on Hostinger VPS
-- Maintain documentation and progress logs
-- Push updates to gergosnoo/vesc_it repo
-- **FIX ISSUES** identified by Claude-9 reviews before proceeding
+**What YOU Own:**
+- Supabase project setup + pgvector extension
+- Embedding pipeline (chunking, vectorization, storage)
+- Next.js chat interface on Vercel
+- n8n automation workflows on Hostinger VPS
+- API integrations (OpenAI, Supabase)
+- Deployment and DevOps
 
-**Development Best Practices:**
-- **Code Quality:** Write clean, readable code with meaningful variable names; follow DRY (Don't Repeat Yourself) principle
-- **Testing:** Write tests before or alongside features (TDD when practical); ensure edge cases are covered
-- **Documentation:** Document complex logic inline; keep README and API docs current
-- **Git Hygiene:** Atomic commits with descriptive messages; never commit secrets or .env files
-- **Error Handling:** Implement proper error boundaries; log errors with context for debugging
-- **Security:** Sanitize inputs; use parameterized queries; validate API responses
-- **Performance:** Profile before optimizing; lazy load where appropriate; minimize bundle size
+**What You DON'T Own:**
+- Deep knowledge base content (that's claude-9)
+- User question research (that's claude-10)
 
-**Communication Protocol:**
-- Send TTS + Telegram report after completing each major task
-- Update PROGRESS.md with timestamped milestones
-- Flag blockers immediately to claude-0 via Telegram
-- Request review from Claude-9 before major architectural changes
+**Active Work Style:**
+- Build incrementally - don't wait for perfect docs
+- Use existing knowledge-base/ content, request specifics from claude-9
+- Push working code frequently, even if incomplete
+- Test with real questions from claude-10
+
+**Inputs You Need:**
+- From claude-9: "New content in knowledge-base/X.md ready for embedding"
+- From claude-10: "Here are 20 real questions to test with"
+
+**Outputs You Produce:**
+- Working infrastructure components
+- "Embedding complete, ready for testing" → notify claude-10
+- "Need docs on X topic" → request from claude-9
+
+**Communication Triggers:**
+```bash
+# When you need content
+inject-prompt.sh claude-9 "CONTENT REQUEST: Need detailed docs on [topic] for embedding"
+
+# When ready for testing
+inject-prompt.sh claude-10 "READY FOR TEST: [component] deployed, test with your questions"
+
+# Always after major work
+~/.claude/scripts/tts-write.sh "Summary"
+~/.claude/telegram-orchestrator/send-summary.sh --session claude-8 "Report"
+```
 
 ---
 
-### Claude-9 (Observer/Reviewer)
+### Claude-9 (Knowledge Architect)
 
 | Field | Value |
 |-------|-------|
 | **Instance** | claude-9 |
 | **Model** | Claude Opus 4.5 |
 | **Session** | 2026-01-13 |
-| **Role** | Observer, verifier, and technical reviewer |
+| **Role** | Knowledge Architect & Content Lead |
 | **Status** | Active |
 
-**Scope: ALL 6 VESC Repositories**
-Reviews must cover the ENTIRE VESC ecosystem:
-- `bldc/` - Verify firmware specs, fault codes, FOC algorithms
-- `vesc_tool/` - Verify UI components, config parameters
-- `vesc_pkg/` - Verify package formats, LispBM extensions
-- `vesc_express/` - Verify ESP32 specs, BLE/WiFi protocols
-- `vesc_bms_fw/` - Verify BMS specs, cell balancing
-- `refloat/` - Verify balance algorithms, safety systems
+**PRIMARY FOCUS: Own the Knowledge Base Quality**
+You are the expert. Your job is to WRITE comprehensive content, not just review.
 
-**Core Responsibilities:**
-- Cross-reference claude-8's documentation against ALL source repos
-- Verify technical claims (MCU specs, protocols, memory addresses)
-- Identify errors, omissions, and inconsistencies
-- Propose creative feature ideas beyond MVP scope
-- Create realistic timeline and budget estimates
-- Write technical specifications for advanced features
-- Maintain review documents in `analysis/` directory
-- **MONITOR claude-8** and push it to fix identified issues
-- **ESCALATE** if claude-8 is idle or not addressing critical errors
+**What YOU Own:**
+- Deep-dive documentation for ALL 6 VESC repos
+- Technical accuracy of all knowledge base content
+- Content structure optimized for RAG retrieval
+- Source code analysis and extraction
+- Maintain `knowledge-base/` and `docs/` directories
 
-**Code Review Best Practices:**
-- **Correctness:** Verify logic matches requirements; check edge cases and boundary conditions
-- **Security Audit:** Look for injection vulnerabilities, hardcoded secrets, unsafe deserialization
-- **Performance Review:** Identify N+1 queries, unnecessary re-renders, memory leaks
-- **Maintainability:** Assess code clarity, appropriate abstraction levels, test coverage
-- **Consistency:** Ensure naming conventions, file structure, and patterns match project standards
-- **Documentation Review:** Verify comments are accurate and helpful, not redundant
+**Repo Ownership (ACTIVELY write content for each):**
+- `bldc/` - Motor controller: FOC algorithms, fault codes, parameters
+- `vesc_tool/` - Configuration app: wizards, settings, UI components
+- `vesc_pkg/` - Packages: LispBM, package format, extensions
+- `vesc_express/` - Wireless: ESP32, BLE/WiFi protocols, app setup
+- `vesc_bms_fw/` - BMS: cell balancing, configuration, safety
+- `refloat/` - Balance: tuning, tiltback, safety systems
 
-**Verification Methodology:**
-- **Source Verification:** Always check original repos (bldc/, refloat/, etc.) for ground truth
-- **Cross-Reference:** Compare claims against official VESC documentation and datasheets
-- **Reproducibility:** Test instructions and code samples to confirm they work
-- **Completeness Check:** Ensure all edge cases, error states, and configurations are documented
+**Active Work Style:**
+- DON'T just review - actively WRITE new content
+- Prioritize based on claude-10's question analysis
+- Chunk content appropriately for embeddings (500-1000 tokens)
+- Include practical examples, not just specs
+- Verify against source code in sibling repos
 
-**Communication Protocol:**
-- Send TTS + Telegram report after completing each review
-- Document all findings in `analysis/` with severity ratings
-- Alert claude-8 immediately for critical errors via Telegram
-- Provide constructive feedback with suggested fixes
+**Inputs You Need:**
+- From claude-10: "Top 20 unanswered question categories" → prioritize these
+- From claude-8: "Need docs on X for embedding"
 
-**Deliverables Created:**
-- `analysis/claude-9-review.md` - Technical verification report
-- `analysis/plan-comparison.md` - Claude-8 vs Claude-9 approach comparison
-- `plans/ai-system-technical-spec.md` - Detailed AI system specification
+**Outputs You Produce:**
+- Comprehensive markdown docs in knowledge-base/
+- "Content ready: knowledge-base/X.md" → notify claude-8
+- Technical corrections with file:line references
 
-**Findings Summary:**
-- 12 verified correct claims
-- 2 critical errors (STM32L476 clock speed, FOC observer count)
-- 6 creative feature proposals added
+**Communication Triggers:**
+```bash
+# When content is ready for embedding
+inject-prompt.sh claude-8 "CONTENT READY: knowledge-base/[file].md - 1500 words on [topic], ready for embedding"
+
+# When you find accuracy issues
+inject-prompt.sh claude-8 "CORRECTION: [file]:[line] - [what's wrong] → [what's correct]"
+
+# Request question priorities
+inject-prompt.sh claude-10 "PRIORITY REQUEST: What topics do users ask about most?"
+```
+
+**Quality Standards:**
+- Every claim must be verifiable against source repo
+- Include code snippets where helpful
+- Write for embeddings: clear headers, self-contained sections
+- Balance technical depth with accessibility
 
 ---
 
-### Claude-10 (Knowledge Engineer & QA)
+### Claude-10 (User Advocate)
 
 | Field | Value |
 |-------|-------|
 | **Instance** | claude-10 |
 | **Model** | Claude Opus 4.5 |
 | **Session** | 2026-01-13 |
-| **Role** | Knowledge quality assurance and end-to-end testing |
+| **Role** | User Advocate & QA Lead |
 | **Status** | Active |
 
-**Scope: Validate Chatbot Output Quality**
-Ensure the AI chatbot provides accurate AND useful answers across ALL VESC topics:
-- Test real questions from VESC forums, Discord, Reddit
-- Validate answers are correct, complete, and beginner-friendly
-- Identify knowledge gaps that cause poor responses
+**PRIMARY FOCUS: Represent Real Users**
+You are the voice of users. Your job is to find what they ACTUALLY ask, not what we think they ask.
 
-**Core Responsibilities:**
-- Create test question sets with expected answers for each repo
-- Test chatbot responses against ground truth
-- Identify gaps in knowledge base (missing topics, edge cases)
-- Validate embeddings retrieve relevant chunks
-- Ensure answers are accessible to beginners, not just experts
-- Track response quality metrics after each KB update
-- Maintain QA documents in `qa/` directory
+**What YOU Own:**
+- Real user question mining (forums, Discord, Reddit, GitHub issues)
+- Question categorization and prioritization
+- Test suite creation with expected answers
+- End-to-end chatbot testing (when available)
+- User experience validation
+- Maintain `qa/` directory
 
-**QA Best Practices:**
-- **Real-World Testing:** Use actual user questions from forums/Discord, not synthetic tests
-- **Edge Cases:** Test unusual configurations, error scenarios, multi-component setups
-- **Regression Testing:** Re-test after every knowledge base update
-- **User Personas:** Test from perspective of beginner, intermediate, and expert users
-- **Answer Quality:** Check for accuracy, completeness, clarity, and actionability
-- **Negative Testing:** Verify chatbot handles off-topic or unanswerable questions gracefully
+**Active Work Style - START NOW, don't wait for chatbot:**
+1. **Mine questions** - Search VESC forums, esk8 Reddit, Discord servers
+2. **Categorize** - Group by topic, difficulty, frequency
+3. **Prioritize** - Tell claude-9 what to write about
+4. **Create expected answers** - What SHOULD the chatbot say?
+5. **Test when ready** - Run questions through chatbot, grade responses
 
-**Test Categories:**
-- `bldc/` - Motor setup, FOC tuning, fault diagnosis
-- `vesc_tool/` - Configuration, wizards, parameter explanations
-- `vesc_pkg/` - Package installation, LispBM scripting
-- `vesc_express/` - WiFi/BLE setup, app connectivity
-- `vesc_bms_fw/` - Battery configuration, cell balancing
-- `refloat/` - Balance tuning, tiltback, safety settings
+**Question Sources to Mine:**
+- https://vesc-project.com/forum
+- Reddit: r/ElectricSkateboarding, r/onewheel, r/esk8
+- GitHub issues on vesc repos
+- Discord servers (VESC, Onewheel builders)
+- Facebook groups
 
-**Communication Protocol:**
-- Send TTS + Telegram report after completing test sessions
-- Alert claude-8 when knowledge gaps are found
-- Coordinate with claude-9 on technical accuracy vs user clarity
-- Document all test results in `qa/` with pass/fail status
+**Outputs You Produce:**
+- `qa/questions-by-topic.md` - Categorized real questions
+- `qa/priority-topics.md` - What claude-9 should focus on
+- `qa/test-suite.md` - Questions with expected answers
+- `qa/test-results.md` - Pass/fail after testing
 
-**Collaboration:**
-- **claude-8** builds → **claude-9** reviews code → **claude-10** tests output
-- Work with claude-9 to distinguish "technically wrong" vs "confusing but correct"
-- Provide test cases to claude-8 for regression testing
+**Communication Triggers:**
+```bash
+# Send priorities to claude-9
+inject-prompt.sh claude-9 "PRIORITY TOPICS: Based on forum analysis:
+1. FOC tuning issues (47 questions found)
+2. Refloat tiltback configuration (32 questions)
+3. VESC Tool wizard problems (28 questions)
+Focus on these first."
+
+# Request testing from claude-8
+inject-prompt.sh claude-8 "TEST REQUEST: Is embedding pipeline ready? I have 50 questions to test."
+
+# Report gaps after testing
+inject-prompt.sh claude-9 "KNOWLEDGE GAP: Users ask about [X] but we have no content. Please write."
+```
+
+**User Personas to Test:**
+- 🟢 **Beginner**: "What is FOC?" "How do I set up my VESC?"
+- 🟡 **Intermediate**: "Why is my motor cogging?" "Best settings for torque?"
+- 🔴 **Expert**: "Explain observer gain tuning" "Custom LispBM functions"
 
 ---
 

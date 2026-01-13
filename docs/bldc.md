@@ -217,6 +217,108 @@ The firmware includes a full LispBM interpreter for custom logic:
 
 *Source: `bldc/datatypes.h:144-173`*
 
+## Motor Detection Troubleshooting
+
+### Detection Flowchart
+
+```
+Motor Detection Failed?
+         │
+         ▼
+    ┌────────────────┐
+    │ Motor spinning │──No──► Check: Motor connected?
+    │   at all?      │        Phase wires secure?
+    └───────┬────────┘
+            │ Yes
+            ▼
+    ┌────────────────┐
+    │ "R is 0" or    │──Yes─► Increase detection current
+    │ "Bad detection"│        (5A → 10A → 15A)
+    └───────┬────────┘
+            │ No
+            ▼
+    ┌────────────────┐
+    │ Hall Error 255 │──Yes─► Check Hall sensor wiring
+    │                │        (5V, GND, H1, H2, H3)
+    └───────┬────────┘
+            │ No
+            ▼
+    ┌────────────────┐
+    │ Detection runs │──Yes─► Remove load from motor
+    │ but fails?     │        (belt, wheel, gear)
+    └───────┬────────┘
+            │ No
+            ▼
+    ┌────────────────┐
+    │ PPM/ADC input  │──Yes─► Disable inputs before
+    │ configured?    │        detection (App → General)
+    └───────┬────────┘
+            │ No
+            ▼
+    ┌────────────────┐
+    │ VESC Tool and  │──No──► Update both to same
+    │ FW versions    │        version (e.g., both 6.05)
+    │ match?         │
+    └───────┬────────┘
+            │ Yes
+            ▼
+       Try different
+       sensor mode
+```
+
+### Common Detection Errors
+
+| Error | Cause | Solution |
+|-------|-------|----------|
+| "R is 0" | Motor not spinning during RL measurement | Increase detection current (Motor → FOC → Detection Current) |
+| "Bad detection result" | Insufficient current or load on motor | Remove belt/wheel, increase current to 10-15A |
+| "Hall Error 255" | Hall sensor wiring issue | Check 5V, GND, and signal wires; verify sensor type |
+| "Detection timeout" | Motor stuck or shorted | Check for mechanical binding; verify phase connections |
+| "λ too low/high" | Incorrect motor parameters | Try different motor type preset; manual flux linkage entry |
+
+### Detection Current Guidelines
+
+| Motor Type | Recommended Current |
+|------------|---------------------|
+| Small hub motors | 3-5A |
+| Mid-size hub motors | 5-10A |
+| Large outrunners | 10-15A |
+| High-power motors | 15-20A |
+
+**Rule of thumb:** Start at 5A, increase by 5A increments if detection fails.
+
+### Pre-Detection Checklist
+
+Before running motor detection:
+- [ ] Motor is disconnected from load (no belt/wheel tension)
+- [ ] All three phase wires securely connected
+- [ ] Hall sensors wired correctly (if using)
+- [ ] No PPM/ADC/UART inputs active
+- [ ] Battery fully charged (stable voltage)
+- [ ] VESC Tool version matches firmware version
+
+### Hall Sensor Wiring
+
+Standard 6-pin JST connector:
+```
+Pin 1: 5V (Red)
+Pin 2: H1 (Yellow)
+Pin 3: H2 (Green)
+Pin 4: H3 (Blue)
+Pin 5: Temperature (optional)
+Pin 6: GND (Black)
+```
+
+**Note:** Wire colors vary by manufacturer. Use multimeter to verify 5V and GND.
+
+### Sensorless Detection Tips
+
+For sensorless FOC detection:
+1. Ensure motor can spin freely
+2. Use higher detection current (10A+)
+3. Motor will spin briefly during detection
+4. If it fails, try "Measure Flux Linkage" separately
+
 ## Resources
 
 - [VESC Project Website](https://vesc-project.com/)

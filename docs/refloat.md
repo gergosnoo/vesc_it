@@ -15,6 +15,89 @@ Advanced self-balancing package for Onewheel-style vehicles:
 **License:** GPL-3.0
 **Author:** Lukas Hrazky
 
+## Migrating from Float to Refloat
+
+### Overview
+
+Refloat is the successor to Float package. Migration is straightforward but requires understanding a few key differences.
+
+### Migration Steps
+
+1. **Backup Current Settings**
+   - In VESC Tool, go to App Settings → General
+   - Click "Save XML" to export your current configuration
+   - Save motor.xml and app.xml separately
+
+2. **Install Refloat**
+   - Open VESC Tool → VESC Packages
+   - Remove Float package (if installed)
+   - Install Refloat from the package store
+   - Click "Write" to flash to VESC
+
+3. **Restore Settings**
+   - Most settings transfer automatically
+   - PID values (kp, ki, kp2) carry over directly
+   - ATR settings remain compatible
+
+### Mahony KP Auto-Migration
+
+**Important:** Refloat handles IMU differently than Float.
+
+When migrating from Float, if your `mahony_kp` value is > 1.0, Refloat automatically sets:
+- `mahony_kp` = 0.4
+- `mahony_ki` = 0
+- `mahony_kp_decay` = 0.1
+
+**Why?** Float used higher KP values (1.5-2.5) due to different IMU processing. Refloat's Mahony filter is more responsive at lower values.
+
+**Manual Override:** If you prefer your old values, you can manually set them back in the Refloat UI, but start with the auto-migrated values first.
+
+### Settings That Transfer
+
+| Setting | Transfer Status |
+|---------|-----------------|
+| PID (kp, ki, kp2) | ✅ Direct transfer |
+| ATR settings | ✅ Direct transfer |
+| Tiltback settings | ✅ Direct transfer |
+| Startup settings | ✅ Direct transfer |
+| Fault angles | ✅ Direct transfer |
+
+### Settings That May Need Adjustment
+
+| Setting | Notes |
+|---------|-------|
+| Mahony KP | Auto-adjusted if > 1.0 |
+| LED Type | May need reconfiguration |
+| Tune Modifiers | Check new defaults |
+
+### LED Type After Migration
+
+If LEDs behave unexpectedly after migration:
+1. Go to Refloat UI → LEDs tab
+2. Verify LED Type matches your hardware:
+   - `WS2812` - Standard addressable LEDs
+   - `SK6812` - RGBW addressable LEDs
+   - `External` - External controller (LCM)
+   - `None` - Disable LED control
+
+**Common Issue:** "LEDs stay on with type NONE" - This happens when the LED type wasn't properly set. Explicitly select your LED type and write configuration.
+
+### Troubleshooting Migration
+
+| Issue | Solution |
+|-------|----------|
+| Board feels different | Check Mahony KP was auto-adjusted |
+| LEDs not working | Reconfigure LED type in Refloat UI |
+| Settings missing | Re-import from saved XML, adjust manually |
+| Package won't install | Update VESC Tool to latest version |
+
+### Resources
+
+- [pev.dev Initial Board Setup Guide](https://pev.dev/t/initial-board-setup/4)
+- [Refloat GitHub](https://github.com/lukash/refloat)
+
+---
+
 ## Key Features
 
 ### Balance Control

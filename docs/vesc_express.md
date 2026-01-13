@@ -104,6 +104,138 @@ VESC Express is ESP32-based firmware providing wireless connectivity for VESC sy
 | `can_baud_rate` | 125K-1M |
 | `can_status_rate_hz` | Status rate |
 
+## WiFi Setup Guide
+
+### Initial Configuration (USB First)
+
+Before WiFi works, you must configure it via USB:
+
+1. **Connect via USB** to VESC Express
+2. Open **VESC Tool** → Connect via USB serial
+3. Go to **VESC Express** → **WiFi** tab
+
+### WiFi Station Mode (Join Existing Network)
+
+Connect VESC Express to your home/phone WiFi:
+
+1. Set **WiFi Mode**: Station
+2. Enter **SSID**: Your network name
+3. Enter **Password**: Your WiFi password
+4. Enable **TCP Local**: Yes
+5. Click **Write** to save
+
+**After reboot:** VESC Express joins your network and gets an IP address.
+
+### WiFi Access Point Mode (Create Network)
+
+VESC Express creates its own WiFi network:
+
+1. Set **WiFi Mode**: Access Point
+2. Set **AP SSID**: Custom name (e.g., "MyVESC")
+3. Set **AP Password**: At least 8 characters
+4. Enable **TCP Local**: Yes
+5. Click **Write** to save
+
+**Connect:** Join the network from your phone/computer, then connect VESC Tool to IP `192.168.4.1`.
+
+### Finding the IP Address
+
+**In Station mode:**
+- Check your router's DHCP client list
+- Or use VESC Tool → USB → Terminal: `net_state`
+
+**In AP mode:**
+- Always `192.168.4.1`
+
+### Connecting VESC Tool via WiFi
+
+1. Phone/computer on same network as VESC Express
+2. Open VESC Tool → **Autoconnect** or **TCP Connection**
+3. Enter IP address and port **65102**
+4. Click Connect
+
+## BLE Setup Guide
+
+### BLE Pairing Process
+
+1. Go to **VESC Express** → **BLE** tab
+2. Set **BLE Mode**: Encrypted (recommended) or Open
+3. Set **BLE Name**: 8 characters max (shown during pairing)
+4. Set **BLE PIN**: 6 digits (if encrypted)
+5. Click **Write** and reboot
+
+### Connecting via BLE
+
+**From VESC Tool Mobile:**
+1. Enable Bluetooth on phone
+2. Open VESC Tool → **BLE** scan
+3. Select your device (matches BLE Name)
+4. Enter PIN if encrypted mode
+5. Connection established
+
+**From Floaty/Float Control App:**
+1. Enable Bluetooth
+2. App auto-scans for VESC devices
+3. Select your board
+4. Enter PIN if prompted
+
+### BLE Mode Options
+
+| Mode | Security | Use Case |
+|------|----------|----------|
+| Disabled | N/A | WiFi only |
+| Open | None | Quick testing |
+| Encrypted | PIN required | Recommended for daily use |
+
+## Troubleshooting Connectivity
+
+### WiFi Issues
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Can't connect to AP | Wrong password | Re-enter password via USB |
+| No IP in station mode | Router not assigning | Check DHCP, try static IP |
+| Connection drops | Signal strength | Move closer or use AP mode |
+| "Connection refused" | TCP not enabled | Enable "TCP Local" setting |
+
+### BLE Issues
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Device not found | BLE disabled | Enable in VESC Express settings |
+| Pairing fails | Wrong PIN | Verify PIN matches settings |
+| Drops constantly | Phone compatibility | Try different app, disable WiFi |
+| "Floaty not seeing board" | BLE mode issue | Set to "Open" for testing |
+
+### Factory Reset
+
+If connectivity is broken and can't configure via USB:
+
+1. **Via USB Terminal:**
+   ```
+   conf_default_all
+   reboot
+   ```
+
+2. **Hardware reset (if available):**
+   - Hold boot button while powering on
+   - May vary by hardware variant
+
+### App Compatibility
+
+| App | Platform | Connection |
+|-----|----------|------------|
+| VESC Tool | iOS/Android/Desktop | BLE, WiFi, USB |
+| Floaty | iOS/Android | BLE only |
+| Float Control | iOS/Android | BLE only |
+| VESC Monitor | Android | BLE, WiFi |
+
+### Recommended Setup for Onewheels
+
+1. **Primary:** BLE Encrypted mode for mobile apps
+2. **Backup:** WiFi AP mode for configuration
+3. Keep USB available for troubleshooting
+
 ## Build Instructions
 
 ### Requirements
