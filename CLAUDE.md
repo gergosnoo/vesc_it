@@ -79,7 +79,7 @@ When session ends, update PROGRESS.md with:
 
 | Component | Technology | Status |
 |-----------|------------|--------|
-| Knowledge Base | Markdown docs | ✅ Complete |
+| Knowledge Base | Markdown docs | 🔄 In Progress |
 | Vector DB | Supabase + pgvector | 🔲 Pending |
 | Web App | Next.js 14 + Vercel | 🔲 Pending |
 | AI | OpenAI GPT-4o-mini + Embeddings | 🔲 Pending |
@@ -129,15 +129,31 @@ The AI should be expert in these XML configs from VESC Tool:
 
 ## Working Guidelines
 
+### ⚠️ MANDATORY: Date & Time Tracking
+
+**CRITICAL REQUIREMENT** - Every milestone entry MUST include both date AND time:
+
+```bash
+# Get BOTH before every milestone entry - NO EXCEPTIONS
+bash ~/.claude/scripts/get-timestamp.sh date   # 2026-01-13
+bash ~/.claude/scripts/get-timestamp.sh time   # 22:46
+```
+
+**Milestone format in PROGRESS.md:**
+```
+| Date | Time | Agent | Milestone | Notes |
+|------|------|-------|-----------|-------|
+| 2026-01-13 | 22:46 | claude-8 | Did something | Details here |
+```
+
+**NEVER:**
+- Hallucinate timestamps
+- Use only time without date
+- Skip timestamp collection before logging
+
 ### Progress Tracking
 
 **ALWAYS use PROGRESS.md for session logging:**
-
-```bash
-# Get accurate timestamps before logging
-bash ~/.claude/scripts/get-timestamp.sh time   # HH:MM
-bash ~/.claude/scripts/get-timestamp.sh date   # YYYY-MM-DD
-```
 
 ### Git Operations
 
