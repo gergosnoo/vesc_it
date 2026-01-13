@@ -239,6 +239,87 @@ inject-prompt.sh claude-9 "KNOWLEDGE GAP: Users ask about [X] but we have no con
 
 ---
 
+## ⛔ Testing Gate (MANDATORY)
+
+**NOTHING is "done" until claude-10 approves it.**
+
+This is a hard gate. Claude-8 and claude-9 can work on OTHER parts while waiting for test results, but no component is considered complete without passing tests.
+
+### Gate Rules
+
+| Rule | Description |
+|------|-------------|
+| **No Ship Without Test** | Claude-8 cannot mark infrastructure "complete" without claude-10 testing |
+| **No Embed Without Verify** | Content from claude-9 must be tested against real questions before mass embedding |
+| **Parallel OK** | Work on new features while testing old ones, but old ones stay "pending" |
+| **Block on Critical** | If claude-10 finds critical issues, related work STOPS until fixed |
+
+### What "Testable" Means
+
+| Component | Testable When | Claude-10 Tests |
+|-----------|---------------|-----------------|
+| Supabase + pgvector | Database created, schema ready | Can query vectors, similarity search works |
+| Embedding pipeline | Script runs without error | Embeds sample docs, retrieves correctly |
+| Knowledge base content | Doc written, claims verified | Answers real user questions accurately |
+| Chat interface | UI deployed, can type | End-to-end: question → relevant answer |
+| n8n automation | Workflow configured | Triggers correctly, syncs as expected |
+
+### User Testing Interface
+
+**Claude-10 MUST create a simple testing experience for the user (Gergő):**
+
+```
+qa/
+├── TESTING.md              # "Here's what you can test right now"
+├── test-suite.md           # Questions with expected answers
+├── test-results.md         # Pass/fail log
+└── quick-test.sh           # One-command test runner (if applicable)
+```
+
+**TESTING.md format:**
+```markdown
+# What You Can Test Right Now
+
+## ✅ Ready for Testing
+- [ ] Component X: `curl https://...` → expect "..."
+- [ ] Ask chatbot: "What is FOC?" → should mention field oriented control
+
+## ⏳ Not Ready Yet
+- Embedding pipeline (claude-8 still building)
+- Chat UI (pending deployment)
+
+## 🧪 Last Test Results
+| Question | Expected | Actual | Pass? |
+|----------|----------|--------|-------|
+| ... | ... | ... | ✅/❌ |
+```
+
+### Testing Communication Flow
+
+```
+claude-8: "READY FOR TEST: Supabase schema deployed"
+     ↓
+claude-10: Tests similarity search, documents results
+     ↓
+claude-10: "TEST PASSED: Supabase ready" OR "TEST FAILED: [issue]"
+     ↓
+If PASSED: claude-8 proceeds to next component
+If FAILED: claude-8 MUST fix before proceeding
+```
+
+### Wake-Up Summary
+
+When the user (Gergő) wakes up, they should find:
+
+1. **qa/TESTING.md** - Clear list of what's testable
+2. **qa/test-results.md** - What passed/failed overnight
+3. **PROGRESS.md** - Updated with all milestones
+4. **Telegram** - Summary of what happened
+
+**Claude-10 is responsible for this morning summary.**
+
+---
+
 ### Handoff Notes
 
 When session ends, update PROGRESS.md with:

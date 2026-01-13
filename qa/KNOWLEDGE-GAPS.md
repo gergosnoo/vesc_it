@@ -8,12 +8,16 @@
 
 ## Executive Summary
 
-After researching real user questions from VESC forums, Discord, and Reddit, I identified **10 knowledge gaps** in the current documentation. These are topics users frequently ask about that are NOT adequately covered in our knowledge base.
+After researching real user questions from VESC forums, Discord, and Reddit, I identified **11 knowledge gaps** in the current documentation.
 
-**Impact:** If left unaddressed, the AI chatbot will:
-- Fail to answer ~40% of common beginner questions
-- Give incomplete troubleshooting advice
-- Miss critical migration/upgrade guidance
+**Status Update (23:35):**
+- ✅ **10/11 gaps FILLED** by claude-9 (3,505 lines of content)
+- ⚠️ **1 CRITICAL gap remains:** GAP-11 Safety Critical Settings
+
+**Remaining Impact:**
+- Chatbot CANNOT safely answer nosedive/BMS bypass questions
+- Users could get INJURED from bad safety advice
+- **GAP-11 MUST be written before launch**
 
 ---
 
@@ -80,23 +84,34 @@ After researching real user questions from VESC forums, Discord, and Reddit, I i
 
 ---
 
-### GAP-10: VESC Express WiFi/BLE Setup Guide
+### GAP-10: VESC Express WiFi/BLE Setup Guide ✅ FILLED
 **Severity:** HIGH
-**File:** `docs/vesc_express.md`
-**Evidence:** Connectivity issues are top complaints
+**File:** `knowledge-base/vesc-express-wifi-ble-setup.md`
+**Status:** COMPLETE (252 lines, claude-9)
+
+---
+
+### GAP-11: Safety Critical Settings ⚠️ NOT WRITTEN
+**Severity:** CRITICAL
+**File:** `knowledge-base/safety-critical-settings.md` (needs creation)
+**Evidence:** pev.dev, forums - LIFE SAFETY questions
 
 **Missing Content:**
-- Initial WiFi configuration steps (USB first)
-- Network SSID/password setup in VESC Tool
-- BLE pairing process
-- Troubleshooting connection drops
-- App compatibility (Floaty, Float Control)
-- Factory reset procedure
+- What causes nosedives on VESC Onewheels
+- How to prevent nosedives (current limits, pushback respect)
+- BMS bypass (charge-only) setup and rationale
+- Battery cutoff settings to avoid sudden shutoff
+- VESC 6.05 upgrade warnings (heel lift, speed tracker changes)
+- UBox auto-shutdown issues
 
 **User Question Examples:**
-- "VESC Express WiFi - how to configure network?"
-- "BLE connection drops constantly on my phone"
-- "Floaty app not seeing my board"
+- "What causes nosedives on VESC Onewheels?"
+- "How do I set up BMS bypass (charge-only)?"
+- "Heel lift stopped working after 6.05 upgrade"
+- "How to prevent BMS from cutting power while riding?"
+- "What battery cutoff settings prevent nosedives?"
+
+**Impact:** Users could get INJURED if chatbot gives wrong safety advice.
 
 ---
 
@@ -176,20 +191,21 @@ After researching real user questions from VESC forums, Discord, and Reddit, I i
 
 ---
 
-## Recommended Actions for claude-8
+## Recommended Actions for claude-9
 
-| Priority | Gap | Action | Est. Effort |
-|----------|-----|--------|-------------|
-| 1 | GAP-01 | Add migration section to refloat.md | 15 min |
-| 2 | GAP-03 | Add troubleshooting flowchart to bldc.md | 20 min |
-| 3 | GAP-05 | Add CAN bus section to protocols.md | 20 min |
-| 4 | GAP-10 | Expand vesc_express.md with setup guide | 15 min |
-| 5 | GAP-04 | Add FOC tuning section to bldc.md | 15 min |
-| 6 | GAP-02 | Add LED troubleshooting to refloat.md | 10 min |
-| 7 | GAP-08/09 | Complete refloat.md setpoint docs | 10 min |
-| 8 | GAP-06/07 | Add hidden features section | 5 min |
+| Priority | Gap | Action | Status |
+|----------|-----|--------|--------|
+| **1** | **GAP-11** | **Write safety-critical-settings.md** | ⚠️ NOT DONE |
+| 2 | GAP-01 | Migration guide | ✅ DONE (201 lines) |
+| 3 | GAP-03 | Detection troubleshooting | ✅ DONE (285 lines) |
+| 4 | GAP-05 | CAN bus setup | ✅ DONE (266 lines) |
+| 5 | GAP-10 | WiFi/BLE guide | ✅ DONE (252 lines) |
+| 6 | GAP-04 | FOC tuning | ✅ DONE (276 lines) |
+| 7 | GAP-02 | LED troubleshooting | ✅ DONE (234 lines) |
+| 8 | GAP-08/09 | Setpoint + Mahony | ✅ DONE (379 lines) |
+| 9 | GAP-06/07 | Hidden modes | ✅ DONE (210 lines) |
 
-**Total estimated:** ~2 hours of documentation work
+**Remaining:** GAP-11 Safety Critical (~250 lines needed)
 
 ---
 
