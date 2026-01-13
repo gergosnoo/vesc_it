@@ -111,8 +111,7 @@ Read the documentation in this order:
 
 ## License
 
-Documentation: MIT License
-Referenced repositories maintain their original licenses (GPL-3.0)
+This project is licensed under GPL-3.0, consistent with the VESC ecosystem.
 
 ## Contributing
 

@@ -82,6 +82,21 @@ The ESP-IDF BLE implementation doesn't show this UUID in the same format. While 
 4. **Well-Organized** - Logical structure from overview to details
 5. **FOC Control Loop** - Correctly describes Clarke/Park transforms and PI controllers
 
+#### 5. Incomplete FOC Observer Types
+
+**Location:** `docs/bldc.md:42-47`
+**Claim:** Lists 5 observer types with "MXV variants"
+**Reality:** There are 7 distinct observer types in `datatypes.h:128-134`:
+- `FOC_OBSERVER_ORTEGA_ORIGINAL = 0`
+- `FOC_OBSERVER_MXLEMMING`
+- `FOC_OBSERVER_ORTEGA_LAMBDA_COMP`
+- `FOC_OBSERVER_MXLEMMING_LAMBDA_COMP`
+- `FOC_OBSERVER_MXV`
+- `FOC_OBSERVER_MXV_LAMBDA_COMP`
+- `FOC_OBSERVER_MXV_LAMBDA_COMP_LIN`
+
+---
+
 ### Weaknesses
 
 1. **Missing Source Citations** - Claims not linked to specific source files
