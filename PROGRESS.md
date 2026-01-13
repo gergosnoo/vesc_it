@@ -17,22 +17,23 @@
 
 ## Milestone Log
 
-| Time | Agent | Milestone | Notes |
-|------|-------|-----------|-------|
-| 21:50 | claude-8 | Created vesc folder | Pulled 6 VESC repos |
-| 21:54 | claude-8 | Cloned all repos | bldc, vesc_tool, vesc_pkg, vesc_express, vesc_bms_fw, refloat |
-| 22:00 | claude-8 | Created vesc_it folder | Project structure initialized |
-| 22:10 | claude-8 | Analyzed all 6 repos | Comprehensive documentation created |
-| 22:14 | claude-8 | Created documentation | 13 markdown files, ~3000 lines |
-| 22:15 | claude-8 | Published to GitHub | gergosnoo/vesc_it |
-| 22:17 | claude-8 | Created implementation plan | 4-phase plan for AI chatbot |
-| 22:20 | claude-8 | Fixed license | Changed to GPL-3.0 |
-| 22:22 | claude-8 | Refocused on Onewheels | Primary focus: Refloat package |
-| 22:24 | claude-8 | Set up project memory | CLAUDE.md and PROGRESS.md created |
-| 22:42 | claude-8 | Added instance config | claude-8 role documented in CLAUDE.md |
-| 22:43 | claude-9 | Joined as reviewer | Technical verification, creative ideas |
-| 22:43 | claude-9 | Created analysis docs | claude-9-review.md, plan-comparison.md |
-| 22:44 | claude-8 | Added infrastructure docs | ~/.claude/ resources in CLAUDE.md |
+| Date | Time | Agent | Milestone | Notes |
+|------|------|-------|-----------|-------|
+| 2026-01-13 | 21:50 | claude-8 | Created vesc folder | Pulled 6 VESC repos |
+| 2026-01-13 | 21:54 | claude-8 | Cloned all repos | bldc, vesc_tool, vesc_pkg, vesc_express, vesc_bms_fw, refloat |
+| 2026-01-13 | 22:00 | claude-8 | Created vesc_it folder | Project structure initialized |
+| 2026-01-13 | 22:10 | claude-8 | Analyzed all 6 repos | Comprehensive documentation created |
+| 2026-01-13 | 22:14 | claude-8 | Created documentation | 13 markdown files, ~3000 lines |
+| 2026-01-13 | 22:15 | claude-8 | Published to GitHub | gergosnoo/vesc_it |
+| 2026-01-13 | 22:17 | claude-8 | Created implementation plan | 4-phase plan for AI chatbot |
+| 2026-01-13 | 22:20 | claude-8 | Fixed license | Changed to GPL-3.0 |
+| 2026-01-13 | 22:22 | claude-8 | Refocused on Onewheels | Primary focus: Refloat package |
+| 2026-01-13 | 22:24 | claude-8 | Set up project memory | CLAUDE.md and PROGRESS.md created |
+| 2026-01-13 | 22:42 | claude-8 | Added instance config | claude-8 role documented in CLAUDE.md |
+| 2026-01-13 | 22:43 | claude-9 | Joined as reviewer | Technical verification, creative ideas |
+| 2026-01-13 | 22:43 | claude-9 | Created analysis docs | claude-9-review.md, plan-comparison.md |
+| 2026-01-13 | 22:44 | claude-8 | Added infrastructure docs | ~/.claude/ resources in CLAUDE.md |
+| 2026-01-13 | 22:45 | claude-8 | Updated timestamp format | Date + Time in PROGRESS.md |
 
 ---
 
@@ -88,9 +89,10 @@
 1. Read this PROGRESS.md first
 2. Check current git status
 3. Continue with Phase 1 (Supabase setup)
-4. Log milestones with accurate timestamps:
+4. Log milestones with accurate date AND time:
    ```bash
-   bash ~/.claude/scripts/get-timestamp.sh time
+   bash ~/.claude/scripts/get-timestamp.sh date  # 2026-01-13
+   bash ~/.claude/scripts/get-timestamp.sh time  # 22:45
    ```
 
 ### Key Files to Review
