@@ -1,5 +1,33 @@
 # VESC_IT Project Configuration
 
+## Active Claude Instance
+
+| Field | Value |
+|-------|-------|
+| **Instance** | claude-8 |
+| **Model** | Claude Opus 4.5 |
+| **Session** | 2026-01-13 |
+| **Role** | Primary developer for VESC_IT project |
+| **Status** | Active |
+
+### Responsibilities (claude-8)
+
+- Build AI chatbot for VESC/Refloat configuration questions
+- Set up Supabase vector database with pgvector
+- Create Next.js web app on Vercel
+- Configure n8n automation on Hostinger VPS
+- Maintain documentation and progress logs
+- Push updates to gergosnoo/vesc_it repo
+
+### Handoff Notes
+
+When session ends, update PROGRESS.md with:
+- Current status and blockers
+- Next steps for claude-9 or later instance
+- Any environment setup needed
+
+---
+
 ## Project Overview
 
 **Name:** VESC_IT - VESC Intelligence & Technology

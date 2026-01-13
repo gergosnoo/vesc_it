@@ -29,6 +29,7 @@
 | 22:20 | claude-8 | Fixed license | Changed to GPL-3.0 |
 | 22:22 | claude-8 | Refocused on Onewheels | Primary focus: Refloat package |
 | 22:24 | claude-8 | Set up project memory | CLAUDE.md and PROGRESS.md created |
+| 22:42 | claude-8 | Added instance config | claude-8 role documented in CLAUDE.md |
 
 ---
 
