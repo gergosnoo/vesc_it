@@ -40,11 +40,17 @@ The VESC BLDC firmware is the core motor controller firmware for VESC hardware. 
 
 ### FOC Observer Types
 
-- Ortega Original
-- Mxlemming
-- Ortega Lambda Comp
-- Mxlemming Lambda Comp
-- MXV variants
+| Type | Enum Value | Description |
+|------|------------|-------------|
+| Ortega Original | 0 | Original Ortega observer |
+| Mxlemming | 1 | Mxlemming improved observer |
+| Ortega Lambda Comp | 2 | Ortega with lambda compensation |
+| Mxlemming Lambda Comp | 3 | Mxlemming with lambda compensation |
+| MXV | 4 | MXV observer |
+| MXV Lambda Comp | 5 | MXV with lambda compensation |
+| MXV Lambda Comp Lin | 6 | MXV with linear lambda compensation |
+
+*Source: `bldc/datatypes.h:128-134`*
 
 ## Architecture
 
@@ -192,6 +198,24 @@ The firmware includes a full LispBM interpreter for custom logic:
 | 4 | Abs Over Current | Absolute overcurrent |
 | 5 | Over Temp FET | MOSFET overtemperature |
 | 6 | Over Temp Motor | Motor overtemperature |
+| 7 | Gate Driver Over Voltage | Gate driver supply too high |
+| 8 | Gate Driver Under Voltage | Gate driver supply too low |
+| 9 | MCU Under Voltage | MCU voltage brownout |
+| 10 | Watchdog Reset | System reset from watchdog |
+| 11 | Encoder SPI | SPI encoder communication error |
+| 12 | Encoder Sin/Cos Low | Sin/cos amplitude too low |
+| 13 | Encoder Sin/Cos High | Sin/cos amplitude too high |
+| 14 | Flash Corruption | Flash memory CRC error |
+| 15-17 | Current Sensor Offset | Current sensor offset too high |
+| 18 | Unbalanced Currents | Phase currents unbalanced |
+| 19 | BRK | Brake resistor fault |
+| 20-22 | Resolver Faults | Resolver LOT/DOS/LOS errors |
+| 25 | Encoder No Magnet | Magnetic encoder lost magnet |
+| 26 | Encoder Magnet Strong | Magnetic encoder field too strong |
+| 27 | Phase Filter | Phase filter fault |
+| 29 | LV Output Fault | Low voltage output fault |
+
+*Source: `bldc/datatypes.h:144-173`*
 
 ## Resources
 

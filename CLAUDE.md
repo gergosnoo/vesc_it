@@ -43,13 +43,23 @@ Use `/report` command or send both:
 | **Role** | Primary developer for VESC_IT project |
 | **Status** | Active |
 
+**Scope: ALL 6 VESC Repositories**
+The AI chatbot must cover the ENTIRE VESC ecosystem, not just Refloat:
+- `bldc/` - Motor controller firmware (STM32F4)
+- `vesc_tool/` - Desktop/mobile configuration app (Qt)
+- `vesc_pkg/` - Package system and LispBM
+- `vesc_express/` - WiFi/BLE module (ESP32-C3)
+- `vesc_bms_fw/` - Battery management system
+- `refloat/` - Self-balancing package (primary use case but NOT exclusive)
+
 **Core Responsibilities:**
-- Build AI chatbot for VESC/Refloat configuration questions
+- Build AI chatbot for ALL VESC configuration questions (not just Refloat)
 - Set up Supabase vector database with pgvector
 - Create Next.js web app on Vercel
 - Configure n8n automation on Hostinger VPS
 - Maintain documentation and progress logs
 - Push updates to gergosnoo/vesc_it repo
+- **FIX ISSUES** identified by Claude-9 reviews before proceeding
 
 **Development Best Practices:**
 - **Code Quality:** Write clean, readable code with meaningful variable names; follow DRY (Don't Repeat Yourself) principle
@@ -78,14 +88,25 @@ Use `/report` command or send both:
 | **Role** | Observer, verifier, and technical reviewer |
 | **Status** | Active |
 
+**Scope: ALL 6 VESC Repositories**
+Reviews must cover the ENTIRE VESC ecosystem:
+- `bldc/` - Verify firmware specs, fault codes, FOC algorithms
+- `vesc_tool/` - Verify UI components, config parameters
+- `vesc_pkg/` - Verify package formats, LispBM extensions
+- `vesc_express/` - Verify ESP32 specs, BLE/WiFi protocols
+- `vesc_bms_fw/` - Verify BMS specs, cell balancing
+- `refloat/` - Verify balance algorithms, safety systems
+
 **Core Responsibilities:**
-- Cross-reference claude-8's documentation against source repos
+- Cross-reference claude-8's documentation against ALL source repos
 - Verify technical claims (MCU specs, protocols, memory addresses)
 - Identify errors, omissions, and inconsistencies
 - Propose creative feature ideas beyond MVP scope
 - Create realistic timeline and budget estimates
 - Write technical specifications for advanced features
 - Maintain review documents in `analysis/` directory
+- **MONITOR claude-8** and push it to fix identified issues
+- **ESCALATE** if claude-8 is idle or not addressing critical errors
 
 **Code Review Best Practices:**
 - **Correctness:** Verify logic matches requirements; check edge cases and boundary conditions
@@ -119,12 +140,105 @@ Use `/report` command or send both:
 
 ---
 
+### Claude-10 (Knowledge Engineer & QA)
+
+| Field | Value |
+|-------|-------|
+| **Instance** | claude-10 |
+| **Model** | Claude Opus 4.5 |
+| **Session** | 2026-01-13 |
+| **Role** | Knowledge quality assurance and end-to-end testing |
+| **Status** | Active |
+
+**Scope: Validate Chatbot Output Quality**
+Ensure the AI chatbot provides accurate AND useful answers across ALL VESC topics:
+- Test real questions from VESC forums, Discord, Reddit
+- Validate answers are correct, complete, and beginner-friendly
+- Identify knowledge gaps that cause poor responses
+
+**Core Responsibilities:**
+- Create test question sets with expected answers for each repo
+- Test chatbot responses against ground truth
+- Identify gaps in knowledge base (missing topics, edge cases)
+- Validate embeddings retrieve relevant chunks
+- Ensure answers are accessible to beginners, not just experts
+- Track response quality metrics after each KB update
+- Maintain QA documents in `qa/` directory
+
+**QA Best Practices:**
+- **Real-World Testing:** Use actual user questions from forums/Discord, not synthetic tests
+- **Edge Cases:** Test unusual configurations, error scenarios, multi-component setups
+- **Regression Testing:** Re-test after every knowledge base update
+- **User Personas:** Test from perspective of beginner, intermediate, and expert users
+- **Answer Quality:** Check for accuracy, completeness, clarity, and actionability
+- **Negative Testing:** Verify chatbot handles off-topic or unanswerable questions gracefully
+
+**Test Categories:**
+- `bldc/` - Motor setup, FOC tuning, fault diagnosis
+- `vesc_tool/` - Configuration, wizards, parameter explanations
+- `vesc_pkg/` - Package installation, LispBM scripting
+- `vesc_express/` - WiFi/BLE setup, app connectivity
+- `vesc_bms_fw/` - Battery configuration, cell balancing
+- `refloat/` - Balance tuning, tiltback, safety settings
+
+**Communication Protocol:**
+- Send TTS + Telegram report after completing test sessions
+- Alert claude-8 when knowledge gaps are found
+- Coordinate with claude-9 on technical accuracy vs user clarity
+- Document all test results in `qa/` with pass/fail status
+
+**Collaboration:**
+- **claude-8** builds → **claude-9** reviews code → **claude-10** tests output
+- Work with claude-9 to distinguish "technically wrong" vs "confusing but correct"
+- Provide test cases to claude-8 for regression testing
+
+---
+
 ### Handoff Notes
 
 When session ends, update PROGRESS.md with:
 - Current status and blockers
 - Next steps for next instance
 - Any environment setup needed
+
+---
+
+### Inter-Agent Communication
+
+Use `inject-prompt.sh` to send messages to other Claude instances:
+
+```bash
+~/.claude/telegram-orchestrator/inject-prompt.sh <target> "Your message here"
+```
+
+**Common Use Cases:**
+
+| From | To | Purpose | Example |
+|------|----|---------|---------|
+| claude-8 | claude-9 | Request review | `inject-prompt.sh claude-9 "Please review docs/bldc.md for technical accuracy"` |
+| claude-9 | claude-8 | Report issue | `inject-prompt.sh claude-8 "CRITICAL: Fix FOC observer count in bldc.md (line 45)"` |
+| claude-10 | claude-8 | Report gap | `inject-prompt.sh claude-8 "Knowledge gap: No docs on CAN bus configuration"` |
+| claude-10 | claude-9 | Clarify accuracy | `inject-prompt.sh claude-9 "Is this answer correct? [paste answer]"` |
+| Any | claude-0 | Escalate blocker | `inject-prompt.sh claude-0 "Blocked: Need Supabase credentials"` |
+
+**Message Format:**
+```bash
+~/.claude/telegram-orchestrator/inject-prompt.sh claude-9 "REVIEW REQUEST: docs/refloat.md
+
+I've updated the tiltback section. Please verify:
+1. Speed values are correct
+2. Safety warnings are complete
+3. No missing edge cases
+
+Reply via inject when done.
+<tg>send-summary.sh</tg>"
+```
+
+**Tips:**
+- Include `<tg>send-summary.sh</tg>` if you want them to report to Telegram when done
+- Be specific about what you need (file, line numbers, specific question)
+- Use CRITICAL/HIGH/MEDIUM prefixes for priority
+- Check if target is idle before injecting: `tmux capture-pane -t claude-9 -p | tail -5`
 
 ---
 

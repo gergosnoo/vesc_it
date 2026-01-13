@@ -33,6 +33,20 @@ Advanced self-balancing package for Onewheel-style vehicles:
 | Booster | Current boost at high pitch |
 | Nose Angling | Speed-dependent tilt |
 
+### Setpoint Adjustment Types (Full Enum)
+| Type | Value | Description |
+|------|-------|-------------|
+| CENTERING | 0 | Return to center position |
+| REVERSESTOP | 1 | Reverse stop activated |
+| TILTBACK_DUTY | 2 | Duty-based tiltback |
+| TILTBACK_HV | 3 | High voltage tiltback |
+| TILTBACK_LV | 4 | Low voltage tiltback |
+| TILTBACK_TEMP | 5 | Temperature tiltback |
+| TILTBACK_SPEED | 6 | Speed-based tiltback |
+| INPUTTILT | 7 | Remote input tilt |
+
+*Source: `refloat/src/setpoint.h`*
+
 ### Safety Systems
 - Pitch/roll fault detection
 - Footpad sensor monitoring
@@ -85,6 +99,7 @@ AHRS Filter ──► Pitch, Roll, Yaw
 | `ki` | Integral gain |
 | `kp2` | Rate (derivative) gain |
 | `mahony_kp` | AHRS pitch KP |
+| `mahony_kp_roll` | AHRS roll KP (separate from pitch) |
 | `kp_brake` | Brake P scaling |
 
 ### Safety
@@ -112,6 +127,16 @@ AHRS Filter ──► Pitch, Roll, Yaw
 | STARTUP | IMU initializing |
 | READY | Waiting for rider |
 | RUNNING | Active balancing |
+| HANDTEST | Bench testing mode (motor runs without footpads) |
+| FLYWHEEL | Indoor training mode (spins freely for tricks) |
+
+### Special Modes
+
+**HANDTEST Mode:** Allows motor operation without footpad activation. Used for bench testing and diagnostics.
+
+**FLYWHEEL Mode:** Spins the wheel freely for indoor trick practice. Useful for balance training without riding.
+
+**Konami Sequence:** Hidden feature activated by specific footpad sensor sequence. Unlocks special modes or configurations.
 
 ### Stop Conditions
 - PITCH - Pitch exceeded

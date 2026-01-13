@@ -95,6 +95,30 @@ The ESP-IDF BLE implementation doesn't show this UUID in the same format. While 
 - `FOC_OBSERVER_MXV_LAMBDA_COMP`
 - `FOC_OBSERVER_MXV_LAMBDA_COMP_LIN`
 
+#### 6. Fault Codes Severely Incomplete (bldc.md)
+
+**Location:** `docs/bldc.md:184-195`
+**Claim:** Lists 7 fault codes (0-6)
+**Reality:** There are **30+ fault codes** in `datatypes.h:144-173`:
+- FAULT_CODE_GATE_DRIVER_OVER_VOLTAGE (7)
+- FAULT_CODE_GATE_DRIVER_UNDER_VOLTAGE (8)
+- FAULT_CODE_MCU_UNDER_VOLTAGE (9)
+- FAULT_CODE_BOOTING_FROM_WATCHDOG_RESET (10)
+- FAULT_CODE_ENCODER_SPI (11)
+- FAULT_CODE_ENCODER_SINCOS_BELOW/ABOVE_MIN/MAX_AMPLITUDE (12-13)
+- FAULT_CODE_FLASH_CORRUPTION (14)
+- FAULT_CODE_HIGH_OFFSET_CURRENT_SENSOR_1/2/3 (15-17)
+- FAULT_CODE_UNBALANCED_CURRENTS (18)
+- FAULT_CODE_BRK (19)
+- FAULT_CODE_RESOLVER_LOT/DOS/LOS (20-22)
+- FAULT_CODE_ENCODER_NO_MAGNET (25)
+- FAULT_CODE_ENCODER_MAGNET_TOO_STRONG (26)
+- FAULT_CODE_PHASE_FILTER (27)
+- FAULT_CODE_LV_OUTPUT_FAULT (29)
+- ...and more
+
+**Severity:** HIGH - Missing fault codes means AI chatbot can't diagnose 80%+ of common hardware issues.
+
 ---
 
 ### Weaknesses
