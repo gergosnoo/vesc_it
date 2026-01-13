@@ -1,6 +1,8 @@
 # VESC_IT Project Configuration
 
-## Active Claude Instance
+## Active Claude Instances
+
+### Claude-8 (Primary Developer)
 
 | Field | Value |
 |-------|-------|
@@ -10,8 +12,7 @@
 | **Role** | Primary developer for VESC_IT project |
 | **Status** | Active |
 
-### Responsibilities (claude-8)
-
+**Responsibilities:**
 - Build AI chatbot for VESC/Refloat configuration questions
 - Set up Supabase vector database with pgvector
 - Create Next.js web app on Vercel
@@ -19,11 +20,44 @@
 - Maintain documentation and progress logs
 - Push updates to gergosnoo/vesc_it repo
 
+---
+
+### Claude-9 (Observer/Reviewer)
+
+| Field | Value |
+|-------|-------|
+| **Instance** | claude-9 |
+| **Model** | Claude Opus 4.5 |
+| **Session** | 2026-01-13 |
+| **Role** | Observer, verifier, and technical reviewer |
+| **Status** | Active |
+
+**Responsibilities:**
+- Cross-reference claude-8's documentation against source repos
+- Verify technical claims (MCU specs, protocols, memory addresses)
+- Identify errors, omissions, and inconsistencies
+- Propose creative feature ideas beyond MVP scope
+- Create realistic timeline and budget estimates
+- Write technical specifications for advanced features
+- Maintain review documents in `analysis/` directory
+
+**Deliverables Created:**
+- `analysis/claude-9-review.md` - Technical verification report
+- `analysis/plan-comparison.md` - Claude-8 vs Claude-9 approach comparison
+- `plans/ai-system-technical-spec.md` - Detailed AI system specification
+
+**Findings Summary:**
+- 12 verified correct claims
+- 2 critical errors (STM32L476 clock speed, FOC observer count)
+- 6 creative feature proposals added
+
+---
+
 ### Handoff Notes
 
 When session ends, update PROGRESS.md with:
 - Current status and blockers
-- Next steps for claude-9 or later instance
+- Next steps for next instance
 - Any environment setup needed
 
 ---
@@ -142,6 +176,64 @@ git add -A && git commit -m "message" && git push origin master
 # Get context
 bash ~/.claude/scripts/context-collector.sh
 ```
+
+## Available Infrastructure (~/.claude/)
+
+The following resources are available from the user's Claude configuration:
+
+### Scripts (`~/.claude/scripts/`)
+| Script | Purpose |
+|--------|---------|
+| `context-collector.sh` | Get current system context |
+| `get-timestamp.sh` | Get accurate time/date (NEVER hallucinate!) |
+| `tts-write.sh` | Text-to-speech notifications |
+| `tts-reader.sh` | Read TTS queue |
+| `init-project.sh` | Initialize project CLAUDE.md |
+
+### Commands (`~/.claude/commands/`)
+| Command | Purpose |
+|---------|---------|
+| `/commit` | Structured git commits |
+| `/context` | Display system context |
+| `/create_plan` | Create implementation plans |
+| `/create_requirement` | Discover requirements |
+| `/debug` | Investigation-only debugging |
+| `/describe_pr` | Generate PR descriptions |
+| `/implement_plan` | Execute plans phase by phase |
+| `/report` | Send TTS/Telegram reports |
+| `/research_codebase` | Deep codebase research |
+| `/tts` | Toggle TTS |
+
+### Agents (`~/.claude/agents/`)
+| Agent | Purpose |
+|-------|---------|
+| `codebase-analyzer` | Understand implementations |
+| `codebase-locator` | Find files by topic |
+| `codebase-pattern-finder` | Find similar patterns |
+| `quality-gate` | Run verification checks |
+| `research-agent` | Research objectively |
+| `status-reporter` | Generate reports with timestamps |
+| `test-writer` | Write tests |
+
+### Telegram (`~/.claude/telegram-orchestrator/`)
+| File | Purpose |
+|------|---------|
+| `send-summary.sh` | Send formatted Telegram notifications |
+| `TELEGRAM_FORMAT.md` | Message format template |
+| `orchestrator.sh` | Multi-session orchestration |
+| `watchdog.sh` | Session health monitoring |
+
+### Templates (`~/.claude/templates/`)
+| Template | Purpose |
+|----------|---------|
+| `PROGRESS.md` | Session logging template |
+| `TODO.md` | Task backlog template |
+| `session-memory-protocol.md` | Memory protocol reference |
+
+### Knowledge (`~/.claude/knowledge/`)
+Reference documentation for compliance and security standards.
+
+---
 
 ## License
 
