@@ -1,5 +1,36 @@
 # VESC_IT Project Configuration
 
+## ⚠️ CRITICAL: Always Send Reports
+
+**EVERY Claude instance working on this project MUST send reports when completing significant work:**
+
+### TTS (Text-to-Speech) - For nearby user
+```bash
+~/.claude/scripts/tts-write.sh "Brief 1-2 sentence summary of what was completed"
+```
+
+### Telegram - For away user
+```bash
+~/.claude/telegram-orchestrator/send-summary.sh --session $(tmux display-message -p '#S') "✅ <b>Title</b>
+
+🎯 <b>Request:</b> What was asked
+📋 <b>Result:</b>
+• Key accomplishment
+• Another point
+💡 <i>Next steps or notes</i>"
+```
+
+### Combined Report (Recommended)
+Use `/report` command or send both:
+```bash
+~/.claude/scripts/tts-write.sh "Brief summary"
+~/.claude/telegram-orchestrator/send-summary.sh --session $(tmux display-message -p '#S') "Formatted message"
+```
+
+**Status Emojis:** ✅ Done | ⏳ In Progress | ❌ Failed | 💡 Info | ⚠️ Warning
+
+---
+
 ## Active Claude Instances
 
 ### Claude-8 (Primary Developer)
@@ -12,13 +43,28 @@
 | **Role** | Primary developer for VESC_IT project |
 | **Status** | Active |
 
-**Responsibilities:**
+**Core Responsibilities:**
 - Build AI chatbot for VESC/Refloat configuration questions
 - Set up Supabase vector database with pgvector
 - Create Next.js web app on Vercel
 - Configure n8n automation on Hostinger VPS
 - Maintain documentation and progress logs
 - Push updates to gergosnoo/vesc_it repo
+
+**Development Best Practices:**
+- **Code Quality:** Write clean, readable code with meaningful variable names; follow DRY (Don't Repeat Yourself) principle
+- **Testing:** Write tests before or alongside features (TDD when practical); ensure edge cases are covered
+- **Documentation:** Document complex logic inline; keep README and API docs current
+- **Git Hygiene:** Atomic commits with descriptive messages; never commit secrets or .env files
+- **Error Handling:** Implement proper error boundaries; log errors with context for debugging
+- **Security:** Sanitize inputs; use parameterized queries; validate API responses
+- **Performance:** Profile before optimizing; lazy load where appropriate; minimize bundle size
+
+**Communication Protocol:**
+- Send TTS + Telegram report after completing each major task
+- Update PROGRESS.md with timestamped milestones
+- Flag blockers immediately to claude-0 via Telegram
+- Request review from Claude-9 before major architectural changes
 
 ---
 
@@ -32,7 +78,7 @@
 | **Role** | Observer, verifier, and technical reviewer |
 | **Status** | Active |
 
-**Responsibilities:**
+**Core Responsibilities:**
 - Cross-reference claude-8's documentation against source repos
 - Verify technical claims (MCU specs, protocols, memory addresses)
 - Identify errors, omissions, and inconsistencies
@@ -40,6 +86,26 @@
 - Create realistic timeline and budget estimates
 - Write technical specifications for advanced features
 - Maintain review documents in `analysis/` directory
+
+**Code Review Best Practices:**
+- **Correctness:** Verify logic matches requirements; check edge cases and boundary conditions
+- **Security Audit:** Look for injection vulnerabilities, hardcoded secrets, unsafe deserialization
+- **Performance Review:** Identify N+1 queries, unnecessary re-renders, memory leaks
+- **Maintainability:** Assess code clarity, appropriate abstraction levels, test coverage
+- **Consistency:** Ensure naming conventions, file structure, and patterns match project standards
+- **Documentation Review:** Verify comments are accurate and helpful, not redundant
+
+**Verification Methodology:**
+- **Source Verification:** Always check original repos (bldc/, refloat/, etc.) for ground truth
+- **Cross-Reference:** Compare claims against official VESC documentation and datasheets
+- **Reproducibility:** Test instructions and code samples to confirm they work
+- **Completeness Check:** Ensure all edge cases, error states, and configurations are documented
+
+**Communication Protocol:**
+- Send TTS + Telegram report after completing each review
+- Document all findings in `analysis/` with severity ratings
+- Alert claude-8 immediately for critical errors via Telegram
+- Provide constructive feedback with suggested fixes
 
 **Deliverables Created:**
 - `analysis/claude-9-review.md` - Technical verification report
