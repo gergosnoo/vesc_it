@@ -1,13 +1,21 @@
 # VESC_IT - VESC Intelligence & Technology
 
-An AI-powered knowledge base and development environment for the VESC (Vedder Electronic Speed Controller) ecosystem.
+An AI-powered knowledge base for **Onewheel-style self-balancing PEVs** using VESC and Refloat.
 
 ## Purpose
 
 This project serves as:
-1. **Knowledge Base** - Comprehensive documentation for training AI agents to become VESC experts
-2. **Development Hub** - Centralized workspace for VESC-related development
-3. **Improvement Tracker** - Analysis of potential enhancements to the open-source VESC ecosystem
+1. **Knowledge Base** - Comprehensive documentation for Onewheel/Refloat configuration
+2. **AI Assistant** - Chatbot that explains every config variable and tuning option
+3. **Setup Guide** - Optimization notes for self-balancing vehicles
+
+## Focus: Onewheels & Self-Balancing PEVs
+
+Primary focus on:
+- **Refloat package** - The main self-balancing firmware
+- **VESC configuration** - Motor and app settings for balance boards
+- **Tuning** - PID, ATR, tiltback, safety settings
+- **Hardware** - Compatible VESC controllers and motors
 
 ## Repository Structure
 
@@ -62,26 +70,30 @@ This project works alongside:
 | Mobile | VESC Tool | QML | Mobile config |
 | Packages | vesc_pkg | C + Lisp + QML | Extensions |
 
-## AI Agent Training
+## AI Assistant Capabilities
 
-This knowledge base is designed to train AI agents to:
+The VESC AI chatbot can help with:
 
-1. **Understand VESC Architecture**
-   - Firmware structure and control loops
-   - Communication protocols (CAN, USB, UART, BLE)
-   - Configuration systems and parameters
+1. **Configuration Explanation**
+   - Explain any motor.xml, app.xml, or refloat.xml variable
+   - Show what each setting does and safe ranges
+   - Describe how changes affect ride feel
 
-2. **Assist with Development**
-   - Write and debug LispBM scripts
-   - Create VESC packages
-   - Configure motor parameters
-   - Troubleshoot issues
+2. **Tuning Guidance**
+   - PID tuning (kp, ki, kp2) for your riding style
+   - ATR setup for hills and terrain
+   - Tiltback and safety configuration
+   - Startup and footpad settings
 
-3. **Provide Expert Guidance**
-   - Motor tuning recommendations
-   - Safety parameter advice
-   - Hardware selection guidance
-   - Integration assistance
+3. **Troubleshooting**
+   - Diagnose common issues (nosedives, wobbles)
+   - Fault code explanations
+   - Hardware compatibility checks
+
+4. **Setup Optimization**
+   - Motor detection settings
+   - Current limits for your battery/motor
+   - Temperature and voltage thresholds
 
 ## Key Technologies
 
