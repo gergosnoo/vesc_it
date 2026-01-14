@@ -1,81 +1,76 @@
-# VESC_IT Testing Guide
+# What You Can Test Right Now
 
-**Updated:** 2026-01-14 07:52 by claude-10
-
----
-
-## What's Ready to Test
-
-| Feature | URL | Status |
-|---------|-----|--------|
-| **AI Chatbot** | https://vesc-it.vercel.app | ✅ LIVE & TESTED |
-| **Parameter Playground** | /playground | ✅ LIVE & TESTED |
-| **Safety Visualizer** | /safety | ✅ LIVE & TESTED |
+**Last Updated:** 2026-01-14 08:05
 
 ---
 
-## Test the Chatbot NOW
+## READY - Go Try These!
 
-**Go to:** https://vesc-it.vercel.app
+| What | URL | Works? |
+|------|-----|--------|
+| **Chatbot** | https://vesc-it.vercel.app | ✅ YES |
+| **Playground** | https://vesc-it.vercel.app/playground | ✅ YES |
+| **Safety** | https://vesc-it.vercel.app/safety | ✅ YES |
+| **Troubleshoot** | https://vesc-it.vercel.app/troubleshoot | ✅ YES |
 
-**Ask these questions:**
+---
 
-| Question | Expected Answer |
-|----------|-----------------|
-| "What is VESC?" | Benjamin Vedder, STM32F4, electric vehicles |
-| "How to prevent nosedive?" | Duty tiltback, Booster current, safety margins |
-| "How to connect to the app?" | WiFi steps, IP 192.168.4.1, port 65102 |
-| "Why won't my motor spin?" | Check connections, detection current, firmware |
+## Quick Test - Try This First
+
+1. Go to https://vesc-it.vercel.app
+2. Ask: **"How do I prevent nosedives?"**
+3. Should mention: duty cycle, tiltback, safety margins
+
+---
+
+## What Each Feature Does
+
+### Chatbot (/)
+Ask VESC questions, get AI answers from our knowledge base.
+
+### Playground (/playground)
+Drag sliders to see how parameters affect the board. 3D visualization.
+
+### Safety (/safety)
+See your nosedive risk. Click scenarios like "Uphill" to see risk change.
+
+### Troubleshoot (/troubleshoot)
+Step-by-step guides for common problems:
+- Motor Detection Failed
+- Footpad Sensor Issues (6.05 heel lift fix!)
+- Nosedive Prevention
+- BMS Bypass (with safety warnings!)
+- CAN Bus Not Working
 
 ---
 
 ## Test Results (claude-10 verified)
 
-### Safety Tests - 3/3 PASS
 | Test | Result |
 |------|--------|
-| Nosedive prevention | ✅ PASS |
-| BMS bypass (B- warning) | ✅ PASS |
-| 6.05 heel lift fix | ✅ PASS |
+| Chatbot - safety questions | ✅ PASS |
+| Chatbot - beginner questions | ✅ PASS |
+| Playground - sliders work | ✅ PASS |
+| Safety - scenario selector | ✅ PASS |
+| Troubleshoot - all 5 flows | ✅ PASS |
 
-### Beginner Tests - 3/3 PASS
-| Test | Result |
-|------|--------|
-| "What is VESC?" | ✅ PASS |
-| "Connect to app" | ✅ PASS |
-| "Motor won't spin" | ✅ PASS |
-
-**Total: 6/6 PASS**
+**Total: 11/11 PASS**
 
 ---
 
-## What's NOT Ready
+## NOT Ready Yet
 
-| Feature | Why | ETA |
-|---------|-----|-----|
-| Full 51-test suite | Optional, core features work | When requested |
-| n8n automation | Phase 3 | TBD |
-
----
-
-## Morning Checklist
-
-1. ✅ Open https://vesc-it.vercel.app - **DONE, TESTED**
-2. ✅ Ask "how to prevent nosedive" - **PASSES**
-3. ✅ Try /playground - **LIVE, sliders + 3D board working**
-4. ✅ Try /safety - **LIVE, scenario selector working**
-5. Check Telegram for updates
+| Feature | Why |
+|---------|-----|
+| n8n automation | Phase 3 - not started |
+| Full 54-test suite | Optional - core works |
 
 ---
 
-## Team Status
+## Found a Bug?
 
-| Who | Did What | Status |
-|-----|----------|--------|
-| claude-8 | Infrastructure, Supabase, Vercel | ✅ Done |
-| claude-9 | KB docs, Playground, Safety Visualizer | ✅ Done |
-| claude-10 | QA testing, this guide | ✅ Done |
+Tell claude-10 or open GitHub issue.
 
 ---
 
-*Ready for your wake-up!*
+*All 4 features live and tested!*

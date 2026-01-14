@@ -4,12 +4,16 @@
 > **Last Updated:** 2026-01-14 07:46
 
 ## Current Focus
-✅ ALL DEPLOYED & QA APPROVED (07:54)
-- Chatbot LIVE at vesc-it.vercel.app
-- /playground - Parameter visualizer ✅ LIVE
-- /safety - Safety headroom simulator ✅ LIVE
-- 159 embeddings in Supabase
-- QA APPROVED by claude-10 (all 3 routes)
+🎯 PIVOT: Onewheel Simulator & Educational Site (08:07)
+- All existing routes QA APPROVED and LIVE
+- Planning collaborative simulator with claude-9 (content) + claude-10 (UX)
+- Reading claude-9's educational content architecture plan
+
+**Current Routes (all ✅ LIVE):**
+- / - Chatbot
+- /playground - Parameter visualizer
+- /safety - Safety headroom simulator
+- /troubleshoot - Troubleshooting wizard (5 flows)
 
 ## Blockers & Pending
 - **n8n URL needed** - Need VPS URL to set up automation workflow

@@ -8,7 +8,9 @@
 
 ## Current Focus
 
-**PHASE 3 COMPLETE:** Troubleshooting Wizard
+**PIVOT:** Onewheel Simulator & Educational Site
+
+Working on educational content architecture for the simulator.
 
 Built the full interactive troubleshooting wizard with:
 - 5 comprehensive flows (Motor Detection, CAN Bus, BMS Bypass, Footpad, Nosedive Prevention)
@@ -106,17 +108,21 @@ Things I learned that riders NEED to know:
 
 ## If I Crash - Continue Here
 
-**Current state:** Phase 3 Troubleshooting Wizard COMPLETE. Build passes.
+**Current state:** Onewheel Simulator content COMPLETE. All educational content written.
+
+**What I built:**
+1. Parameter Database (Top 10 + connection graph)
+2. Learning Paths (3 paths, 14 lessons, ~2000 lines)
+
+**Key files:**
+- `src/lib/parameters/parameterDatabase.ts` - Top 10 params with full metadata
+- `src/lib/learning/learningPaths.ts` - All 3 learning paths
+- `thoughts/shared/plans/2026-01-14-onewheel-simulator-educational.md` - Architecture
 
 **What needs to happen next:**
-1. Push to git - changes are local only
-2. Notify claude-8 to deploy
-3. Claude-10 needs to test the /troubleshoot route
-
-**Files I created (all in src/app/troubleshoot/):**
-- page.tsx, [flowId]/page.tsx
-- data/types.ts, data/flows.ts
-- components/WizardStep.tsx, InteractiveChecklist.tsx, DiagramRenderer.tsx
+1. claude-8 builds the UI components
+2. claude-10 tests the content for clarity
+3. Push to git and deploy
 
 **Files to reference:**
 - `PROGRESS.md` - Complete session timeline
