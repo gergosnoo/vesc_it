@@ -207,13 +207,25 @@ This guide covers the most popular VESC-compatible controllers, their specificat
 
 **Source:** `hwconf/shaman/Little_FOCer/hw_Little_FOCer_core.h`
 
-**Hardware Limits:**
+**Key Terms:** Little FOCer, LittleFOCer, LF V3, Little FOCer V3 current limits, Little FOCer V3 specs
+
+#### Little FOCer V3 Current Limits (Hardware Maximum)
+
+The Little FOCer V3 has the following **hardware limits** (absolute maximum the controller can handle):
+
+- **Motor Current Limit:** ±150A (standard) or ±250A (extended firmware)
+- **Battery Current Limit:** ±100A
+- **Absolute Current Limit:** 175A (standard) or 350A (extended)
+- **Maximum Voltage:** 60V (limits to 16S batteries)
+
 | Parameter | Standard | Extended |
 |-----------|----------|----------|
 | Motor Current | ±150A | ±250A |
 | Battery Current | ±100A | ±100A |
 | Absolute Current | 175A | 350A |
 | Max Voltage | 60V | 60V |
+
+**IMPORTANT:** Hardware limits are NOT recommended operating limits! For reliable operation, set your current limits to 70-80% of hardware maximum.
 
 **Most Popular Onewheel Controller!**
 
@@ -224,14 +236,19 @@ This guide covers the most popular VESC-compatible controllers, their specificat
 - Active community support
 - Lower cost than UBOX
 
-**Recommended Onewheel Settings (16S):**
-| Parameter | Value |
-|-----------|-------|
-| Motor Current Max | 60-80A |
-| Motor Current Min | -60A |
-| Battery Current Max | 25-35A |
-| Battery Current Min | -12A |
-| Tiltback Duty | 0.80 |
+#### Little FOCer V3 Recommended Settings (Safe Operating Range)
+
+For Onewheel use with 16S battery, these **recommended settings** provide good performance while staying well within hardware limits:
+
+| Parameter | Recommended Value | Hardware Max |
+|-----------|-------------------|--------------|
+| Motor Current Max | 60-80A | 150A |
+| Motor Current Min | -60A | -150A |
+| Battery Current Max | 25-35A | 100A |
+| Battery Current Min | -12A | -100A |
+| Tiltback Duty | 0.80 | - |
+
+**Why not use hardware limits?** Running at maximum current generates excessive heat and reduces lifespan. The recommended 60-80A motor current provides excellent torque while keeping the controller cool.
 
 **Known Issues:**
 

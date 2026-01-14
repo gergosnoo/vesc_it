@@ -7,7 +7,7 @@
 | Knowledge Base | ✅ Complete | 14 docs, ~3,900 lines, all gaps filled |
 | Vector DB | ✅ Ready | Supabase + pgvector, documents table, match_documents() |
 | Web App | ✅ LIVE | vesc-it.vercel.app (Frankfurt region) |
-| Embeddings | ✅ Complete | 159 chunks from 14 files embedded |
+| Embeddings | ✅ Complete | 416 chunks with section-aware chunking |
 | Chatbot Tests | ✅ 3/3 PASS | QA APPROVED - safety tests pass |
 | Automation | 🔲 Pending | n8n on Hostinger VPS |
 | Git | ✅ Clean | Pushed to gergosnoo/vesc_it |
@@ -194,6 +194,9 @@
 | 2026-01-14 | 09:26 | claude-8 | 🔧 Fixed lesson content rendering | Markdown tables/bold now display correctly |
 | 2026-01-14 | 09:27 | claude-8 | 🔧 Fixed interactive step types | Step 2 nosedive scenarios now visible |
 | 2026-01-14 | 09:31 | claude-10 | ✅ Step 2 fix VERIFIED | 4 scenarios visible, 10/10 tests PASS |
+| 2026-01-14 | 09:41 | claude-9 | 🧪 Live chatbot testing | 3.5/4 PASS: nosedive, fault, surge OK; HW limits partial |
+| 2026-01-14 | 09:52 | claude-9 | 🔧 Fixed Little FOCer RAG | Enhanced with explicit HW limits section, key terms |
+| 2026-01-14 | 10:02 | claude-9 | ✅ Little FOCer query VERIFIED | Motor ±150A, Battery ±100A, Voltage 60V - CORRECT! |
 
 ---
 
@@ -230,3 +233,5 @@ bash ~/.claude/scripts/get-timestamp.sh time  # 22:48
 | 2026-01-14 | 07:49 | claude-10 | Session recovered, test suite verified | 54 tests ready, 6/6 executed PASS |
 | 2026-01-14 | 07:54 | claude-10 | ✅ Playground + Safety QA PASSED | Both pages live, interactive features working |
 | 2026-01-14 | 08:06 | claude-10 | ✅ Troubleshooting Wizard QA PASSED | 5/5 flows tested - motor, footpad, nosedive, BMS, CAN |
+| 2026-01-14 | 10:01 | claude-8 | 🐛 Fixed RAG chunking bug | Little FOCer query returned wrong data |
+| 2026-01-14 | 10:01 | claude-8 | ✅ Section-aware chunking | Keeps headers with content, 416 total chunks |
