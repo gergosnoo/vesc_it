@@ -26,7 +26,7 @@ function getOpenAI() {
 
 export async function POST(request: Request) {
   try {
-    const { message, history } = await request.json();
+    const { message, history = [] } = await request.json();
 
     const supabaseClient = getSupabase();
     const openaiClient = getOpenAI();
