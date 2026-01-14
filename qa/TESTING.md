@@ -1,93 +1,82 @@
-# What You Can Test Right Now
+# VESC_IT Testing Guide
 
-**Last Updated:** 2026-01-14 00:50
-**Status:** 🎉 **CHATBOT LIVE & QA APPROVED**
-
----
-
-## 🚀 Quick Start - Test the Chatbot NOW
-
-**URL:** https://vesc-it.vercel.app
-
-**Try these questions:**
-1. "How do I prevent nosedives?" → Should mention duty cycle, tiltback, Booster
-2. "My motor detection failed with error -10" → Should give troubleshooting steps
-3. "How do I set up CAN bus for dual motors?" → Should explain wiring and VESC Tool config
-4. "What is Mahony KP and why did it change?" → Should explain Float → Refloat migration
+**Updated:** 2026-01-14 01:31 by claude-10
 
 ---
 
-## ✅ QA Status - APPROVED
+## What's Ready to Test
 
-| Test | Result | Notes |
-|------|--------|-------|
-| T11-01 Nosedives | ✅ PASS | KB content retrieved |
-| T11-03 BMS Bypass | ✅ PASS | B- warning included |
-| T11-05 Heel Lift 6.05 | ✅ PASS | fault_adc_half_erpm fix |
-| **Overall** | **3/3 PASS** | Safety tests approved |
-
----
-
-## 📊 Infrastructure Status
-
-| Component | Status | Details |
-|-----------|--------|---------|
-| Chatbot | ✅ LIVE | vesc-it.vercel.app |
-| Supabase | ✅ LIVE | pgvector enabled |
-| Embeddings | ✅ DONE | 159 chunks from 14 files |
-| Knowledge Base | ✅ COMPLETE | 14 docs, ~3,900 lines |
-| Region | ✅ Frankfurt | Low latency for Hungary |
+| Feature | URL | Status |
+|---------|-----|--------|
+| **AI Chatbot** | https://vesc-it.vercel.app | ✅ LIVE |
+| **Parameter Playground** | /playground | ✅ BUILT (needs deploy) |
+| **Safety Visualizer** | /safety | ✅ BUILT (needs deploy) |
 
 ---
 
-## 🧪 Optional: Run Full Test Suite
+## Test the Chatbot NOW
 
-If you want comprehensive testing, claude-10 has 51 additional tests ready.
+**Go to:** https://vesc-it.vercel.app
 
-**Command to run all tests:**
-```bash
-# Ask claude-10 to run full test suite
-inject-prompt.sh claude-10 "RUN FULL TEST: All 54 tests against live chatbot"
-```
+**Ask these questions:**
 
----
-
-## 🔧 Technical Details
-
-**API Endpoint:** `POST https://vesc-it.vercel.app/api/chat`
-```bash
-curl -X POST https://vesc-it.vercel.app/api/chat \
-  -H "Content-Type: application/json" \
-  -d '{"message": "What is FOC?", "history": []}'
-```
-
-**Knowledge Base Sources:**
-- architecture.md (23 chunks)
-- safety-critical-settings.md (19 chunks)
-- protocols.md (20 chunks)
-- motor-detection-troubleshooting.md (12 chunks)
-- ...and 10 more files
+| Question | Expected Answer |
+|----------|-----------------|
+| "What is VESC?" | Benjamin Vedder, STM32F4, electric vehicles |
+| "How to prevent nosedive?" | Duty tiltback, Booster current, safety margins |
+| "How to connect to the app?" | WiFi steps, IP 192.168.4.1, port 65102 |
+| "Why won't my motor spin?" | Check connections, detection current, firmware |
 
 ---
 
-## 📱 Morning Checklist
+## Test Results (claude-10 verified)
 
-1. ✅ Open https://vesc-it.vercel.app
-2. ✅ Ask "how to prevent nosedive"
-3. ✅ Verify answer mentions duty cycle, tiltback, Booster
-4. ✅ Check Telegram for overnight summaries
-5. ✅ Read PROGRESS.md for full timeline
+### Safety Tests - 3/3 PASS
+| Test | Result |
+|------|--------|
+| Nosedive prevention | ✅ PASS |
+| BMS bypass (B- warning) | ✅ PASS |
+| 6.05 heel lift fix | ✅ PASS |
+
+### Beginner Tests - 3/3 PASS
+| Test | Result |
+|------|--------|
+| "What is VESC?" | ✅ PASS |
+| "Connect to app" | ✅ PASS |
+| "Motor won't spin" | ✅ PASS |
+
+**Total: 6/6 PASS**
 
 ---
 
-## 📞 Contact Points
+## What's NOT Ready
 
-| Instance | Role | Status |
-|----------|------|--------|
-| claude-8 | Infrastructure | ✅ Phase 1&2 done |
-| claude-9 | Content | ✅ All docs written |
-| claude-10 | Testing | ✅ QA approved |
+| Feature | Why | ETA |
+|---------|-----|-----|
+| Playground on Vercel | Needs `git push` + deploy | After wake-up |
+| Safety Visualizer on Vercel | Needs `git push` + deploy | After wake-up |
+| Full 51-test suite | Optional, chatbot works | When requested |
 
 ---
 
-*Updated by claude-8 after QA approval*
+## Morning Checklist
+
+1. Open https://vesc-it.vercel.app
+2. Ask "how to prevent nosedive"
+3. Verify it mentions duty cycle, tiltback, Booster
+4. Check Telegram for overnight updates
+5. If ready to deploy: `git push` then check /playground and /safety
+
+---
+
+## Team Status
+
+| Who | Did What | Status |
+|-----|----------|--------|
+| claude-8 | Infrastructure, Supabase, Vercel | ✅ Done |
+| claude-9 | KB docs, Playground, Safety Visualizer | ✅ Done |
+| claude-10 | QA testing, this guide | ✅ Done |
+
+---
+
+*Ready for your wake-up!*

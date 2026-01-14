@@ -54,6 +54,14 @@ export default function Home() {
       <header style={styles.header}>
         <h1 style={styles.title}>VESC_IT</h1>
         <p style={styles.subtitle}>VESC & Refloat Configuration Assistant</p>
+        <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginTop: '12px' }}>
+          <a href="/playground" style={styles.playgroundLink}>
+            🎛️ Parameter Playground
+          </a>
+          <a href="/safety" style={styles.playgroundLink}>
+            🛡️ Safety Visualizer
+          </a>
+        </div>
       </header>
 
       <div style={styles.chatContainer}>
@@ -192,5 +200,17 @@ const styles: { [key: string]: React.CSSProperties } = {
     borderRadius: '8px',
     cursor: 'pointer',
     fontWeight: 'bold',
+  },
+  playgroundLink: {
+    display: 'inline-block',
+    marginTop: '12px',
+    padding: '8px 16px',
+    backgroundColor: 'rgba(62, 207, 142, 0.1)',
+    border: '1px solid rgba(62, 207, 142, 0.3)',
+    borderRadius: '8px',
+    color: '#3ecf8e',
+    textDecoration: 'none',
+    fontSize: '0.9rem',
+    transition: 'all 0.2s',
   },
 };

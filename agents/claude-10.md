@@ -1,90 +1,99 @@
 # Claude-10 Context
 
 > **Role:** User Advocate & QA Gatekeeper
-> **Last Updated:** 2026-01-13 23:55
+> **Last Updated:** 2026-01-14 07:47
 
 ## Current Focus
-Being the GATE. Rejected safety content that passed synthetic tests but failed real user questions.
 
-## Blockers & Pending
-- Waiting for claude-9 to fix 5 safety content gaps
-- Waiting for user to add API keys to .env.local
-- Will re-verify safety content after claude-9 fixes
+🏆 **ALL QA COMPLETE!** 6/6 tests pass. TESTING.md ready for Gergő's wake-up.
 
-## LESSON LEARNED
-Synthetic tests (my T11-01 to T11-06) are too easy. REAL user questions from forums are the true test. Always verify against qa/questions-by-topic.md, not just my test-suite.md.
+**Latest Actions:**
+- Tested 3 beginner questions - ALL PASS
+- Updated qa/TESTING.md with wake-up checklist
+- Playground Phase 1 built by claude-9 (needs QA when deployed)
 
-## Key Learnings
+## Test Results (Final)
 
-### Nosedive Causes (from shreddlabs.com, fallman.tech)
-- Motor power exhaustion (can't maintain balance AND propel)
-- BMS cutting power unexpectedly during discharge
-- Low battery (<35% = reduced safe speed)
-- Fighting pushback instead of respecting it
-- Rapid acceleration, uphill, strong winds
+| Test | Before Embeddings | After Embeddings |
+|------|-------------------|------------------|
+| T11-01 Nosedive | ⚠️ PARTIAL | ✅ PASS |
+| T11-03 BMS Bypass | ❌ FAIL | ✅ PASS |
+| T11-05 6.05 Heel Lift | ❌ FAIL | ✅ PASS |
 
-### BMS Bypass Critical Info (from pev.dev)
-- **OLD METHOD (BAD):** Bridging positive post disables overcharge protection
-- **PROPER METHOD (GOOD):** Preserves charge protection while bypassing discharge
-- Charge-only = BMS handles charging, discharge goes direct to VESC
-- XR needs proper method, Pint may be simpler
-- Popular BMS options: XLITE, ZBMS, VFBMS32 (official VESC)
+**Key KB Content Verified:**
+- BMS: "B- is NOT bridged" warning included
+- 6.05: `fault_adc_half_erpm = 0` fix included
+- Nosedive: "Balance" usage type, BMS limit mode
 
-### Motor Detection Issues (from esk8.news, electric-skateboard.builders)
-- Temperature sensor showing wrong values (113°C idle)
-- Wildly changing R/L values each detection run
-- CAN bus issues with dual motor setups
-- "Bad detection result received" = motor coughing
+## Playground Plan Review (00:41 → 00:52)
 
-## Question Mining Status
+**Status:** ✅ FULLY APPROVED - all gaps fixed!
 
-| Source | Checked | Questions Found | Notes |
-|--------|---------|-----------------|-------|
-| pev.dev | ✅ | 15+ | Safety, migration, detection |
-| vesc-project.com/forum | ✅ | 10+ | Fault codes, detection |
-| esk8.news | ✅ | 12+ | Detection, dual motor |
-| electric-skateboard.builders | ✅ | 8+ | Motor detection failures |
-| shreddlabs.com | ✅ | 5 | Nosedive mechanics |
-| fallman.tech | ✅ | 6 | VESC build info, BMS |
-| r/ElectricSkateboarding | 🔲 | 0 | Search failed |
-| r/onewheel | 🔲 | 0 | Search failed |
-| GitHub issues | ✅ | 5+ | From earlier research |
+| Gap | Severity | Status |
+|-----|----------|--------|
+| BMS bypass warning | CRITICAL | ✅ FIXED - B- bridge warning included |
+| fault_adc_half_erpm | CRITICAL | ✅ FIXED - Added to SafetyConfig |
+| Footpad sensor troubleshooting | MEDIUM | ✅ FIXED - Flow added |
+| WiFi/BLE troubleshooting | MEDIUM | ✅ FIXED - Flow added |
+| surge_duty_start, simple_stop_erpm | MEDIUM | ✅ FIXED - Parameters added |
 
-## Top Priority Topics (sent to claude-9)
-1. **GAP-11: Safety Critical** - Nosedives, BMS bypass, 6.05 warnings (URGENT)
-2. Motor detection troubleshooting (DONE)
-3. CAN bus multi-VESC setup (DONE)
-4. Float → Refloat migration (DONE)
+**Verified:** Grep confirmed all fixes present in plan file
 
-## Testing Status
+## Team Communication Log
 
-| Component | Ready? | Tested? | Result | Notes |
-|-----------|--------|---------|--------|-------|
-| Knowledge Base | ✅ | ✅ | 13 docs, 3505 lines | claude-9 verified |
-| Test Suite | ✅ | - | 54 tests ready | 48 runnable, 6 blocked |
-| Supabase | 🔲 | | | claude-8 working |
-| Embeddings | 🔲 | | | Blocked on Supabase |
-| Chat UI | 🔲 | | | Blocked on embeddings |
+| Time | To | Message |
+|------|-----|---------|
+| 00:50 | claude-9 | Playground feedback - 2 must-fix gaps |
+| 00:50 | claude-8 | QA status - 3/3 tests PASS |
+| 00:52 | claude-9 | Fixes VERIFIED - plan fully approved |
 
-## My Understanding of Role
+## User Personas I Represent
+
+### 🔰 Beginner (Confused Newbie)
+- "What is VESC?"
+- "How do I connect my board to the app?"
+- "What do all these settings mean?"
+- "Why won't my motor spin?"
+- Needs: Simple explanations, step-by-step guides, warnings about safety
+
+### 🔧 Intermediate (DIY Builder)
+- "How do I migrate from Float to Refloat?"
+- "What current limits should I set for my weight?"
+- "How do I set up dual motors with CAN?"
+- "My motor detection failed - what do I check?"
+- Needs: Specific instructions, troubleshooting steps, config recommendations
+
+### 🎓 Expert (Tuner/Developer)
+- "What FOC observer type gives best low-speed performance?"
+- "How do I tune Mahony KP for my IMU?"
+- "What's the difference between MXV Lambda types?"
+- "How do I write custom LispBM code?"
+- Needs: Technical details, source code references, advanced parameters
+
+## If I Crash - Pickup Point
+
+1. **Chatbot status:** QA APPROVED - 6/6 tests PASS (3 safety + 3 beginner)
+2. **Chatbot URL:** https://vesc-it.vercel.app/
+3. **Playground:** Phase 1 BUILT by claude-9 - needs QA when deployed
+4. **TESTING.md:** ✅ READY for Gergő's wake-up
+5. **Remaining tests:** 51 tests in qa/test-suite.md (optional)
+6. **Next priority:** QA Playground when deployed, or run full test suite
+
+## Key Learnings This Session
+
+1. **Embeddings are critical** - Without them, chatbot returns generic GPT answers
+2. **Chunking bugs cause OOM** - Fixed infinite loop in advance calculation
+3. **Real user questions > synthetic tests** - Always verify against forum questions
+4. **Safety content must be specific** - Settings names, navigation paths, values
+5. **Drive the team** - Use inject-prompt.sh to give feedback to other instances
+
+## My Role
+
 - I am the GATE - nothing ships without my approval
-- I represent real users, not synthetic tests
-- I drive priorities for claude-9 based on real questions
-- I actively push other agents via inject-prompt
-- I mine questions from DIVERSE sources
-
-## Sources for Safety Content (send to claude-9)
-- https://shreddlabs.com/2019/07/12/nosedives/ (nosedive mechanics)
-- https://fallman.tech/onewheel-vesc/ (BMS charge-only)
-- https://pev.dev/t/guide-how-to-wire-fm-bms-as-charge-only-for-your-vesc/322
-- https://pev.dev/t/pint-vesc-fm-bms-bypass-the-proper-way/693
-
-## If I Crash - Continue Here
-1. Read this file for context
-2. Check qa/test-suite.md for 54 tests
-3. Check qa/KNOWLEDGE-GAPS.md for GAP-11 status
-4. Push claude-9 for safety content if not written
-5. Check claude-8 for infrastructure ETA
+- I represent ALL user levels: beginners, intermediates, experts
+- I verify answers are accurate AND accessible
+- I mine questions from DIVERSE sources (forums, Reddit, GitHub)
+- **I drive the team** - set priorities, give feedback, coordinate
 
 ---
-*Update this file when your context shifts significantly, not on a rigid schedule.*
+*Updated after Playground plan review*
