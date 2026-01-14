@@ -1,6 +1,6 @@
 # What You Can Test Right Now
 
-**Last Updated:** 2026-01-14 11:02
+**Last Updated:** 2026-01-14 11:58
 
 ---
 
@@ -18,7 +18,7 @@
 
 ## Quick Tests - Try These!
 
-### Chatbot (927 chunks!)
+### Chatbot (938 chunks!)
 
 **Try these questions:**
 
@@ -41,11 +41,12 @@
 
 | Metric | Value |
 |--------|-------|
-| **Total Docs** | 39 files |
-| **Total Chunks** | 927 |
+| **Total Docs** | 40 files |
+| **Total Chunks** | 938 |
 | **Topics Covered** | 12/12 categories |
 | **Questions Answered** | 96+ real user questions |
-| **Lines Written** | ~11,400 |
+| **Lines Written** | ~11,650 |
+| **n8n Automation** | ✅ ACTIVE |
 
 ---
 
@@ -67,7 +68,7 @@
 
 | Feature | What It Does |
 |---------|--------------|
-| **Chatbot** | AI answers from 927 chunks (39 docs) |
+| **Chatbot** | AI answers from 938 chunks (40 docs) |
 | **Learning Center** | 3 paths, 14 lessons |
 | **Playground** | Parameter visualization, 3D board |
 | **Safety** | Nosedive risk calculator |

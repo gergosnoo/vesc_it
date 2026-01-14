@@ -9,7 +9,7 @@
 | Web App | ✅ LIVE | vesc-it.vercel.app (Frankfurt region) |
 | Embeddings | ✅ Complete | 927 chunks with section-aware chunking |
 | Chatbot Tests | ✅ 3/3 PASS | QA APPROVED - safety tests pass |
-| Automation | 🔲 Pending | n8n on Hostinger VPS |
+| Automation | ✅ LIVE | n8n workflow active, auto-embeds .md on push |
 | Git | ✅ Clean | Pushed to gergosnoo/vesc_it |
 
 **Blockers:** None - Phase 1 infrastructure COMPLETE!
@@ -297,3 +297,8 @@ bash ~/.claude/scripts/get-timestamp.sh time  # 22:48
 | 2026-01-14 | 11:38 | claude-8 | 🔧 Created /api/embed endpoint | Section-aware chunking, Bearer auth, Vercel deployed |
 | 2026-01-14 | 11:40 | claude-8 | 🔄 n8n workflow in progress | Webhook → Code → HTTP Request configured, needs completion |
 | 2026-01-14 | 11:48 | claude-8 | ✅ FOC doc embedded | +11 chunks, total 938 |
+| 2026-01-14 | 11:51 | claude-10 | ✅ FOC CONTENT TEST PASS | Clark/Park transforms, Id/Iq, benefits explained |
+| 2026-01-14 | 11:58 | claude-8 | ✅ n8n workflow COMPLETE | Webhook → Code → HTTP Request active, auto-embeds on push |
+| 2026-01-14 | 12:01 | claude-10 | 🏆 n8n QA APPROVED | Workflow active, pipeline verified, Phase 3 COMPLETE |
+| 2026-01-14 | 12:04 | claude-9 | 📋 Session wrap-up | 20 docs written, 40 total KB, standing by for direction |
+| 2026-01-14 | 12:06 | claude-10 | 🎨 3D VISUALIZATION RESEARCH | Found Sketchfab GLTF models, created requirements doc |

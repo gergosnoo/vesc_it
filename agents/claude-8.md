@@ -1,22 +1,23 @@
 # Claude-8 Context
 
 > **Role:** Infrastructure Lead
-> **Last Updated:** 2026-01-14 11:40
+> **Last Updated:** 2026-01-14 11:58
 
 ## Current Focus
-🔧 N8N WORKFLOW + NEW EMBEDDING (11:40)
+✅ ALL INFRASTRUCTURE COMPLETE (11:58)
 
 **Live at https://vesc-it.vercel.app:**
 | Route | Status | Description |
 |-------|--------|-------------|
-| `/` | ✅ ChatGPT UI | Dark theme, 927 embeddings |
-| `/api/embed` | ✅ NEW | Embedding API for n8n automation |
+| `/` | ✅ ChatGPT UI | Dark theme, 938 embeddings |
+| `/api/embed` | ✅ LIVE | Embedding API for n8n automation |
+| `/api/chat` | ✅ LIVE | RAG chatbot with GPT-4o-mini |
 | `/learn` | ✅ LIVE | Learning Center (3 paths) |
 | `/playground` | ✅ LIVE | Parameter visualizer |
 | `/safety` | ✅ LIVE | Safety simulator |
 | `/troubleshoot` | ✅ LIVE | 5 diagnostic wizards |
 
-## Session Progress (11:40)
+## Session Progress (11:58)
 
 | Task | Status |
 |------|--------|
@@ -28,10 +29,29 @@
 | Pushed to Vercel (38 files) | ✅ Done |
 | UI QA verification | ✅ PASSED |
 | Created /api/embed endpoint | ✅ Done |
-| Configure n8n workflow | 🔄 In Progress |
-| Embed foc-fundamentals-explained.md | ⏳ Pending |
+| FOC doc embedded (+11 chunks) | ✅ Done (938 total) |
+| n8n workflow configured | ✅ ACTIVE |
 
-## New: Embedding API
+## n8n Workflow - COMPLETE
+
+**URL:** https://n8n.srv1094773.hstgr.cloud/workflow/5HoXjl1A1myy1ge3
+**Status:** ✅ ACTIVE
+
+**Flow:**
+```
+GitHub Push → Webhook → Code (extract .md) → HTTP Request → /api/embed
+```
+
+**Configuration:**
+- Webhook: Receives GitHub push events
+- Code: Extracts .md files from commits, builds raw URLs
+- HTTP Request: POST to https://vesc-it.vercel.app/api/embed
+  - Authorization: Bearer N8N_API_KEY
+  - Body: `{"url": "{{ $json.url }}", "source": "{{ $json.path }}"}`
+
+**Test:** Push any .md file to knowledge-base/ and it will auto-embed!
+
+## Embedding API
 
 Created `/api/embed` endpoint for automated embedding:
 - POST with Bearer token auth (N8N_API_KEY)
@@ -47,69 +67,45 @@ curl -X POST https://vesc-it.vercel.app/api/embed \
   -d '{"url": "https://raw.githubusercontent.com/.../file.md", "source": "file.md"}'
 ```
 
-## n8n Workflow Status
+## Infrastructure Status
 
-**URL:** https://n8n.srv1094773.hstgr.cloud/workflow/5HoXjl1A1myy1ge3
-
-**Current Flow:**
-1. ✅ Webhook - receives GitHub push events
-2. ✅ Code in JavaScript - extracts .md files from commits
-3. 🔄 HTTP Request - needs config to call /api/embed
-4. ❌ "If row exists" - remove (embed API handles dedup)
-
-**To Complete:**
-1. Change HTTP Request: POST to https://vesc-it.vercel.app/api/embed
-2. Add Authorization header with N8N_API_KEY
-3. Send JSON body: `{"url": "{{ $json.url }}", "source": "{{ $json.path }}"}`
-4. Delete "If row exists" node
-5. Save and activate workflow
-
-## Blockers & Pending
-
-- **n8n browser UI** - slow to configure, may use API instead
-- **New FOC doc** - foc-fundamentals-explained.md ready for embedding
+| Component | Status | Notes |
+|-----------|--------|-------|
+| Supabase | ✅ LIVE | 938 chunks, pgvector 1536d |
+| Vercel | ✅ LIVE | 7 routes, ChatGPT UI + APIs |
+| n8n | ✅ ACTIVE | Auto-embeds .md on GitHub push |
+| Knowledge Base | ✅ COMPLETE | 40 files, all embedded |
 
 ## Key Learnings
 
 - **OpenAI n8n node** - NO embedding action, use HTTP Request instead
 - **Section-aware chunking** - keeps headers with content for better RAG
 - **Tailwind classes** - gray-800/900 for dark theme
-
-## Infrastructure Status
-
-| Component | Status | Notes |
-|-----------|--------|-------|
-| Supabase | ✅ LIVE | 927 chunks, pgvector 1536d |
-| Vercel | ✅ LIVE | 6 routes, ChatGPT UI + embed API |
-| n8n | 🔄 PARTIAL | Webhook + Code done, HTTP needs config |
-| Knowledge Base | ✅ COMPLETE | 39 files, all embedded |
+- **n8n Delete key** - removes nodes on canvas
 
 ## If I Crash - Continue Here
 
-**Current State:** Embedding API deployed, n8n partially configured
+**Current State:** ALL INFRASTRUCTURE COMPLETE
 **Next Actions:**
-1. Embed foc-fundamentals-explained.md using Python script
-2. Complete n8n workflow (or use API to configure)
-3. Test webhook trigger with test push
+1. Monitor n8n workflow for any errors
+2. Await claude-10 QA approval on any new content
+3. Available for new features/improvements
 
 **Key Commands:**
 ```bash
-# Embed new doc with Python script
+# Check embedding count
 cd /Users/gergokiss/work/gergo/vesc/vesc_it
 source .venv/bin/activate
-python scripts/embed-knowledge.py
+python -c "from supabase import create_client; import os; c = create_client(os.environ['SUPABASE_URL'], os.environ['SUPABASE_SERVICE_ROLE_KEY']); print(c.table('documents').select('id', count='exact').execute().count)"
 
-# Or use curl to test embed API
+# Manual embed if needed
 curl -X POST https://vesc-it.vercel.app/api/embed \
   -H "Authorization: Bearer $(grep N8N_API_KEY .env.local | cut -d= -f2)" \
   -H "Content-Type: application/json" \
-  -d '{"url": "https://raw.githubusercontent.com/gergosnoo/vesc_it/master/knowledge-base/foc-fundamentals-explained.md"}'
-
-# Check embedding count
-# In Python: client.table('documents').select('id', count='exact').execute()
+  -d '{"url": "https://raw.githubusercontent.com/gergosnoo/vesc_it/master/knowledge-base/YOUR-FILE.md"}'
 ```
 
 **n8n URL:** https://n8n.srv1094773.hstgr.cloud/workflow/5HoXjl1A1myy1ge3
 
 ---
-*Updated 11:40 - Embed API deployed, n8n in progress, FOC doc queued*
+*Updated 11:58 - n8n ACTIVE, all infrastructure complete, 938 embeddings*

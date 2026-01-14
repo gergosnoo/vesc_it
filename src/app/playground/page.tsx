@@ -1,10 +1,12 @@
 'use client';
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { PARAMETERS, getParametersByCategory } from '@/lib/vesc/parameters';
 import { usePlaygroundStore } from '@/stores/playgroundStore';
 import { ParameterSlider } from './components/ParameterSlider';
 import { BoardVisualizer } from './components/BoardVisualizer';
+import { BoardVisualizer3D } from './components/BoardVisualizer3D';
 import { SafetyGauge } from './components/SafetyGauge';
 
 const categories = [
@@ -15,6 +17,7 @@ const categories = [
 ] as const;
 
 export default function PlaygroundPage() {
+  const [is3DView, setIs3DView] = useState(true); // Default to 3D
   const {
     selectedCategory,
     setSelectedCategory,
@@ -43,6 +46,17 @@ export default function PlaygroundPage() {
           </div>
 
           <div className="flex items-center gap-4">
+            {/* 2D/3D Toggle */}
+            <button
+              onClick={() => setIs3DView(!is3DView)}
+              className={`px-3 py-1.5 rounded-lg text-sm transition-colors ${
+                is3DView
+                  ? 'bg-blue-500/20 text-blue-400 border border-blue-500/50'
+                  : 'bg-slate-800 text-slate-400 hover:text-white'
+              }`}
+            >
+              {is3DView ? '🎮 3D View' : '📐 2D View'}
+            </button>
             <button
               onClick={toggleDescriptions}
               className={`px-3 py-1.5 rounded-lg text-sm transition-colors ${
@@ -90,8 +104,10 @@ export default function PlaygroundPage() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.1 }}
             >
-              <h3 className="text-lg font-semibold mb-3 text-slate-300">Live Preview</h3>
-              <BoardVisualizer />
+              <h3 className="text-lg font-semibold mb-3 text-slate-300">
+                Live Preview {is3DView && <span className="text-blue-400 text-sm ml-2">• Drag to rotate</span>}
+              </h3>
+              {is3DView ? <BoardVisualizer3D /> : <BoardVisualizer />}
             </motion.div>
 
             {/* Safety Gauge */}
