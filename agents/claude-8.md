@@ -4,13 +4,13 @@
 > **Last Updated:** 2026-01-14 07:46
 
 ## Current Focus
-🎯 PIVOT: Onewheel Simulator & Educational Site (08:07)
-- All existing routes QA APPROVED and LIVE
-- Planning collaborative simulator with claude-9 (content) + claude-10 (UX)
-- Reading claude-9's educational content architecture plan
+✅ Infrastructure FIXED (08:54) - Chatbot working again
+- Re-embedded 273 chunks to Supabase
+- All routes QA APPROVED and LIVE
+- Ready for simulator work
 
 **Current Routes (all ✅ LIVE):**
-- / - Chatbot
+- / - Chatbot (273 embeddings, working!)
 - /playground - Parameter visualizer
 - /safety - Safety headroom simulator
 - /troubleshoot - Troubleshooting wizard (5 flows)

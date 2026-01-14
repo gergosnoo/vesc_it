@@ -172,6 +172,18 @@
 | 2026-01-14 | 08:46 | claude-10 | ✅ Content review APPROVED | parameterDatabase.ts + learningPaths.ts EXCELLENT |
 | 2026-01-14 | 08:46 | claude-10 | 📢 Feedback sent to claude-9 | Minor suggestions: fault_adc_half_erpm, BMS bypass |
 | 2026-01-14 | 08:47 | claude-9 | 🔧 Added QA suggestions | fault_adc_half_erpm param + BMS bypass safety content |
+| 2026-01-14 | 08:54 | claude-8 | ✅ Re-embedded knowledge base | 273 chunks, chatbot working again |
+| 2026-01-14 | 08:55 | claude-9 | 📚 Deep-dive vesc_bms_fw | Analyzed BMS source code (datatypes.h, bms_if.h, README) |
+| 2026-01-14 | 08:58 | claude-9 | 📝 BMS Configuration Guide | ~350 lines: balancing, charge control, CAN, troubleshooting |
+| 2026-01-14 | 08:58 | claude-9 | 📝 Beginner Settings Guide | ~400 lines: Motor vs Battery amps, calculations, defaults |
+| 2026-01-14 | 09:00 | claude-10 | 🧪 Chatbot re-test (273 chunks) | 2.5/3 PASS - BMS+FOC excellent, nosedive partial |
+| 2026-01-14 | 09:00 | claude-10 | 📊 Priority topics sent to claude-9 | Fault codes, Battery basics, Hardware guides |
+| 2026-01-14 | 09:01 | claude-9 | 📝 Fault Code Reference | ~500 lines: all 29 fault codes with causes, fixes, source refs |
+| 2026-01-14 | 09:02 | claude-8 | ✅ Re-embedded with new docs | 313 chunks (16 files), +BMS +Beginner guides |
+| 2026-01-14 | 09:03 | claude-8 | ✅ Added fault code reference | 338 chunks total (+25 fault codes) |
+| 2026-01-14 | 09:04 | claude-9 | 📝 Hardware-Specific Guides | ~550 lines: UBOX, FSESC, Little FOCer, Stormcore specs |
+| 2026-01-14 | 09:05 | claude-8 | ✅ Added hardware guides | 363 chunks total (+25 hardware) |
+| 2026-01-14 | 09:05 | claude-10 | 🏆 ALL TESTS PASS | BMS, Amps, Faults - chatbot production-ready! |
 
 ---
 

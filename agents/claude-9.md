@@ -1,8 +1,8 @@
 # Claude-9 Context
 
 > **Role:** Knowledge Architect
-> **Last Updated:** 2026-01-14 08:35
-> **Session:** Educational Content Complete
+> **Last Updated:** 2026-01-14 08:58
+> **Session:** Active Content Creation - BMS & Beginner Guides
 
 ---
 
@@ -13,8 +13,8 @@
 **I built all the educational content for the Onewheel Simulator.**
 
 Two main files ready to use:
-1. `src/lib/parameters/parameterDatabase.ts` - Top 10 parameters explained
-2. `src/lib/learning/learningPaths.ts` - 3 learning paths (~2000 lines)
+1. `src/lib/parameters/parameterDatabase.ts` - 11 parameters explained (QA approved)
+2. `src/lib/learning/learningPaths.ts` - 3 learning paths, 14 lessons (~2000 lines)
 
 Everything is pushed to GitHub. Waiting for claude-8 to build UI components.
 
@@ -22,7 +22,7 @@ Everything is pushed to GitHub. Waiting for claude-8 to build UI components.
 
 ## What I Created Today
 
-### 1. Parameter Database (Top 10)
+### 1. Parameter Database (11 Parameters)
 
 | # | Parameter | Why It's Important |
 |---|-----------|-------------------|
@@ -36,6 +36,7 @@ Everything is pushed to GitHub. Waiting for claude-8 to build UI components.
 | 8 | Simple Stop ERPM | Dismount behavior |
 | 9 | ATR Strength | Speed-based nose angle |
 | 10 | Haptic Buzz Duty | Vibration warning |
+| 11 | fault_adc_half_erpm | VESC 6.05 heel lift fix (QA added) |
 
 Each parameter has:
 - Plain English explanation
@@ -82,7 +83,7 @@ kp ──────────────────ratio──────
 |------|-------|--------|
 | Learning path UI | claude-8 | Not started |
 | Parameter slider UI | claude-8 | Not started |
-| Content QA review | claude-10 | Requested |
+| Content QA review | claude-10 | ✅ APPROVED |
 
 ---
 
@@ -129,4 +130,50 @@ From overnight session:
 
 ---
 
-*Session ended 08:35 | Educational content complete, awaiting UI*
+## QA Improvements Implemented
+
+Based on claude-10's review:
+1. Added `fault_adc_half_erpm` parameter (#11) - critical for VESC 6.05 heel lift fix
+2. Added BMS bypass safety section in Learning Path A (Understanding Warnings lesson)
+
+---
+
+## New Content Created (08:58)
+
+### vesc-bms-configuration-guide.md (~350 lines)
+Deep-dive into vesc_bms_fw repo. Covers:
+- Cell balancing modes and parameters
+- Charge control configuration
+- CAN bus integration with motor controller
+- Distributed balancing for multi-BMS setups
+- Fault codes and troubleshooting
+- BMS bypass for Onewheels (charge-only method)
+
+### vesc-beginner-settings-guide.md (~400 lines)
+Most common beginner confusions. Covers:
+- Motor Amps vs Battery Amps (THE #1 question)
+- How to calculate battery limits from cell specs
+- Voltage cutoff settings by cell chemistry
+- Temperature limits
+- PPM/throttle calibration
+- Safe starting defaults for esk8, Onewheel, e-bike
+- Common beginner mistakes and fixes
+
+---
+
+## If I Crash - Continue Here
+
+**Current state:** Active content creation. Two new KB docs written.
+
+**Key files created:**
+- `knowledge-base/vesc-bms-configuration-guide.md`
+- `knowledge-base/vesc-beginner-settings-guide.md`
+
+**Next steps:**
+1. Notify claude-8 to re-embed knowledge base
+2. Claude-10 to test new content against user questions
+3. Continue writing if more gaps identified
+
+---
+
+*Session updated 08:58 | Actively writing new knowledge base content*

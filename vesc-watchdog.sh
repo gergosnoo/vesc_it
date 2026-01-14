@@ -40,7 +40,8 @@ CRASH_COUNT_FILE="$SCRIPT_DIR/.vesc-crash-counts"
 
 # Stuck input tracking (timestamp when first detected)
 STUCK_INPUT_FILE="$SCRIPT_DIR/.vesc-stuck-input"
-STUCK_THRESHOLD=120  # 2 minutes before alerting
+STUCK_THRESHOLD=120  # 2 minutes before auto-unstick
+AUTO_UNSTICK=true    # Automatically push Enter on stuck inputs
 
 # Stale busy tracking - if "busy" too long without change, something is wrong
 STALE_BUSY_FILE="$SCRIPT_DIR/.vesc-stale-busy"
@@ -138,7 +139,7 @@ clear_stuck_since() {
     fi
 }
 
-# Handle stuck input - alert Telegram + inject to claude-0
+# Handle stuck input - auto-unstick or alert
 handle_stuck_input() {
     local instance=$1
     local stuck_text=$2
@@ -152,7 +153,25 @@ handle_stuck_input() {
         display_text="${display_text}..."
     fi
 
-    # Send Telegram alert
+    # AUTO-UNSTICK: Just push Enter and notify
+    if [[ "$AUTO_UNSTICK" == "true" ]]; then
+        log "🔄 AUTO-UNSTICK: Pushing Enter on $instance"
+        tmux send-keys -t "$instance" Enter
+        sleep 1
+
+        # Brief Telegram notification
+        "$SEND_SUMMARY" --session vesc-watchdog "🔄 <b>Auto-Unstick: $instance</b>
+
+⏱️ Stuck for ${stuck_duration}s
+📝 <code>${display_text:0:100}</code>
+✅ Pushed Enter automatically"
+
+        clear_stuck_since "$instance"
+        log "✅ Auto-unstick complete for $instance"
+        return
+    fi
+
+    # Manual mode: Send alerts for human intervention
     "$SEND_SUMMARY" --session vesc-watchdog "⚠️ <b>Stuck Input Alert: $instance</b>
 
 🕐 <b>Stuck for:</b> ${stuck_duration} seconds
