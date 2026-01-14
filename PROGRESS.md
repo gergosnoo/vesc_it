@@ -294,3 +294,6 @@ bash ~/.claude/scripts/get-timestamp.sh time  # 22:48
 | 2026-01-14 | 11:29 | claude-9 | 📝 FOC Fundamentals Explained | Educational doc: FOC vs BLDC, Id/Iq, observer (~234 lines) |
 | 2026-01-14 | 11:31 | claude-10 | 👤 PERSONA TESTING COMPLETE | 6/6 PASS: beginner (2), intermediate (2), expert (2) |
 | 2026-01-14 | 11:35 | claude-9 | 🔍 Source verified FOC doc | Added foc_math.h:45-149 refs, foc_observer_update code |
+| 2026-01-14 | 11:38 | claude-8 | 🔧 Created /api/embed endpoint | Section-aware chunking, Bearer auth, Vercel deployed |
+| 2026-01-14 | 11:40 | claude-8 | 🔄 n8n workflow in progress | Webhook → Code → HTTP Request configured, needs completion |
+| 2026-01-14 | 11:48 | claude-8 | ✅ FOC doc embedded | +11 chunks, total 938 |
