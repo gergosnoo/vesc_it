@@ -1,5 +1,5 @@
 #!/bin/bash
-# VESC Watchdog v2.1 - Role-specific reminders + Crash Recovery + Stuck Input Detection
+# VESC Watchdog v2.2 - Aggressive Push + Multi-layer Detection
 #
 # Usage:
 #   ./vesc-watchdog.sh start    - Start watchdog daemon
@@ -9,12 +9,14 @@
 #   ./vesc-watchdog.sh unstick <instance>  - Push Enter on stuck instance
 #
 # Monitors: claude-8, claude-9, claude-10
-# Interval: 10 minutes
+# Interval: 5 minutes
 # Features:
-#   - Role-specific reminders
+#   - Role-specific reminders (every cycle when idle)
+#   - FORCE reminders (every 15 min even when "busy")
 #   - Crash detection and auto-recovery
-#   - Starter prompts with full context
-#   - Stuck input detection (alerts Telegram + injects to claude-0)
+#   - Stuck input detection (2 min threshold)
+#   - Stale busy detection (20 min same output = frozen)
+#   - Starter prompts with full context on restart
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_DIR="$SCRIPT_DIR"
@@ -23,6 +25,9 @@ LOG_FILE="$SCRIPT_DIR/logs/vesc-watchdog.log"
 INJECT_SCRIPT="$HOME/.claude/telegram-orchestrator/inject-prompt.sh"
 SEND_SUMMARY="$HOME/.claude/telegram-orchestrator/send-summary.sh"
 INTERVAL=300  # 5 minutes (faster detection)
+
+# Force reminder every N cycles even if "busy"
+FORCE_REMINDER_INTERVAL=3  # Every 3 cycles (15 min), force a reminder regardless
 
 # Instances to watch
 INSTANCES=("claude-8" "claude-9" "claude-10")
@@ -838,7 +843,7 @@ TIME=\$(~/.claude/scripts/get-timestamp.sh time)
 # ============================================================================
 
 run_daemon() {
-    log "VESC Watchdog v2.1 daemon started (PID: $$)"
+    log "VESC Watchdog v2.2 daemon started (PID: $$)"
     log "Features: Role reminders + Crash recovery + Stuck input detection (${STUCK_THRESHOLD}s threshold)"
     echo $$ > "$PID_FILE"
 
@@ -927,6 +932,20 @@ run_daemon() {
                             log "$instance is busy, same output for ${duration}s"
                         fi
                     fi
+
+                    # FORCE REMINDER every N cycles even when busy
+                    if [[ $((counter % FORCE_REMINDER_INTERVAL)) -eq 0 ]]; then
+                        log "⚡ FORCE REMINDER to $instance (cycle $counter)"
+                        local force_msg="⚡ **STATUS CHECK** - You've been running for a while.
+
+🔄 **Are you making progress?** If stuck, ask for help!
+📢 **Report status NOW** - Update PROGRESS.md and send Telegram
+🤝 **Talk to team** - Need something? Inject to claude-8/9/10
+
+If you're idle, START A NEW TASK immediately!"
+                        "$INJECT_SCRIPT" "$instance" "$force_msg"
+                        sleep 3
+                    fi
                     ;;
             esac
         done
@@ -951,7 +970,7 @@ start_watchdog() {
         fi
     fi
 
-    echo "Starting VESC Watchdog v2.1..."
+    echo "Starting VESC Watchdog v2.2..."
     nohup "$0" daemon >> "$LOG_FILE" 2>&1 &
     echo "VESC Watchdog started (PID: $!)"
     echo "Monitoring: ${INSTANCES[*]}"
@@ -977,7 +996,7 @@ stop_watchdog() {
 }
 
 show_status() {
-    echo "=== VESC Watchdog v2.1 Status ==="
+    echo "=== VESC Watchdog v2.2 Status ==="
     echo ""
 
     if [[ -f "$PID_FILE" ]]; then
@@ -1112,7 +1131,7 @@ case "${1:-}" in
         run_daemon
         ;;
     *)
-        echo "VESC Watchdog v2.1 - Role reminders + Crash recovery + Stuck input detection"
+        echo "VESC Watchdog v2.2 - Role reminders + Crash recovery + Stuck input detection"
         echo ""
         echo "Usage: $0 {start|stop|status|restart|unstick|clear} [instance]"
         echo ""

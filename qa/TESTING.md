@@ -1,6 +1,6 @@
 # VESC_IT Testing Guide
 
-**Updated:** 2026-01-14 01:31 by claude-10
+**Updated:** 2026-01-14 07:52 by claude-10
 
 ---
 
@@ -8,9 +8,9 @@
 
 | Feature | URL | Status |
 |---------|-----|--------|
-| **AI Chatbot** | https://vesc-it.vercel.app | ✅ LIVE |
-| **Parameter Playground** | /playground | ✅ BUILT (needs deploy) |
-| **Safety Visualizer** | /safety | ✅ BUILT (needs deploy) |
+| **AI Chatbot** | https://vesc-it.vercel.app | ✅ LIVE & TESTED |
+| **Parameter Playground** | /playground | ✅ LIVE & TESTED |
+| **Safety Visualizer** | /safety | ✅ LIVE & TESTED |
 
 ---
 
@@ -53,19 +53,18 @@
 
 | Feature | Why | ETA |
 |---------|-----|-----|
-| Playground on Vercel | Needs `git push` + deploy | After wake-up |
-| Safety Visualizer on Vercel | Needs `git push` + deploy | After wake-up |
-| Full 51-test suite | Optional, chatbot works | When requested |
+| Full 51-test suite | Optional, core features work | When requested |
+| n8n automation | Phase 3 | TBD |
 
 ---
 
 ## Morning Checklist
 
-1. Open https://vesc-it.vercel.app
-2. Ask "how to prevent nosedive"
-3. Verify it mentions duty cycle, tiltback, Booster
-4. Check Telegram for overnight updates
-5. If ready to deploy: `git push` then check /playground and /safety
+1. ✅ Open https://vesc-it.vercel.app - **DONE, TESTED**
+2. ✅ Ask "how to prevent nosedive" - **PASSES**
+3. ✅ Try /playground - **LIVE, sliders + 3D board working**
+4. ✅ Try /safety - **LIVE, scenario selector working**
+5. Check Telegram for updates
 
 ---
 

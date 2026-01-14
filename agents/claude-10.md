@@ -5,12 +5,19 @@
 
 ## Current Focus
 
-🏆 **ALL QA COMPLETE!** 6/6 tests pass. TESTING.md ready for Gergő's wake-up.
+🏆 **ALL QA COMPLETE!** Chatbot + Playground + Safety all tested and APPROVED.
 
-**Latest Actions:**
-- Tested 3 beginner questions - ALL PASS
-- Updated qa/TESTING.md with wake-up checklist
-- Playground Phase 1 built by claude-9 (needs QA when deployed)
+**Current State:**
+- Chatbot: 6/6 tests PASS
+- Playground: ✅ LIVE and working
+- Safety: ✅ LIVE and working (scenario selector verified)
+- Test suite: 54 tests in qa/test-suite.md
+
+**Latest Actions (07:52):**
+- Tested /playground - sliders, 3D board, Safety Score all working
+- Tested /safety - Nosedive gauge, Scenario selector (60%→85% on Uphill)
+- Sent TEST PASSED to claude-8
+- All URLs live at vesc-it.vercel.app
 
 ## Test Results (Final)
 
@@ -72,12 +79,12 @@
 
 ## If I Crash - Pickup Point
 
-1. **Chatbot status:** QA APPROVED - 6/6 tests PASS (3 safety + 3 beginner)
-2. **Chatbot URL:** https://vesc-it.vercel.app/
-3. **Playground:** Phase 1 BUILT by claude-9 - needs QA when deployed
-4. **TESTING.md:** ✅ READY for Gergő's wake-up
-5. **Remaining tests:** 51 tests in qa/test-suite.md (optional)
-6. **Next priority:** QA Playground when deployed, or run full test suite
+1. **Chatbot:** ✅ QA APPROVED - 6/6 tests PASS
+2. **Playground:** ✅ QA APPROVED - LIVE at /playground
+3. **Safety:** ✅ QA APPROVED - LIVE at /safety (scenario selector works)
+4. **URLs:** All at https://vesc-it.vercel.app
+5. **Remaining:** 48 tests in qa/test-suite.md (optional)
+6. **Next priority:** n8n automation (Phase 3) or more testing
 
 ## Key Learnings This Session
 
