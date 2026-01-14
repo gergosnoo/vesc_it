@@ -1,69 +1,71 @@
 # Claude-8 Context
 
 > **Role:** Infrastructure Lead
-> **Last Updated:** 2026-01-14 11:01
+> **Last Updated:** 2026-01-14 11:12
 
 ## Current Focus
-🚀 ALL SYSTEMS LIVE - 927 EMBEDDINGS (11:01)
+🎨 CHAT UI DEPLOYED - AWAITING QA (11:12)
 
 **Live at https://vesc-it.vercel.app:**
 | Route | Status | Description |
 |-------|--------|-------------|
-| `/` | ✅ LIVE | Chatbot (927 embeddings) |
+| `/` | ✅ NEW UI | ChatGPT-style chat (927 embeddings) |
 | `/learn` | ✅ LIVE | Learning Center (3 paths) |
 | `/playground` | ✅ LIVE | Parameter visualizer |
 | `/safety` | ✅ LIVE | Safety simulator |
 | `/troubleshoot` | ✅ LIVE | 5 diagnostic wizards |
 
-## Session Progress (10:56)
+## Session Progress (11:12)
 
-| Task | Chunks | Status |
-|------|--------|--------|
-| Fixed RAG chunking bug | - | ✅ Done |
-| Scraped pev.dev (9 posts) | 60 | ✅ Done |
-| Embedded claude-9 KB batch 1 | 124 | ✅ Done |
-| Embedded claude-9 KB batch 2 | 48 | ✅ Done |
-| Embedded claude-9 KB batch 3 | 45 | ✅ Done |
-| Embedded claude-9 KB batch 4 | 75 | ✅ Done |
-| Embedded claude-9 KB batch 5 (HW Compat, Beginner, CAN/UART) | 75 | ✅ Done |
-| Fixed API bug (history undefined) | - | ✅ Done |
-| Embedded Round 4 (LispBM, Backup, Mobile) | 84 | ✅ Done |
-| **Total embeddings** | **927** | 🎉 |
+| Task | Status |
+|------|--------|
+| Fixed RAG chunking bug | ✅ Done |
+| Scraped pev.dev (9 posts) | ✅ Done |
+| Embedded 927 chunks (4 rounds) | ✅ Done |
+| Fixed API bug (history undefined) | ✅ Done |
+| ChatGPT-style UI redesign | ✅ Done |
+| Pushed to Vercel (38 files) | ✅ Done |
+| **UI QA verification** | ⏳ Awaiting claude-10 |
+
+## New UI Features
+- Dark theme with gray-900 background
+- 4 suggestion chips (2x2 grid)
+- User/Assistant avatars (blue/green)
+- Animated typing indicator (bouncing dots)
+- Auto-expanding textarea input
+- Navigation header to all routes
+- "Powered by 927 chunks" footer
 
 ## Blockers & Pending
-- **n8n ready** - URL: https://n8n.srv1094773.hstgr.cloud
-- Workflow started, needs OpenAI + Supabase nodes
-- **Modern Chat UI** - In backlog per Gergő
+- **UI QA** - Awaiting claude-10 verification
+- **n8n workflow** - URL: https://n8n.srv1094773.hstgr.cloud
 
 ## Key Learnings
-- **RAG chunking**: Section-aware by `##` headers keeps content together
-- **pev.dev scraping**: WebFetch works, .json API not public
-- **Embedding flow**: Python venv + incremental processing avoids OOM
-- **API defaults**: Always use `history = []` default for undefined arrays
+- **Tailwind classes** - gray-800/900 for dark theme
+- **Auto-resize textarea** - scrollHeight + min()
+- **Vercel auto-deploy** - ~60 seconds from push
 
 ## Infrastructure Status
 
 | Component | Status | Notes |
 |-----------|--------|-------|
 | Supabase | ✅ LIVE | 927 chunks, pgvector 1536d |
-| Vercel | ✅ LIVE | 5 routes, Frankfurt region |
+| Vercel | ✅ LIVE | 5 routes, ChatGPT UI deployed |
 | n8n | 🔄 PARTIAL | Webhook + Code, needs completion |
-| Knowledge Base | ✅ LIVE | 39 files in knowledge-base/ |
+| Knowledge Base | ✅ COMPLETE | 39 files, all embedded |
 
 ## If I Crash - Continue Here
 
-**Current State:** All deployed, 927 embeddings, awaiting Round 4 QA
+**Current State:** ChatGPT UI deployed, awaiting QA
 **Next Action:**
-1. Wait for claude-10 QA results on 843 chunks
-2. If claude-9 sends more KB docs → embed them
+1. Wait for claude-10 UI QA results
+2. If QA passes → UI complete
 3. When directed → finish n8n workflow
-4. When directed → start Chat UI redesign
 
 **Key Commands:**
 ```bash
-# Embed new KB file
-export $(grep -v '^#' .env.local | xargs) && source .venv/bin/activate
-# Then run Python embedding script
+# Check Vercel deployment
+git log --oneline -1  # aebf5b5
 
 # Check embedding count
 # In Python: client.table('documents').select('id', count='exact').execute()
@@ -72,4 +74,4 @@ export $(grep -v '^#' .env.local | xargs) && source .venv/bin/activate
 **n8n URL:** https://n8n.srv1094773.hstgr.cloud
 
 ---
-*Updated 11:01 - 927 embeddings, all routes live, awaiting Round 4 QA*
+*Updated 11:12 - ChatGPT UI deployed, 927 embeddings, awaiting QA*

@@ -3,7 +3,7 @@
 **Created by:** claude-10 (User Advocate)
 **Date:** 2026-01-13
 **Source:** Forums, Reddit, GitHub, Discord
-**Total Questions:** 96+
+**Total Questions:** 106+
 
 ---
 
@@ -245,3 +245,23 @@
 
 *Compiled by claude-10 | User Advocate*
 *Updated 2026-01-14 10:46 - Added 21 questions from diverse sources (vesc-project.com, Reddit)*
+*Updated 2026-01-14 11:20 - Added 10 edge case questions from deep forum mining*
+
+---
+
+## 13. Edge Cases / Hardware-Specific (NEW - 10 questions)
+
+**Source:** vesc-project.com, endless-sphere, GitHub issues (2024)
+
+| Question | Source | Hardware |
+|----------|--------|----------|
+| "UNBALANCED_CURRENTS fault at high load" | vesc-project | FSESC 75350 |
+| "Config reverts to default after reboot" | vesc-project | VESC6MKV |
+| "Firmware update on old 4.7 VESCs" | vesc-project | Enertion Focbox |
+| "BMS CAN connection stops motor" | vesc-project | VESC 6 HP + BMS |
+| "Observer issues with BBSHD motors on 6.02" | endless-sphere | BBSHD mid-drive |
+| "Mid-drive acceleration clunk" | endless-sphere | Cyclone 3000 |
+| "Mac VESC Tool crashes on BLE connect" | GitHub #369 | MacOS Sonoma |
+| "Android RT log crashes app" | GitHub #378 | Android 6.05 |
+| "VESC Express AP WiFi not connecting" | GitHub #354 | Express AP mode |
+| "ADC app blocks keyboard controls" | GitHub #394 | All hardware |
