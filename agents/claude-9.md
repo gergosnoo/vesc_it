@@ -1,135 +1,132 @@
 # Claude-9 Context
 
 > **Role:** Knowledge Architect
-> **Last Updated:** 2026-01-14 07:57
-> **Session:** ACTIVE - Building Phase 3
+> **Last Updated:** 2026-01-14 08:35
+> **Session:** Educational Content Complete
 
 ---
 
-## Current Focus
+## 🌅 For Gergő When You Wake Up
 
-**PIVOT:** Onewheel Simulator & Educational Site
+### TL;DR
 
-Working on educational content architecture for the simulator.
+**I built all the educational content for the Onewheel Simulator.**
 
-Built the full interactive troubleshooting wizard with:
-- 5 comprehensive flows (Motor Detection, CAN Bus, BMS Bypass, Footpad, Nosedive Prevention)
-- Interactive checklists with progress tracking
-- 7 animated SVG diagrams
-- Step navigation with history and back button
-- Solution and escalation endpoints with helpful links
+Two main files ready to use:
+1. `src/lib/parameters/parameterDatabase.ts` - Top 10 parameters explained
+2. `src/lib/learning/learningPaths.ts` - 3 learning paths (~2000 lines)
 
-## What I Just Built
+Everything is pushed to GitHub. Waiting for claude-8 to build UI components.
 
-### Troubleshooting Wizard (`/troubleshoot`)
+---
 
-**Files created:**
-- `src/app/troubleshoot/page.tsx` - Main flow selector
-- `src/app/troubleshoot/[flowId]/page.tsx` - Dynamic wizard page
-- `src/app/troubleshoot/data/types.ts` - TypeScript types
-- `src/app/troubleshoot/data/flows.ts` - 5 complete troubleshooting flows (~800 lines)
-- `src/app/troubleshoot/components/WizardStep.tsx` - Step renderer
-- `src/app/troubleshoot/components/InteractiveChecklist.tsx` - Checkable items
-- `src/app/troubleshoot/components/DiagramRenderer.tsx` - 7 SVG diagrams
+## What I Created Today
 
-**Flows included:**
-1. Motor Detection Failed - Error codes, flux linkage, DRV errors
-2. CAN Bus Not Working - Wiring, termination, multi-VESC
-3. BMS Bypass Issues - CRITICAL safety content (B- bridge warning!)
-4. Footpad Sensor Issues - Including 6.05 heel lift fix
-5. Nosedive Prevention - Tiltback, duty cycle, safety settings
+### 1. Parameter Database (Top 10)
 
-### What You Can Do Right Now
+| # | Parameter | Why It's Important |
+|---|-----------|-------------------|
+| 1 | Tiltback Duty | Primary nosedive prevention |
+| 2 | Kp | Main ride feel control |
+| 3 | Kd | Smoothness/stability |
+| 4 | Mahony Kp | Level tracking speed |
+| 5 | Surge Duty Start | Hill protection |
+| 6 | Tiltback Speed | Absolute speed limit |
+| 7 | Startup Pitch Tolerance | How level to engage |
+| 8 | Simple Stop ERPM | Dismount behavior |
+| 9 | ATR Strength | Speed-based nose angle |
+| 10 | Haptic Buzz Duty | Vibration warning |
 
-**Test the chatbot:**
+Each parameter has:
+- Plain English explanation
+- "If you increase/decrease" cause-effect
+- Safe ranges by skill level
+- Related parameters
+- Animation keys for simulator
+
+### 2. Learning Paths (3 Paths, 14 Lessons)
+
+**Path A: Complete Beginner** (15-20 min)
+- What is VESC/Refloat
+- How balance works (with duty cycle)
+- Why nosedives happen (with scenarios)
+- Your first safe tune
+- Understanding warnings
+
+**Path B: Stock Onewheel Rider** (12-15 min)
+- VESC vs Stock differences
+- Translating modes to settings
+- Float → Refloat migration
+- Safety for experienced riders
+
+**Path C: Tuning Deep Dive** (25-30 min)
+- PID theory (Kp, Kd explained simply)
+- Mahony filter demystified
+- ATR mastery
+- Surge & Booster protection
+- Creating your perfect tune
+
+### 3. Connection Graph
+
+Shows how parameters relate:
 ```
-Open https://vesc-it.vercel.app
-Try: "How do I prevent nosedives?"
-Try: "My motor detection is failing with error -10"
-Try: "How do I set up BMS bypass safely?"
-```
-
-**Review the Playground plan:**
-```
-Read: thoughts/shared/plans/2026-01-14-vesc-playground.md
-Decide: Do you want to build this next?
+surge_duty_start ──must_be_less_than──► tiltback_duty
+kp ──────────────────ratio────────────► kd (Kd ≈ Kp/10)
 ```
 
 ---
 
-## Current Status
+## What's NOT Done Yet
 
-| Component | Status | Notes |
-|-----------|--------|-------|
-| Knowledge Base | ✅ Complete | 14 docs, 3,967 lines |
-| Chatbot | ✅ Live | vesc-it.vercel.app |
-| Playground Plan | ✅ Approved | Ready to build |
-| Playground Build | 🔲 Not started | Waiting for your decision |
-
-## What I Built
-
-### Knowledge Base (14 documents)
-
-| Priority | Document | What It Covers |
-|----------|----------|----------------|
-| 🔴 Critical | safety-critical-settings.md | Nosedive prevention, BMS bypass (WRONG vs RIGHT method), 6.05 warnings |
-| 🟠 High | motor-detection-troubleshooting.md | Error codes, flux linkage issues, detection failures |
-| 🟠 High | can-bus-multi-vesc-setup.md | Multi-VESC wiring, termination, CAN IDs |
-| 🟠 High | vesc-express-wifi-ble-setup.md | WiFi modes, BLE pairing, app connectivity |
-| 🟡 Medium | refloat-migration-guide.md | Float → Refloat upgrade path |
-| 🟡 Medium | foc-advanced-tuning-guide.md | Observer types, current control, filtering |
-| 🟡 Medium | All others... | LED, footpad, hidden modes, wizards |
-
-### VESC Playground Plan
-
-**The idea:** Instead of just text answers, show users what happens when they change settings.
-
-**Three tools in one:**
-1. **Parameter Playground** - Drag a slider, watch the 3D board respond
-2. **Safety Visualizer** - See your nosedive risk in real-time as a gauge
-3. **Troubleshooting Wizard** - Animated step-by-step guides
-
-**Tech:** Next.js + Three.js + Framer Motion (same stack as chatbot, easy to integrate)
+| Task | Owner | Status |
+|------|-------|--------|
+| Learning path UI | claude-8 | Not started |
+| Parameter slider UI | claude-8 | Not started |
+| Content QA review | claude-10 | Requested |
 
 ---
 
-## Key Safety Insights
+## Key Design Decisions
 
-Things I learned that riders NEED to know:
+1. **Organize by user intent, not VESC menus**
+   - "How It Feels" instead of "Refloat Cfg > Tune"
+   - Users ask "how do I make it feel X" not "where is parameter Y"
 
-| Issue | What Happens | The Fix |
-|-------|--------------|---------|
-| **BMS B- bridge** | Disables overcharge protection → fire risk | Use charge-only wiring instead |
-| **fault_adc_half_erpm** | Heel lift stops working at speed after 6.05 | Set to 0 in Refloat Cfg → Faults |
-| **UBox thermal** | Controller shuts off mid-ride | Lower MOSFET temp limits, add cooling |
-| **iOS app saves** | Config appears saved but isn't | Always verify by reconnecting |
+2. **Cause-effect explanations**
+   - Every parameter shows what happens if you increase/decrease
+   - Real-world analogies (car steering, broom balancing)
+
+3. **Progressive learning**
+   - Beginners start with safety, not performance
+   - Stock OW riders get translation, not basics
+   - Deep dive for those who want to understand the math
 
 ---
 
 ## If I Crash - Continue Here
 
-**Current state:** Onewheel Simulator content COMPLETE. All educational content written.
-
-**What I built:**
-1. Parameter Database (Top 10 + connection graph)
-2. Learning Paths (3 paths, 14 lessons, ~2000 lines)
+**Current state:** All content written and pushed. Waiting for UI.
 
 **Key files:**
-- `src/lib/parameters/parameterDatabase.ts` - Top 10 params with full metadata
-- `src/lib/learning/learningPaths.ts` - All 3 learning paths
-- `thoughts/shared/plans/2026-01-14-onewheel-simulator-educational.md` - Architecture
+- `src/lib/parameters/parameterDatabase.ts`
+- `src/lib/learning/learningPaths.ts`
+- `thoughts/shared/plans/2026-01-14-onewheel-simulator-educational.md`
 
-**What needs to happen next:**
-1. claude-8 builds the UI components
-2. claude-10 tests the content for clarity
-3. Push to git and deploy
-
-**Files to reference:**
-- `PROGRESS.md` - Complete session timeline
-- `thoughts/shared/plans/2026-01-14-vesc-playground.md` - Playground implementation details
-- `knowledge-base/` - All 14 knowledge base documents
-- `qa/` - Test questions and results from claude-10
+**Next steps:**
+1. Claude-8 builds UI components
+2. Claude-10 tests content clarity
+3. Integration and polish
 
 ---
 
-*Session ended 01:00 | Chatbot live, Playground planned*
+## Earlier Work (Still Live)
+
+From overnight session:
+- **Chatbot** → https://vesc-it.vercel.app (working!)
+- **Troubleshooting Wizard** → /troubleshoot (5 flows)
+- **Safety Visualizer** → /safety (nosedive risk gauge)
+- **Parameter Playground** → /playground (sliders)
+
+---
+
+*Session ended 08:35 | Educational content complete, awaiting UI*
