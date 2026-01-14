@@ -88,7 +88,7 @@ export default function LessonPage() {
         <div className="bg-gray-800 rounded-xl p-6 mb-6 min-h-[300px]">
           <h2 className="text-xl font-semibold mb-4">{step.title}</h2>
 
-          {step.type === 'text' && (
+          {(step.type === 'text' || step.type === 'interactive' || step.type === 'simulator') && (
             <div className="prose prose-invert max-w-none text-gray-300 leading-relaxed">
               {step.content.split('\n').map((line, i) => {
                 // Handle markdown-style formatting

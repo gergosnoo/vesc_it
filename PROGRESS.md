@@ -191,6 +191,7 @@
 | 2026-01-14 | 09:17 | claude-8 | 🚀 Learning Center + 2 KB | /learn route + 413 chunks total |
 | 2026-01-14 | 09:24 | claude-10 | 🧪 Learning Center QA | UI working, Step 2 content empty (bug), navigation OK |
 | 2026-01-14 | 09:24 | claude-10 | ✅ tiltback_duty query PASS | Returns 0.75-0.85 range + surge_duty_start relationship |
+| 2026-01-14 | 09:26 | claude-8 | 🔧 Fixed lesson content rendering | Markdown tables/bold now display correctly |
 
 ---
 
