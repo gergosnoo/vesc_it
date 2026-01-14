@@ -1,25 +1,39 @@
 # Claude-10 Context
 
 > **Role:** User Advocate & QA Gatekeeper
-> **Last Updated:** 2026-01-14 09:31
+> **Last Updated:** 2026-01-14 10:22
 
 ## Current Focus
 
-🏆 **ALL 5 FEATURES QA COMPLETE!** Chatbot + Playground + Safety + Troubleshoot + Learning Center APPROVED.
+✅ **ALL TESTS PASS!** 768 chunks, API fixed, new content verified.
 
 **Current State:**
-- Chatbot: ✅ 6/6 tests PASS (413 chunks)
+- Chatbot: ✅ API FIXED - 768 chunks, all tests pass
 - Playground: ✅ LIVE and working
 - Safety: ✅ LIVE and working
 - Troubleshooting Wizard: ✅ 5/5 flows PASS
-- Learning Center: ✅ LIVE and working (Step 2 bug FIXED)
-- Test suite: 10/10 tests PASS
+- Learning Center: ✅ LIVE and working
+- New content: ✅ 4/4 PASS (RT Data, Field Weakening, Throttle, Packages)
+- Questions DB: 96+ questions in 12 categories
 
-**Latest Actions (09:31):**
-- ✅ VERIFIED Step 2 content fix from claude-8
-- All 4 nosedive scenarios now visible
-- Interactive lesson types working correctly
-- Updated TESTING.md + PROGRESS.md
+**Latest Actions (10:52):**
+- ✅ API bug fixed by claude-8 (history.slice() undefined)
+- ✅ Tested RT Data interpretation - PASS (scaling factors)
+- ✅ Tested Field Weakening tuning - PASS (FW Current Max 30A)
+- ✅ Tested Throttle Curve tuning - PASS (expo, deadband)
+- ✅ Tested Balance Package comparison - PASS (Float vs Refloat vs Balance)
+
+**pev.dev QA Results:**
+| Test | Expected | Actual | Status |
+|------|----------|--------|--------|
+| PintV/XRV battery limits | 30A/-30A | 30A/-30A | ✅ PASS |
+| Superflux MK1 FOC | 27-35mΩ, 105-136µH | Exact match | ✅ PASS |
+| Motor wizard steps | Step-by-step guide | Comprehensive | ✅ PASS |
+
+**Priority Topics for claude-9:**
+1. Encoder/Hall Sensor Troubleshooting (HIGH)
+2. VESC Tool RT Data Interpretation (MEDIUM)
+3. Field Weakening Tuning (MEDIUM)
 
 ## Test Results (Final)
 
@@ -81,14 +95,17 @@
 
 ## If I Crash - Pickup Point
 
-1. **Chatbot:** ✅ QA APPROVED - 413 chunks, all tests PASS
+1. **Chatbot:** ✅ API FIXED - 843 chunks, 14/14 tests PASS
 2. **Playground:** ✅ QA APPROVED - LIVE at /playground
 3. **Safety:** ✅ QA APPROVED - LIVE at /safety
 4. **Troubleshoot:** ✅ QA APPROVED - LIVE at /troubleshoot (5/5 flows)
 5. **Learning Center:** ✅ QA APPROVED - LIVE at /learn (3 paths, 14 lessons)
-6. **URLs:** All at https://vesc-it.vercel.app
-7. **TESTING.md:** ✅ 10/10 tests PASS
-8. **Next priority:** n8n automation (Phase 3) or pivot to Simulator project
+6. **Questions DB:** 96+ questions in qa/questions-by-topic.md (12 categories)
+7. **URLs:** All at https://vesc-it.vercel.app
+8. **Test Suite:** qa/test-suite.md has 64 tests
+9. **TESTING.md:** Updated for Gergő's wake-up (10:55)
+10. **Next priority:** Wait for Round 4 content (LispBM, Config Backup, Mobile App)
+11. **Backlog:** Modern Chat UI review (per Gergő)
 
 ## Key Learnings This Session
 

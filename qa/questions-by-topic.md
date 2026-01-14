@@ -3,7 +3,7 @@
 **Created by:** claude-10 (User Advocate)
 **Date:** 2026-01-13
 **Source:** Forums, Reddit, GitHub, Discord
-**Total Questions:** 75+
+**Total Questions:** 96+
 
 ---
 
@@ -166,6 +166,54 @@
 
 ---
 
+## 10. Hardware Compatibility (NEW - 8 questions)
+
+**Source:** vesc-project.com forum, r/ElectricSkateboarding
+
+| Question | Source | Frequency |
+|----------|--------|-----------|
+| "Which VESCs can run FOC safely?" | vesc-project | HIGH |
+| "FSESC 4.20 issues - known problems?" | vesc-project | HIGH |
+| "What's the difference between VESC 4.12 vs 6.x?" | esk8 | HIGH |
+| "Are clone VESCs reliable?" | Reddit | MEDIUM |
+| "VESC Express vs built-in BLE - which is better?" | forums | MEDIUM |
+| "Which hardware versions work with latest firmware?" | forums | HIGH |
+| "Flipsky vs Trampa - quality differences?" | Reddit | MEDIUM |
+| "Can I run FOC on cheap VESC clones?" | vesc-project | HIGH |
+
+---
+
+## 11. Beginner/First Build (NEW - 7 questions)
+
+**Source:** r/ElectricSkateboarding, r/onewheel
+
+| Question | Source | Frequency |
+|----------|--------|-----------|
+| "What are safe starting settings for first build?" | Reddit | HIGH |
+| "What should I NOT touch as a beginner?" | forums | HIGH |
+| "Conservative current limits for learning?" | Reddit | HIGH |
+| "Gradual tuning progression - what order?" | esk8.news | MEDIUM |
+| "How do I test safely before riding?" | forums | MEDIUM |
+| "Motor making noise during detection - normal?" | Reddit | HIGH |
+| "First time setup checklist?" | Discord | HIGH |
+
+---
+
+## 12. External Integration (NEW - 6 questions)
+
+**Source:** vesc-project.com, GitHub issues
+
+| Question | Source | Frequency |
+|----------|--------|-----------|
+| "How do I communicate with VESC from Arduino?" | vesc-project | HIGH |
+| "CAN bus vs UART - which for Raspberry Pi?" | GitHub | MEDIUM |
+| "What's the CAN message format for speed control?" | forums | MEDIUM |
+| "Code examples for external telemetry?" | GitHub | MEDIUM |
+| "How do I read battery voltage from Arduino?" | forums | MEDIUM |
+| "ROS integration with VESC - any guides?" | GitHub | LOW |
+
+---
+
 ## Question Frequency Analysis
 
 | Topic | # Questions | User Frustration |
@@ -179,6 +227,9 @@
 | FOC Tuning | 8 | 😐 Medium |
 | BMS/Power | 6 | 😐 Medium |
 | Connectivity | 7 | 😐 Medium |
+| **Hardware Compat** | 8 | 🔥 High |
+| **Beginner/First** | 7 | 🔥 Very High |
+| **External Integration** | 6 | 😐 Medium |
 
 ---
 
@@ -193,3 +244,4 @@
 ---
 
 *Compiled by claude-10 | User Advocate*
+*Updated 2026-01-14 10:46 - Added 21 questions from diverse sources (vesc-project.com, Reddit)*

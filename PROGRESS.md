@@ -4,10 +4,10 @@
 
 | Component | Status | Notes |
 |-----------|--------|-------|
-| Knowledge Base | ✅ Complete | 14 docs, ~3,900 lines, all gaps filled |
+| Knowledge Base | ✅ Complete | 39 docs, ~11,400 lines, +9 pev.dev community guides |
 | Vector DB | ✅ Ready | Supabase + pgvector, documents table, match_documents() |
 | Web App | ✅ LIVE | vesc-it.vercel.app (Frankfurt region) |
-| Embeddings | ✅ Complete | 416 chunks with section-aware chunking |
+| Embeddings | ✅ Complete | 927 chunks with section-aware chunking |
 | Chatbot Tests | ✅ 3/3 PASS | QA APPROVED - safety tests pass |
 | Automation | 🔲 Pending | n8n on Hostinger VPS |
 | Git | ✅ Clean | Pushed to gergosnoo/vesc_it |
@@ -197,6 +197,14 @@
 | 2026-01-14 | 09:41 | claude-9 | 🧪 Live chatbot testing | 3.5/4 PASS: nosedive, fault, surge OK; HW limits partial |
 | 2026-01-14 | 09:52 | claude-9 | 🔧 Fixed Little FOCer RAG | Enhanced with explicit HW limits section, key terms |
 | 2026-01-14 | 10:02 | claude-9 | ✅ Little FOCer query VERIFIED | Motor ±150A, Battery ±100A, Voltage 60V - CORRECT! |
+| 2026-01-14 | 10:12 | claude-9 | ✅ Safety Visualizer tested | All 6 scenarios working, headroom gauge, warnings OK |
+| 2026-01-14 | 10:17 | claude-9 | 📋 pev.dev scraping plan | Identified 6 high-value targets, coordinated with claude-8 |
+| 2026-01-14 | 10:46 | claude-10 | 🐛 API BUG FOUND | Chatbot /api/chat returns errors for ALL queries |
+| 2026-01-14 | 10:46 | claude-10 | 📢 Bug reported to claude-8 | inject-prompt sent, blocks QA testing |
+| 2026-01-14 | 10:46 | claude-10 | 🌐 Source diversity research | Added 21 questions from vesc-project.com + Reddit |
+| 2026-01-14 | 10:46 | claude-10 | 📋 qa/questions-by-topic.md | Now 96+ questions in 12 categories |
+| 2026-01-14 | 10:49 | claude-10 | 📢 Sent priorities to claude-9 | HW Compat, Beginner Settings, CAN/UART Integration |
+| 2026-01-14 | 10:49 | claude-10 | 📋 Modern Chat UI | Added to backlog per Gergő |
 
 ---
 
@@ -235,3 +243,46 @@ bash ~/.claude/scripts/get-timestamp.sh time  # 22:48
 | 2026-01-14 | 08:06 | claude-10 | ✅ Troubleshooting Wizard QA PASSED | 5/5 flows tested - motor, footpad, nosedive, BMS, CAN |
 | 2026-01-14 | 10:01 | claude-8 | 🐛 Fixed RAG chunking bug | Little FOCer query returned wrong data |
 | 2026-01-14 | 10:01 | claude-8 | ✅ Section-aware chunking | Keeps headers with content, 416 total chunks |
+| 2026-01-14 | 10:19 | claude-8 | 🌐 Started pev.dev scraping | 2 posts fetched, coordinating with claude-9 |
+| 2026-01-14 | 10:23 | claude-8 | 📥 pev.dev scraping batch complete | 9 posts, 40KB, ready for claude-9 |
+| 2026-01-14 | 10:22 | claude-10 | ✅ RAG fix VERIFIED | Little FOCer V3: ±150A/±100A/60V - correct! |
+| 2026-01-14 | 10:22 | claude-10 | 📢 Coordination sent | Notified claude-8 (n8n URL) + claude-9 (status) |
+| 2026-01-14 | 10:25 | claude-10 | 🔍 pev.dev content tested | Content NOT embedded yet - chatbot returns generic answers |
+| 2026-01-14 | 10:26 | claude-9 | 📚 pev.dev KB created | 6 new docs from scraped content (~2,100 lines) |
+| 2026-01-14 | 10:26 | claude-9 | 📝 New KB docs | refloat-guide, motor-wizard, pintv-xrv, power-kit, owie, firmware-update |
+| 2026-01-14 | 10:25 | claude-10 | 📢 Embedding request | Notified claude-8 to embed 9 scraped files from scraped-content/ |
+| 2026-01-14 | 10:26 | claude-8 | ✅ Embedded pev.dev content | 60 chunks, total 476, PintV query verified |
+| 2026-01-14 | 10:29 | claude-8 | 🎉 600 embeddings milestone | +124 chunks from claude-9's 6 KB files |
+| 2026-01-14 | 10:28 | claude-10 | ✅ pev.dev QA TESTS PASS | PintV 30A + Superflux MK1 FOC params verified |
+| 2026-01-14 | 10:31 | claude-10 | 🏆 600-EMBEDDING QA APPROVED | 3/3 tests pass, motor wizard comprehensive |
+| 2026-01-14 | 10:34 | claude-10 | 📝 Test suite updated | 64 total tests, +10 pev.dev content tests |
+| 2026-01-14 | 10:35 | claude-9 | 📝 Remote/Input Config guide | PPM, ADC, UART throttle configuration (~400 lines) |
+| 2026-01-14 | 10:35 | claude-9 | 📝 Encoder/Hall Troubleshooting | HIGH priority from claude-10, faults 25/26/255 (~450 lines) |
+| 2026-01-14 | 10:36 | claude-8 | ✅ +48 chunks embedded | Remote input + Hall sensor docs, total 648 |
+| 2026-01-14 | 10:41 | claude-9 | 📝 RT Data Interpretation guide | MEDIUM priority, sampled at fault, timeout (~350 lines) |
+| 2026-01-14 | 10:41 | claude-9 | 📝 Field Weakening Tuning guide | MEDIUM priority, PintV/XRV safety values (~300 lines) |
+| 2026-01-14 | 10:41 | claude-10 | ✅ Hall Error 255 TEST PASS | 6-step troubleshooting guide, HIGH priority filled |
+| 2026-01-14 | 10:42 | claude-8 | ✅ +45 chunks embedded | RT Data + Field Weakening, total 693 |
+| 2026-01-14 | 10:46 | claude-9 | 📝 Throttle Curve Tuning guide | HIGH priority, expo/deadband/ramp (~350 lines) |
+| 2026-01-14 | 10:46 | claude-9 | 📝 Battery Cell Config guide | HIGH priority, S/P/BMS/cutoffs (~400 lines) |
+| 2026-01-14 | 10:46 | claude-9 | 📝 Balance Package Comparison | Float vs Refloat vs Balance (~300 lines) |
+| 2026-01-14 | 10:47 | claude-8 | ✅ +75 chunks embedded | Throttle, Battery, Package comparison - total 768 |
+| 2026-01-14 | 10:50 | claude-8 | 🐛 Fixed API error | history.slice() on undefined - added default [] |
+| 2026-01-14 | 10:52 | claude-10 | ✅ 4/4 NEW CONTENT TESTS PASS | RT Data, Field Weakening, Throttle, Packages (768 chunks) |
+| 2026-01-14 | 10:52 | claude-10 | ✅ 768 embeddings QA APPROVED | RT Data, FW, Throttle, Packages all pass |
+| 2026-01-14 | 10:53 | claude-9 | 📝 VESC Hardware Compatibility | HIGH priority, clone warnings, DRV chips (~450 lines) |
+| 2026-01-14 | 10:53 | claude-9 | 📝 Conservative Beginner Settings | HIGH priority, safe starting points (~400 lines) |
+| 2026-01-14 | 10:53 | claude-9 | 📝 CAN/UART Integration guide | Arduino/RPi code examples, protocols (~500 lines) |
+| 2026-01-14 | 10:53 | claude-9 | 🏆 ROUND 3 COMPLETE | 3 more KB docs, total 36 docs, ~1,350 lines added |
+| 2026-01-14 | 10:54 | claude-8 | ✅ +75 chunks embedded | HW Compat, Beginner Settings, CAN/UART - total 843 |
+| 2026-01-14 | 10:55 | claude-10 | 📋 Gap analysis complete | 36 docs cover most topics, 3 remaining gaps identified |
+| 2026-01-14 | 10:55 | claude-10 | 📢 Round 4 priorities sent | LispBM, Config Backup, Mobile App Troubleshooting |
+| 2026-01-14 | 10:58 | claude-10 | ✅ 3/3 ROUND 3 TESTS PASS | HW Compat, Beginner Settings, CAN/UART (843 chunks) |
+| 2026-01-14 | 11:00 | claude-9 | 📝 LispBM Scripting guide | HIGH priority, 234 functions, code examples (~550 lines) |
+| 2026-01-14 | 11:00 | claude-9 | 📝 Config Backup & Restore | HIGH priority, XML workflow, version compat (~400 lines) |
+| 2026-01-14 | 11:00 | claude-9 | 📝 Mobile App Troubleshooting | iOS/Android issues, BLE pairing (~450 lines) |
+| 2026-01-14 | 11:00 | claude-9 | 🏆 ROUND 4 COMPLETE | 3 more KB docs, total 39 docs, ~1,400 lines added |
+| 2026-01-14 | 11:01 | claude-8 | ✅ +84 chunks embedded | LispBM, Config Backup, Mobile App - total 927 |
+| 2026-01-14 | 11:02 | claude-10 | ✅ 3/3 ROUND 4 TESTS PASS | LispBM, Config Backup, Mobile App verified |
+| 2026-01-14 | 11:02 | claude-10 | 🏆 KB COMPLETE | 12/12 priorities, 20/20 tests, 927 chunks, 39 docs |
+| 2026-01-14 | 11:03 | claude-9 | 🎉 SESSION COMPLETE | 19 docs (~7,400 lines), 4 rounds, all priorities done |

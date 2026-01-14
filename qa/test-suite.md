@@ -704,3 +704,166 @@
 ---
 
 *Created by claude-10 | User Advocate + Testing Gatekeeper*
+
+---
+
+## Test Category 12: pev.dev Content (NEW - 2026-01-14)
+
+**Source:** Scraped from pev.dev community posts with HIGH view counts
+**Status:** ✅ 3/3 VERIFIED (10:28)
+**Embeddings:** 60 chunks from pev.dev + 124 chunks from KB = 600 total
+
+### T12-01: PintV/XRV Battery Limits ✅ PASSED
+**Question:** "What battery current limits should I use for PintV or XRV stock batteries?"
+
+**Expected Answer Should Include:**
+- **Max: 30A**
+- **Max Regen: -30A**
+- Stock batteries cannot handle higher factory defaults
+- Risk of voltage sag and pack damage
+
+**Source:** pev.dev/critical-setting-fixes (7,505 views)
+**Result:** ✅ PASS - Returns exact 30A/-30A with safety warning
+
+---
+
+### T12-02: Superflux MK1 FOC Parameters ✅ PASSED
+**Question:** "What are the expected FOC parameters for Superflux MK1 motor?"
+
+**Expected Answer Should Include:**
+- **Resistance:** 27.0-35.1 mΩ
+- **Inductance:** 105.0-136.0 µH
+- **Flux Linkage:** 23.5-24.5
+
+**Source:** pev.dev/common-motor-foc-ranges (2,704 views)
+**Result:** ✅ PASS - Returns exact ranges
+
+---
+
+### T12-03: Motor Wizard Steps ✅ PASSED
+**Question:** "How do I run the motor detection wizard in VESC Tool?"
+
+**Expected Answer Should Include:**
+- Select Usage Type ("Balance" for PEV)
+- Load Defaults
+- Battery Configuration
+- Run Motor Detection
+- Hall Sensors (if present)
+- Wheel Diameter and Pole Count
+- Set Current Limits
+- Write Configuration
+
+**Source:** pev.dev/motor-wizard-guide + KB
+**Result:** ✅ PASS - Comprehensive steps returned
+
+---
+
+### T12-04: PintV/XRV Voltage Tiltback
+**Question:** "What voltage tiltback settings should I use for PintV/XRV?"
+
+**Expected Answer Should Include:**
+- **High Voltage:** 64.5V
+- **Low Voltage:** 45.0V
+- Location: Float Cfg/Refloat Cfg > Specs
+
+**Source:** pev.dev/critical-setting-fixes
+
+---
+
+### T12-05: Field Weakening for Stock Battery
+**Question:** "What field weakening settings are safe for PintV stock battery?"
+
+**Expected Answer Should Include:**
+- **Current Max:** 30A
+- **Duty Start:** 60%
+- **Ramp Time:** 500ms
+- Factory values may exceed safe limits
+
+**Source:** pev.dev/critical-setting-fixes
+
+---
+
+### T12-06: XRV IMU Setting
+**Question:** "What is the correct IMU accelerometer confidence decay for XRV?"
+
+**Expected Answer Should Include:**
+- Set to **0.02**
+- XRV ships with incorrect 0.1 value
+- Location: App Cfg > IMU > AHRS
+
+**Source:** pev.dev/critical-setting-fixes
+
+---
+
+### T12-07: Cannon Core V2 FOC Parameters
+**Question:** "What FOC parameters should Cannon Core V2 detect?"
+
+**Expected Answer Should Include:**
+- **Resistance:** 65.0-84.5 mΩ
+- **Inductance:** 130.0-156.0 µH
+- **Flux Linkage:** 29.5-30.5
+
+**Source:** pev.dev/common-motor-foc-ranges
+
+---
+
+### T12-08: Hypercore FOC Parameters
+**Question:** "What are the expected FOC values for Hypercore motor?"
+
+**Expected Answer Should Include:**
+- **Resistance:** 80.0-104.0 mΩ
+- **Inductance:** 190.0-228.0 µH
+- **Flux Linkage:** 26.5-27.5 (standard), varies by magnet grade
+
+**Source:** pev.dev/common-motor-foc-ranges
+
+---
+
+### T12-09: Refloat Mahony KP Separation
+**Question:** "How does Refloat handle Mahony KP differently than Float?"
+
+**Expected Answer Should Include:**
+- Separate firmware-level and package-level settings
+- Firmware uses "true pitch" with KP 0.4
+- Independent Pitch, Roll, and Yaw KP parameters
+- Values >1.0 trigger automatic migration
+
+**Source:** pev.dev/refloat-announcement (8,765 views)
+
+---
+
+### T12-10: OWIE BMS Bypass Wiring
+**Question:** "How do I wire OWIE for BMS charge-only bypass?"
+
+**Expected Answer Should Include:**
+- Power: FM BMS 5V and GND to OWIE
+- Data: OWIE Rx to FM BMS white wire
+- Purple wire connects XLR to BMS positive
+- Use latching switch and 10-amp diode
+- "Charge and discharge path are no longer shared"
+
+**Source:** pev.dev/owie-wiring-fw-guide (9,254 views)
+
+---
+
+## Updated Summary
+
+| Category | Test Count | Verified |
+|----------|------------|----------|
+| Float → Refloat Migration | 5 | ✅ |
+| Motor Detection | 6 | ✅ |
+| CAN Bus / Dual Motor | 7 | ✅ |
+| Fault Codes | 5 | ✅ |
+| VESC Tool Basics | 5 | ✅ |
+| LED Configuration | 5 | ✅ |
+| Setpoint Adjustment Types | 4 | ✅ |
+| Mahony KP Tuning | 4 | ✅ |
+| FOC Advanced Tuning | 4 | ✅ |
+| Motor Wizard | 3 | ✅ |
+| Safety Critical | 6 | ✅ |
+| **pev.dev Content (NEW)** | **10** | ✅ 3/10 |
+| **TOTAL** | **64 tests** | |
+
+---
+
+*Last Updated: 2026-01-14 10:31 by claude-10*

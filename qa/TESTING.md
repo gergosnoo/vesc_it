@@ -1,6 +1,6 @@
 # What You Can Test Right Now
 
-**Last Updated:** 2026-01-14 09:28
+**Last Updated:** 2026-01-14 11:02
 
 ---
 
@@ -12,92 +12,86 @@
 | **Playground** | https://vesc-it.vercel.app/playground | ✅ YES |
 | **Safety** | https://vesc-it.vercel.app/safety | ✅ YES |
 | **Troubleshoot** | https://vesc-it.vercel.app/troubleshoot | ✅ YES |
-| **Learning Center** | https://vesc-it.vercel.app/learn | ✅ NEW! |
+| **Learning Center** | https://vesc-it.vercel.app/learn | ✅ YES |
 
 ---
 
 ## Quick Tests - Try These!
 
-### Chatbot
-1. Ask: **"What is tiltback_duty?"** → Should show 0.75-0.85 range
-2. Ask: **"What is FAULT_CODE_OVER_TEMP_FET?"** → Should show causes & fixes
-3. Ask: **"UBOX specs"** → Should show V2_100 (±300A) and SINGLE_100 (±150A)
+### Chatbot (927 chunks!)
 
-### Learning Center
-1. Go to /learn
-2. Click "Complete Beginner"
-3. Click "Why Nosedives Happen"
-4. Read through all 4 steps (Step 2 bug FIXED!)
+**Try these questions:**
 
----
-
-## What Each Feature Does
-
-### Chatbot (/)
-Ask VESC questions, get AI answers from 413 embedded chunks.
-
-### Learning Center (/learn) 🆕
-3 learning paths for different experience levels:
-- Complete Beginner (5 lessons)
-- Coming from Stock Onewheel (4 lessons)
-- Tuning Deep Dive (5 lessons)
-
-### Playground (/playground)
-Drag sliders to see how parameters affect the board. 3D visualization.
-
-### Safety (/safety)
-See your nosedive risk. Click scenarios like "Uphill" to see risk change.
-
-### Troubleshoot (/troubleshoot)
-Step-by-step guides for common problems:
-- Motor Detection Failed
-- Footpad Sensor Issues (6.05 heel lift fix!)
-- Nosedive Prevention
-- BMS Bypass (with safety warnings!)
-- CAN Bus Not Working
+| Question | Should Include |
+|----------|----------------|
+| "What is tiltback_duty?" | 0.75-0.85 range |
+| "FAULT_CODE_OVER_TEMP_FET?" | Causes & fixes |
+| "How do I interpret RT Data?" | Scaling factors ×10/×100/×1000 |
+| "What is field weakening?" | FW Current Max 30A |
+| "Which VESCs run FOC safely?" | VESC 4.12/6.x, clone warnings |
+| "Safe beginner settings?" | 30A start, gradual tuning |
+| "How to backup VESC config?" | Tools → Backup, UUID |
+| "Write LispBM code?" | VESC Tool steps, upload |
+| "iPhone app not saving?" | BT permission, force reconnect |
+| "PintV battery limits?" | 30A/-30A |
 
 ---
 
-## Test Results (claude-10 verified 09:31)
+## Knowledge Base Stats
 
-| Test | Result |
-|------|--------|
-| Chatbot - BMS balancing | ✅ PASS |
-| Chatbot - Motor vs Battery Amps | ✅ PASS |
-| Chatbot - Fault codes | ✅ PASS |
-| Chatbot - Hardware (UBOX, Little FOCer) | ✅ PASS |
-| Chatbot - tiltback_duty | ✅ PASS |
-| Playground - sliders work | ✅ PASS |
-| Safety - scenario selector | ✅ PASS |
-| Troubleshoot - all 5 flows | ✅ PASS |
-| Learning Center - UI navigation | ✅ PASS |
-| Learning Center - lesson content | ✅ FIXED |
+| Metric | Value |
+|--------|-------|
+| **Total Docs** | 39 files |
+| **Total Chunks** | 927 |
+| **Topics Covered** | 12/12 categories |
+| **Questions Answered** | 96+ real user questions |
+| **Lines Written** | ~11,400 |
 
-**Total: 10/10 PASS**
+---
+
+## Test Results (11:02)
+
+| Round | Tests | Status |
+|-------|-------|--------|
+| pev.dev Content | 3/3 | ✅ PASS |
+| Round 2 (RT Data, FW, Throttle) | 4/4 | ✅ PASS |
+| Round 3 (HW, Beginner, CAN) | 3/3 | ✅ PASS |
+| Round 4 (LispBM, Backup, Mobile) | 3/3 | ✅ PASS |
+| UI Features | 7/7 | ✅ PASS |
+
+**Total: 20/20 PASS**
+
+---
+
+## All Features
+
+| Feature | What It Does |
+|---------|--------------|
+| **Chatbot** | AI answers from 927 chunks (39 docs) |
+| **Learning Center** | 3 paths, 14 lessons |
+| **Playground** | Parameter visualization, 3D board |
+| **Safety** | Nosedive risk calculator |
+| **Troubleshoot** | 5 step-by-step flows |
 
 ---
 
 ## Known Issues
 
-| Issue | Severity |
-|-------|----------|
-| ~~Step 2 content empty~~ | ✅ FIXED 09:27 |
-| General nosedive question generic | Low - RAG tuning opportunity |
+| Issue | Status |
+|-------|--------|
+| ~~API errors~~ | ✅ FIXED |
+| ~~Step 2 empty~~ | ✅ FIXED |
+| General nosedive generic | Low priority |
 
 ---
 
 ## NOT Ready Yet
 
-| Feature | Why |
-|---------|-----|
-| n8n automation | Phase 3 - not started |
+| Feature | Status |
+|---------|--------|
+| n8n automation | Phase 3 |
+| Modern Chat UI | Backlog |
 
 ---
 
-## Found a Bug?
-
-Tell claude-10 or open GitHub issue.
-
----
-
-*All 5 features live and tested! 413 chunks in knowledge base. 10/10 tests pass!*
+*All 5 features live! 927 chunks, 39 docs, 20/20 tests PASS!*

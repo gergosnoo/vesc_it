@@ -76,6 +76,30 @@
 | T11-03 | BMS bypass setup | ❌ FAIL | ✅ PASS | B- NOT bridged warning included! |
 | T11-05 | 6.05 heel lift fix | ❌ FAIL | ✅ PASS | fault_adc_half_erpm = 0 fix! |
 
+### 🔧 RAG Fix Verification (2026-01-14)
+
+| Time | Test | Result | Notes |
+|------|------|--------|-------|
+| 10:22 | Little FOCer V3 limits | ✅ PASS | Motor ±150A, Battery ±100A, 60V - section-aware chunking fix WORKS |
+
+### 📥 pev.dev Content Testing (2026-01-14)
+
+| Time | Test | Result | Notes |
+|------|------|--------|-------|
+| 10:25 | PintV/XRV battery limits | ⏳→✅ PASS | NOW returns 30A/-30A from pev.dev content! |
+| 10:28 | Superflux MK1 FOC params | ✅ PASS | Returns 27-35.1mΩ, 105-136µH, 23.5-24.5 flux |
+
+**Status:** ✅ 9 pev.dev posts embedded (60 chunks, 476 total). ALL TESTS PASS!
+
+### 🔧 Encoder/Hall Troubleshooting (2026-01-14)
+
+| Time | Test | Result | Notes |
+|------|------|--------|-------|
+| 10:41 | Hall Error 255 | ✅ PASS | 6-step guide: wiring, power, RT Data, swap wires |
+
+**Source:** claude-9's encoder-hall-troubleshooting.md (448 lines)
+**Status:** ✅ HIGH PRIORITY GAP FILLED!
+
 **Key KB Content Retrieved:**
 - BMS bypass: "Make sure the negative terminal of the BMS (B-) is NOT bridged"
 - 6.05 fix: Navigate to Refloat Cfg → Faults → fault_adc_half_erpm = 0
@@ -98,12 +122,82 @@
 
 ---
 
-## Next Actions Required
+### 🐛 API Bug Report (2026-01-14 10:46)
 
-1. **🚨 claude-8:** Run embedding script with memory fix IMMEDIATELY
-2. **claude-10:** Re-run all 54 tests after embeddings uploaded
-3. **claude-10:** Document pass/fail for each test
+| Time | Issue | Status | Notes |
+|------|-------|--------|-------|
+| 10:46 | /api/chat returns error | ✅ FIXED | history.slice() on undefined |
+| 10:50 | claude-8 fixed | ✅ | Added default [] for history |
 
 ---
 
-*Updated by claude-10 | Testing Gatekeeper*
+### 🧪 New Content Tests (2026-01-14 10:52)
+
+**Total Chunks:** 768
+
+| Time | Test | Result | Notes |
+|------|------|--------|-------|
+| 10:52 | RT Data Interpretation | ✅ PASS | Scaling factors ×10/×100/×1000, fault sampling |
+| 10:52 | Field Weakening Tuning | ✅ PASS | FW Current Max 30A, Duty Start 0.6, Ramp 500ms |
+| 10:52 | Throttle Curve Tuning | ✅ PASS | Expo 0-3, Poly mode, deadband, ramp time |
+| 10:52 | Balance Package Comparison | ✅ PASS | Float vs Refloat vs Balance explained |
+
+**Status:** ✅ ALL 4/4 PASS - claude-9's content retrieval working!
+
+---
+
+### 🧪 Round 3 Content Tests (2026-01-14 10:57)
+
+**Total Chunks:** 843 (+75 from 768)
+
+| Time | Test | Result | Notes |
+|------|------|--------|-------|
+| 10:57 | VESC Hardware Compatibility | ✅ PASS | Lists VESC 4.12/6.x/75-300, clone warnings |
+| 10:57 | Beginner Safe Settings | ✅ PASS | Motor wizard, 30A start, gradual tuning |
+| 10:57 | CAN/UART Arduino Integration | ✅ PASS | VescUart + MCP_CAN libraries, when to use each |
+
+**Status:** ✅ ALL 3/3 PASS - Round 3 content retrieval verified!
+
+---
+
+### 🧪 Round 4 Content Tests (2026-01-14 11:02)
+
+**Total Chunks:** 927 (+84 from 843)
+
+| Time | Test | Result | Notes |
+|------|------|--------|-------|
+| 11:02 | LispBM Scripting | ✅ PASS | VESC Tool steps, source file refs |
+| 11:02 | Config Backup/Restore | ✅ PASS | Built-in method, UUID matching |
+| 11:02 | Mobile App (iOS) Troubleshooting | ✅ PASS | BT permission, force reconnect |
+
+**Status:** ✅ ALL 3/3 PASS - Round 4 complete, ALL 12 priorities verified!
+
+---
+
+### 📋 Source Diversity Research (2026-01-14 10:46)
+
+| Source | Questions Found | Topics |
+|--------|-----------------|--------|
+| vesc-project.com | 8 | Hardware compatibility, FSESC issues |
+| r/ElectricSkateboarding | 7 | Beginner settings, clone VESCs |
+| r/onewheel | 5 | Safe first build, testing |
+| GitHub issues | 6 | External integration, CAN/UART |
+
+**Total:** 21 new questions added to qa/questions-by-topic.md (now 96+ total)
+
+**Priorities sent to claude-9:**
+1. VESC Hardware Compatibility (HIGH)
+2. Conservative Beginner Settings (HIGH)
+3. CAN/UART Integration Guide (MEDIUM)
+
+---
+
+## Next Actions Required
+
+1. **🔴 claude-8:** FIX API BUG - chatbot returns error for all queries
+2. **claude-10:** Re-run all tests after API fixed
+3. **claude-9:** Write docs for 3 new priority topics
+
+---
+
+*Updated by claude-10 | Testing Gatekeeper | 2026-01-14 10:46*

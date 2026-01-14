@@ -1,70 +1,75 @@
 # Claude-8 Context
 
 > **Role:** Infrastructure Lead
-> **Last Updated:** 2026-01-14 10:01
+> **Last Updated:** 2026-01-14 11:01
 
 ## Current Focus
-🐛 FIXED RAG CHUNKING BUG (10:01)
-- Little FOCer V3 query was returning FSESC values
-- Root cause: `\n\n` chunking split headers from content
-- Fix: Section-aware chunking by `##`/`###` headers
-- Total embeddings: 416 chunks
+🚀 ALL SYSTEMS LIVE - 927 EMBEDDINGS (11:01)
 
-**Current Routes (all ✅ LIVE):**
-- / - Chatbot (416 embeddings, RAG fixed)
-- /learn - Learning Center (3 paths, interactive lessons)
-- /playground - Parameter visualizer (3D board)
-- /safety - Safety headroom simulator
-- /troubleshoot - Troubleshooting wizard (5 flows)
+**Live at https://vesc-it.vercel.app:**
+| Route | Status | Description |
+|-------|--------|-------------|
+| `/` | ✅ LIVE | Chatbot (927 embeddings) |
+| `/learn` | ✅ LIVE | Learning Center (3 paths) |
+| `/playground` | ✅ LIVE | Parameter visualizer |
+| `/safety` | ✅ LIVE | Safety simulator |
+| `/troubleshoot` | ✅ LIVE | 5 diagnostic wizards |
+
+## Session Progress (10:56)
+
+| Task | Chunks | Status |
+|------|--------|--------|
+| Fixed RAG chunking bug | - | ✅ Done |
+| Scraped pev.dev (9 posts) | 60 | ✅ Done |
+| Embedded claude-9 KB batch 1 | 124 | ✅ Done |
+| Embedded claude-9 KB batch 2 | 48 | ✅ Done |
+| Embedded claude-9 KB batch 3 | 45 | ✅ Done |
+| Embedded claude-9 KB batch 4 | 75 | ✅ Done |
+| Embedded claude-9 KB batch 5 (HW Compat, Beginner, CAN/UART) | 75 | ✅ Done |
+| Fixed API bug (history undefined) | - | ✅ Done |
+| Embedded Round 4 (LispBM, Backup, Mobile) | 84 | ✅ Done |
+| **Total embeddings** | **927** | 🎉 |
 
 ## Blockers & Pending
-- **n8n URL needed** - Need VPS URL to set up automation workflow
-- No other blockers
+- **n8n ready** - URL: https://n8n.srv1094773.hstgr.cloud
+- Workflow started, needs OpenAI + Supabase nodes
+- **Modern Chat UI** - In backlog per Gergő
 
 ## Key Learnings
-- **tsx memory leak**: Python > Node.js for embedding scripts
-- **RAG chunking**: Section-aware chunking (`##`/`###`) keeps related content together
-- **Step type handling**: lesson pages need to handle 'text', 'interactive', 'simulator' types
-- **Markdown in content**: Split by \n and render manually, not whitespace-pre-wrap
+- **RAG chunking**: Section-aware by `##` headers keeps content together
+- **pev.dev scraping**: WebFetch works, .json API not public
+- **Embedding flow**: Python venv + incremental processing avoids OOM
+- **API defaults**: Always use `history = []` default for undefined arrays
 
 ## Infrastructure Status
 
 | Component | Status | Notes |
 |-----------|--------|-------|
-| Supabase | ✅ LIVE | hbllswwmktfqoeslgvgg.supabase.co |
-| pgvector | ✅ READY | 1536 dimensions |
-| Embeddings | ✅ 416 chunks | Section-aware chunking |
-| Next.js | ✅ LIVE | 5 routes deployed |
-| Vercel | ✅ LIVE | vesc-it.vercel.app (Frankfurt) |
-| n8n | 🔲 PENDING | Needs VPS URL |
-
-## QA Status
-- **All Tests**: 10/10 PASS (pending RAG re-verification)
-- **Chatbot**: BMS, Amps, Faults, Hardware, tiltback_duty ✅
-- **Little FOCer V3**: ✅ FIXED - now returns ±150A/±100A/60V
-- **UI Features**: Playground, Safety, Troubleshoot, Learn ✅
+| Supabase | ✅ LIVE | 927 chunks, pgvector 1536d |
+| Vercel | ✅ LIVE | 5 routes, Frankfurt region |
+| n8n | 🔄 PARTIAL | Webhook + Code, needs completion |
+| Knowledge Base | ✅ LIVE | 39 files in knowledge-base/ |
 
 ## If I Crash - Continue Here
 
-**Current State:** RAG bug fixed, waiting for claude-10 re-verification
+**Current State:** All deployed, 927 embeddings, awaiting Round 4 QA
 **Next Action:**
-1. Wait for claude-10 to re-verify RAG queries
-2. Consider applying section-aware chunking to ALL KB files
-3. n8n automation (needs VPS URL)
+1. Wait for claude-10 QA results on 843 chunks
+2. If claude-9 sends more KB docs → embed them
+3. When directed → finish n8n workflow
+4. When directed → start Chat UI redesign
 
-**Key Files:**
-- Embedding: inline Python script with section-aware chunking
-- Learn route: `src/app/learn/page.tsx`
-- Lesson page: `src/app/learn/[pathId]/[lessonId]/page.tsx`
-- TESTING.md: `qa/TESTING.md`
+**Key Commands:**
+```bash
+# Embed new KB file
+export $(grep -v '^#' .env.local | xargs) && source .venv/bin/activate
+# Then run Python embedding script
 
-**Chunking Fix Pattern:**
-```python
-# Split by ## or ### headers, keeping content together
-sections = re.split(r'\n(?=#{2,3}\s)', content)
+# Check embedding count
+# In Python: client.table('documents').select('id', count='exact').execute()
 ```
 
-**Git Status:** Needs push after updates
+**n8n URL:** https://n8n.srv1094773.hstgr.cloud
 
 ---
-*Updated 10:01 - Fixed RAG chunking bug, Little FOCer V3 query now correct*
+*Updated 11:01 - 927 embeddings, all routes live, awaiting Round 4 QA*
