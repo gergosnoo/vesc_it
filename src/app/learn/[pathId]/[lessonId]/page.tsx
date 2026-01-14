@@ -89,10 +89,39 @@ export default function LessonPage() {
           <h2 className="text-xl font-semibold mb-4">{step.title}</h2>
 
           {step.type === 'text' && (
-            <div className="prose prose-invert max-w-none">
-              <div className="whitespace-pre-wrap text-gray-300 leading-relaxed">
-                {step.content}
-              </div>
+            <div className="prose prose-invert max-w-none text-gray-300 leading-relaxed">
+              {step.content.split('\n').map((line, i) => {
+                // Handle markdown-style formatting
+                if (line.startsWith('|')) {
+                  // Table row
+                  const cells = line.split('|').filter(c => c.trim());
+                  return (
+                    <div key={i} className="grid grid-cols-2 gap-2 py-1 border-b border-gray-700">
+                      {cells.map((cell, j) => (
+                        <span key={j} className={j === 0 ? 'font-medium' : ''}>{cell.trim()}</span>
+                      ))}
+                    </div>
+                  );
+                }
+                if (line.startsWith('**') && line.endsWith('**')) {
+                  // Bold line
+                  return <p key={i} className="font-bold text-white mt-4">{line.replace(/\*\*/g, '')}</p>;
+                }
+                if (line.trim() === '') {
+                  return <br key={i} />;
+                }
+                // Regular text with inline bold
+                const parts = line.split(/(\*\*[^*]+\*\*)/);
+                return (
+                  <p key={i} className="my-2">
+                    {parts.map((part, j) =>
+                      part.startsWith('**') ?
+                        <strong key={j} className="text-white">{part.replace(/\*\*/g, '')}</strong> :
+                        part
+                    )}
+                  </p>
+                );
+              })}
             </div>
           )}
 

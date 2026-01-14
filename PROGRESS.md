@@ -188,6 +188,9 @@
 | 2026-01-14 | 09:12 | claude-9 | 📝 Error Recovery Guide | ~450 lines: connection issues, fault recovery, firmware |
 | 2026-01-14 | 09:15 | claude-9 | 📝 Nosedive Prevention Checklist | ~400 lines: RAG-optimized duty cycle, tiltback, headroom |
 | 2026-01-14 | 09:15 | claude-9 | 🏆 SESSION TOTAL | 6 KB docs, ~2,650 lines, all QA gaps addressed |
+| 2026-01-14 | 09:17 | claude-8 | 🚀 Learning Center + 2 KB | /learn route + 413 chunks total |
+| 2026-01-14 | 09:24 | claude-10 | 🧪 Learning Center QA | UI working, Step 2 content empty (bug), navigation OK |
+| 2026-01-14 | 09:24 | claude-10 | ✅ tiltback_duty query PASS | Returns 0.75-0.85 range + surge_duty_start relationship |
 
 ---
 
