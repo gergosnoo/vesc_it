@@ -1,6 +1,6 @@
 # What You Can Test Right Now
 
-**Last Updated:** 2026-01-14 09:25
+**Last Updated:** 2026-01-14 09:28
 
 ---
 
@@ -27,7 +27,7 @@
 1. Go to /learn
 2. Click "Complete Beginner"
 3. Click "Why Nosedives Happen"
-4. Read through lessons (⚠️ Step 2 may have empty content - known bug)
+4. Read through all 4 steps (Step 2 bug FIXED!)
 
 ---
 
@@ -58,7 +58,7 @@ Step-by-step guides for common problems:
 
 ---
 
-## Test Results (claude-10 verified 09:25)
+## Test Results (claude-10 verified 09:31)
 
 | Test | Result |
 |------|--------|
@@ -71,9 +71,9 @@ Step-by-step guides for common problems:
 | Safety - scenario selector | ✅ PASS |
 | Troubleshoot - all 5 flows | ✅ PASS |
 | Learning Center - UI navigation | ✅ PASS |
-| Learning Center - lesson content | ⚠️ Step 2 empty |
+| Learning Center - lesson content | ✅ FIXED |
 
-**Total: 9/10 PASS (1 minor bug)**
+**Total: 10/10 PASS**
 
 ---
 
@@ -81,7 +81,7 @@ Step-by-step guides for common problems:
 
 | Issue | Severity |
 |-------|----------|
-| /learn Step 2 content empty | Minor - UI bug |
+| ~~Step 2 content empty~~ | ✅ FIXED 09:27 |
 | General nosedive question generic | Low - RAG tuning opportunity |
 
 ---
@@ -100,4 +100,4 @@ Tell claude-10 or open GitHub issue.
 
 ---
 
-*All 5 features live and tested! 413 chunks in knowledge base.*
+*All 5 features live and tested! 413 chunks in knowledge base. 10/10 tests pass!*

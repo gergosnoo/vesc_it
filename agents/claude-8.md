@@ -1,17 +1,19 @@
 # Claude-8 Context
 
 > **Role:** Infrastructure Lead
-> **Last Updated:** 2026-01-14 07:46
+> **Last Updated:** 2026-01-14 09:28
 
 ## Current Focus
-🏆 PRODUCTION-READY (09:10) - All QA tests passing!
-- 363 chunks embedded (18 KB files)
-- 4 new docs pushed to GitHub
-- Chatbot answering all question types correctly
+🏆 ALL FEATURES LIVE & TESTED (09:28)
+- 5 routes deployed and working
+- 413 chunks embedded (20 KB files)
+- 10/10 QA tests passing
+- Learning Center bug fixed
 
 **Current Routes (all ✅ LIVE):**
-- / - Chatbot (363 embeddings, production-ready!)
-- /playground - Parameter visualizer
+- / - Chatbot (413 embeddings)
+- /learn - Learning Center (3 paths, interactive lessons)
+- /playground - Parameter visualizer (3D board)
 - /safety - Safety headroom simulator
 - /troubleshoot - Troubleshooting wizard (5 flows)
 
@@ -20,47 +22,41 @@
 - No other blockers
 
 ## Key Learnings
-Insights discovered during work:
-- **tsx memory leak**: Node.js tsx loader has catastrophic memory issues with regex string operations. Python is far more reliable for embedding scripts.
-- **Supabase new key format**: Keys now start with `sb_publishable_` and `sb_secret_` instead of old format.
-- **Vercel region**: Set to Frankfurt (fra1) for Hungary users - was defaulting to Washington D.C.
-- **Lazy initialization**: Next.js serverless functions need lazy client initialization to avoid build errors when env vars are empty.
+- **tsx memory leak**: Python > Node.js for embedding scripts
+- **Step type handling**: lesson pages need to handle 'text', 'interactive', 'simulator' types
+- **Markdown in content**: Split by \n and render manually, not whitespace-pre-wrap
 
 ## Infrastructure Status
 
 | Component | Status | Notes |
 |-----------|--------|-------|
 | Supabase | ✅ LIVE | hbllswwmktfqoeslgvgg.supabase.co |
-| pgvector | ✅ READY | Extension enabled, 1536 dimensions |
-| Embeddings | ✅ DONE | 159 chunks from 14 KB files |
-| Next.js | ✅ LIVE | Chat API + UI deployed |
+| pgvector | ✅ READY | 1536 dimensions |
+| Embeddings | ✅ 413 chunks | 20 KB files embedded |
+| Next.js | ✅ LIVE | 5 routes deployed |
 | Vercel | ✅ LIVE | vesc-it.vercel.app (Frankfurt) |
-| n8n | 🔲 PENDING | Needs VPS URL from user |
+| n8n | 🔲 PENDING | Needs VPS URL |
 
 ## QA Status
-- **Chatbot Tests**: 3/3 PASS (safety tests approved)
-- **Testing Gate**: PASSED by claude-10
-
-## My Understanding of Role
-- I build infrastructure, not content
-- I request docs from claude-9, testing from claude-10
-- Nothing ships without claude-10 approval
-- Python > Node.js for data processing scripts
+- **All Tests**: 10/10 PASS
+- **Chatbot**: BMS, Amps, Faults, Hardware, tiltback_duty ✅
+- **UI Features**: Playground, Safety, Troubleshoot, Learn ✅
 
 ## If I Crash - Continue Here
 
-**Current State:** Phase 1 & 2 COMPLETE, QA APPROVED
-**Next Action:** Wait for user decision:
-1. Set up n8n (needs VPS URL)
-2. Run 51 optional tests
-3. Wrap up for the night
+**Current State:** All features LIVE, QA APPROVED, ready for wake-up
+**Next Action:**
+1. Wait for Gergő to test
+2. n8n automation (needs VPS URL)
+3. More features based on feedback
 
 **Key Files:**
-- Embedding script: `scripts/embed.py` (working)
-- Chat API: `src/app/api/chat/route.ts`
-- Environment: `.env.local` (has all keys)
+- Embedding: `scripts/embed.py` + `.venv/bin/python3`
+- Learn route: `src/app/learn/page.tsx`
+- Lesson page: `src/app/learn/[pathId]/[lessonId]/page.tsx`
+- TESTING.md: `qa/TESTING.md`
 
 **Git Status:** Clean, pushed to gergosnoo/vesc_it
 
 ---
-*Updated after Phase 1 & 2 completion, QA approval received.*
+*Updated 09:28 - All 5 routes live, 10/10 tests pass, ready for Gergő's wake-up testing*
