@@ -443,6 +443,45 @@ export const TOP_10_PARAMETERS: Parameter[] = [
     visualEffect: 'vibration_indicator',
     animationKey: 'hapticPulse',
   },
+
+  // #11 - FAULT ADC HALF ERPM (VESC 6.05 Fix)
+  {
+    id: 'fault_adc_half_erpm',
+    name: 'Fault ADC Half ERPM',
+    shortName: 'Heel Lift Fix',
+    category: 'safety',
+    location: 'Refloat Cfg → Faults → fault_adc_half_erpm',
+    unit: 'ERPM',
+
+    whatItDoes:
+      'Controls at what speed heel-lift disengagement stops working.',
+    whyItMatters:
+      'After VESC 6.05, heel lift may stop working at speed. This setting fixes that critical safety issue.',
+    feelDescription:
+      'With wrong setting: you lift your heel at speed and nothing happens. With correct setting (0): heel lift works at ALL speeds.',
+
+    causeEffect: {
+      increase:
+        'Heel lift only works at lower speeds. Above this ERPM, lifting your heel does nothing. DANGEROUS.',
+      decrease:
+        'Heel lift works at higher speeds. Set to 0 for heel lift at ALL speeds (recommended).',
+    },
+
+    range: { min: 0, max: 5000, default: 1000, step: 100 },
+    safeRanges: {
+      beginner: [0, 0],
+      intermediate: [0, 0],
+      advanced: [0, 0],
+    },
+    dangerZone:
+      'Any value above 0 disables heel lift at speed! After 6.05 upgrade, ALWAYS set to 0.',
+
+    relatedParams: ['simple_stop_erpm'],
+    affectedBy: [],
+
+    visualEffect: 'heel_lift_zone',
+    animationKey: 'heelLiftSpeed',
+  },
 ];
 
 // ============================================================

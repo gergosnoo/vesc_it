@@ -496,6 +496,34 @@ Increasing tiltback to 90% = only 10% margin (risky!)
           ],
         },
         {
+          id: 'bms-bypass-safety',
+          type: 'text',
+          title: '🔥 CRITICAL: BMS Bypass Safety',
+          content: `
+If your board has a BMS (Battery Management System) bypass, you MUST understand this:
+
+**❌ WRONG WAY: Bridging B- Terminal**
+- Some guides show bridging the B- terminal
+- This DISABLES overcharge protection
+- Regenerative braking can overcharge cells
+- Result: **FIRE RISK** from thermal runaway
+
+**✅ RIGHT WAY: Charge-Only Bypass**
+- BMS stays in the charging path
+- VESC handles discharge directly
+- Overcharge protection still works
+- Regen braking is safe
+
+**If you're not sure how your BMS is wired, ASK before riding.**
+
+This is not a tune setting - it's hardware wiring. Get it wrong and your battery could catch fire.
+          `,
+          tips: [
+            'If someone else built your board, ask them how the BMS is wired',
+            'Charge-only bypass is the ONLY safe method',
+          ],
+        },
+        {
           id: 'warning-quiz',
           type: 'quiz',
           title: 'Final Check',
