@@ -297,6 +297,79 @@ foc_detect_all [current] [min_erpm] [low_duty]
 
 ---
 
+## Detection Edge Cases (Advanced)
+
+### "R is 0" Due to Receiver Interference
+
+**Symptom:** R shows 0 even with good connections.
+
+**Cause:** PPM/ADC receiver noise during detection. Radio receivers (especially 2.4GHz) can inject noise into current sensing.
+
+**Fix:**
+1. **Disconnect receiver completely** during detection
+2. If wired remote, unplug signal wire (leave power)
+3. Move VESC away from radio receiver
+4. Shield cables if interference persists
+
+### Detection Failed Reason -11 (or -10x codes)
+
+**Symptom:** "Detection failed, reason: -11" or similar negative code.
+
+**Cause:** A fault occurred DURING detection. Code = -100 + fault_code.
+
+**Debug Steps:**
+1. Open VESC Tool → Terminal
+2. Type `faults` and press Enter
+3. Note the fault name
+4. Type `faults_clear` to clear
+5. Fix the underlying issue, retry detection
+
+**Common -10x codes:**
+| Code | Fault | Fix |
+|------|-------|-----|
+| -101 | Over voltage | Lower input voltage |
+| -102 | Under voltage | Charge battery |
+| -103 | DRV error | Check phase wires, gate driver |
+| -104 | Overcurrent | Reduce detection current |
+| -111 | Encoder SPI | Check encoder wiring |
+
+### Detection Values Way Off (Wrong R/L/λ)
+
+**Symptom:** Detection "succeeds" but values are wildly wrong - motor runs badly.
+
+**Cause:** Switching frequency too high for accurate measurement on some motors.
+
+**Fix:**
+1. Go to **Motor Settings → FOC → Advanced**
+2. Reduce **FOC Switching Frequency** to **5-10 kHz** temporarily
+3. Run detection again
+4. Values should now be accurate
+5. Optionally increase frequency back after detection (if motor runs well)
+
+**Why this works:** Lower switching frequency = longer measurement windows = more accurate R/L detection.
+
+### Big Motor Detection Issues (Hub motors, >5kW)
+
+**Symptom:** Large motors fail detection or give poor results.
+
+**Cause:** Default detection current (5A) is too low for large motors with high cogging torque.
+
+**Fix:**
+1. **Increase detection current to 30-50A** (depends on motor rating)
+2. **Lower switching frequency to 3-5 kHz**
+3. Ensure power supply can handle detection current
+4. Motor MUST be able to spin freely (remove wheel if needed)
+
+**Settings for large motors:**
+| Parameter | Value |
+|-----------|-------|
+| Detection Current | 30-50A |
+| FOC Switching Freq | 3-5 kHz |
+| Min ERPM | 150 |
+| Detection Duty | 0.1-0.15 |
+
+---
+
 ## When Detection Keeps Failing
 
 If nothing works:

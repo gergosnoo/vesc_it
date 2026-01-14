@@ -1,111 +1,64 @@
 # Claude-8 Context
 
 > **Role:** Infrastructure Lead
-> **Last Updated:** 2026-01-14 11:58
+> **Last Updated:** 2026-01-14 14:03 (END OF DAY)
 
 ## Current Focus
-✅ ALL INFRASTRUCTURE COMPLETE (11:58)
+🏁 **END OF DAY** - 1057 CHUNKS, Production Ready!
 
-**Live at https://vesc-it.vercel.app:**
+### Today's Accomplishments
+✅ FOC Overmodulation embedded (+12) - QA APPROVED
+✅ WS2812 LED Patterns embedded (+12) - QA APPROVED
+✅ XR Conversion Guide embedded (+11) - Awaiting QA
+✅ 3D Floatwheel fixed (dimensions + orientation) - QA APPROVED
+✅ All 13 features QA APPROVED by claude-10
+✅ Embedding pipeline running smoothly
+
+### Live Infrastructure
 | Route | Status | Description |
 |-------|--------|-------------|
-| `/` | ✅ ChatGPT UI | Dark theme, 938 embeddings |
-| `/api/embed` | ✅ LIVE | Embedding API for n8n automation |
-| `/api/chat` | ✅ LIVE | RAG chatbot with GPT-4o-mini |
-| `/learn` | ✅ LIVE | Learning Center (3 paths) |
-| `/playground` | ✅ LIVE | Parameter visualizer |
+| `/` | ✅ ChatGPT UI | 1057 embeddings |
+| `/playground` | ✅ **3D** | Floatwheel visualizer |
+| `/learn` | ✅ LIVE | Learning Center |
 | `/safety` | ✅ LIVE | Safety simulator |
 | `/troubleshoot` | ✅ LIVE | 5 diagnostic wizards |
 
-## Session Progress (11:58)
+## Session Stats
 
-| Task | Status |
-|------|--------|
-| Fixed RAG chunking bug | ✅ Done |
-| Scraped pev.dev (9 posts) | ✅ Done |
-| Embedded 927 chunks (4 rounds) | ✅ Done |
-| Fixed API bug (history undefined) | ✅ Done |
-| ChatGPT-style UI redesign | ✅ Done |
-| Pushed to Vercel (38 files) | ✅ Done |
-| UI QA verification | ✅ PASSED |
-| Created /api/embed endpoint | ✅ Done |
-| FOC doc embedded (+11 chunks) | ✅ Done (938 total) |
-| n8n workflow configured | ✅ ACTIVE |
-
-## n8n Workflow - COMPLETE
-
-**URL:** https://n8n.srv1094773.hstgr.cloud/workflow/5HoXjl1A1myy1ge3
-**Status:** ✅ ACTIVE
-
-**Flow:**
-```
-GitHub Push → Webhook → Code (extract .md) → HTTP Request → /api/embed
-```
-
-**Configuration:**
-- Webhook: Receives GitHub push events
-- Code: Extracts .md files from commits, builds raw URLs
-- HTTP Request: POST to https://vesc-it.vercel.app/api/embed
-  - Authorization: Bearer N8N_API_KEY
-  - Body: `{"url": "{{ $json.url }}", "source": "{{ $json.path }}"}`
-
-**Test:** Push any .md file to knowledge-base/ and it will auto-embed!
-
-## Embedding API
-
-Created `/api/embed` endpoint for automated embedding:
-- POST with Bearer token auth (N8N_API_KEY)
-- Accepts `url` (GitHub raw) or `content` (direct text)
-- Section-aware chunking (~1500 chars)
-- Auto-embeds and stores in Supabase
-
-**Usage:**
-```bash
-curl -X POST https://vesc-it.vercel.app/api/embed \
-  -H "Authorization: Bearer $N8N_API_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{"url": "https://raw.githubusercontent.com/.../file.md", "source": "file.md"}'
-```
+| Metric | Value |
+|--------|-------|
+| Starting chunks | 1034 |
+| Ending chunks | 1057 |
+| Docs embedded | 3 (overmod, LED, XR) |
+| QA approvals | 14 features |
 
 ## Infrastructure Status
 
 | Component | Status | Notes |
 |-----------|--------|-------|
-| Supabase | ✅ LIVE | 938 chunks, pgvector 1536d |
-| Vercel | ✅ LIVE | 7 routes, ChatGPT UI + APIs |
-| n8n | ✅ ACTIVE | Auto-embeds .md on GitHub push |
-| Knowledge Base | ✅ COMPLETE | 40 files, all embedded |
-
-## Key Learnings
-
-- **OpenAI n8n node** - NO embedding action, use HTTP Request instead
-- **Section-aware chunking** - keeps headers with content for better RAG
-- **Tailwind classes** - gray-800/900 for dark theme
-- **n8n Delete key** - removes nodes on canvas
+| Supabase | ✅ LIVE | 1057 chunks |
+| Vercel | ✅ LIVE | 7 routes + 3D |
+| n8n | ✅ ACTIVE | Auto-embeds on push |
+| Knowledge Base | ✅ 51 docs | All embedded |
 
 ## If I Crash - Continue Here
 
-**Current State:** ALL INFRASTRUCTURE COMPLETE
-**Next Actions:**
-1. Monitor n8n workflow for any errors
-2. Await claude-10 QA approval on any new content
-3. Available for new features/improvements
+**Current State:** 1057 chunks, end of day 2026-01-14
+**Supabase:** 1057 chunks (51 KB docs)
+**Last Action:** Embedded xr-to-vesc-conversion-guide.md (+11 chunks)
+**Pending QA:** XR Conversion Guide (awaiting claude-10)
+**Test URL:** https://vesc-it.vercel.app
 
-**Key Commands:**
-```bash
-# Check embedding count
-cd /Users/gergokiss/work/gergo/vesc/vesc_it
-source .venv/bin/activate
-python -c "from supabase import create_client; import os; c = create_client(os.environ['SUPABASE_URL'], os.environ['SUPABASE_SERVICE_ROLE_KEY']); print(c.table('documents').select('id', count='exact').execute().count)"
+### Tomorrow's Priorities
+1. Get QA approval for XR Conversion Guide
+2. Embed any new content from claude-9
+3. Continue production pipeline
 
-# Manual embed if needed
-curl -X POST https://vesc-it.vercel.app/api/embed \
-  -H "Authorization: Bearer $(grep N8N_API_KEY .env.local | cut -d= -f2)" \
-  -H "Content-Type: application/json" \
-  -d '{"url": "https://raw.githubusercontent.com/gergosnoo/vesc_it/master/knowledge-base/YOUR-FILE.md"}'
-```
-
-**n8n URL:** https://n8n.srv1094773.hstgr.cloud/workflow/5HoXjl1A1myy1ge3
+### Key Learnings Today
+- Metadata JSON filter queries need exact match syntax
+- Content search (ilike) works reliably for verification
+- 3D Floatwheel: wheel axis X, forward +Z, board 30"×9.5"
+- Embedding pipeline stable at ~12 chunks per doc
 
 ---
-*Updated 11:58 - n8n ACTIVE, all infrastructure complete, 938 embeddings*
+*Session ended 14:03 - 1057 chunks, 14 features QA approved*

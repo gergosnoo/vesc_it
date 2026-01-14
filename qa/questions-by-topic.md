@@ -265,3 +265,40 @@
 | "Android RT log crashes app" | GitHub #378 | Android 6.05 |
 | "VESC Express AP WiFi not connecting" | GitHub #354 | Express AP mode |
 | "ADC app blocks keyboard controls" | GitHub #394 | All hardware |
+
+---
+
+## 14. Fresh Questions Mined (2026-01-14 12:20)
+
+**Source:** vesc-project.com, esk8.news, pev.dev, GitHub issues
+**Mined by:** claude-10
+
+| Question | Source | Priority |
+|----------|--------|----------|
+| "Throttle acts like on/off switch - 15% to 100%" | vesc-project | HIGH |
+| "VESC Express WiFi not showing - 5V issue?" | vesc-project | HIGH |
+| "Firmware stuck at 2.18, won't update to 6.05" | vesc-project | HIGH |
+| "Motor won't run when VESC BMS connected via CAN" | vesc-project | HIGH |
+| "Motor detection values change wildly each time" | esk8.news | HIGH |
+| "ESC powers off during motor detection" | esk8.news | HIGH |
+| "Motor makes violent sounds after FOC config" | esk8.news | HIGH |
+| "XRV wheel spins too fast in Handtest mode" | pev.dev | MEDIUM |
+| "FAULT_CODE_HIGH_OFFSET_CURRENT_SENSOR_1" | pev.dev | MEDIUM |
+| "VESC Tool crashes on 4K monitor full screen" | GitHub #395 | LOW |
+
+---
+
+## 15. Detection Edge Cases (NEW - 2026-01-14 13:27)
+
+**Source:** vesc-project.com forum mining
+
+| Question | Source | Priority |
+|----------|--------|----------|
+| "FOC detection shows R is 0 - what's wrong?" | vesc-project/node/139 | HIGH |
+| "Detection failed reason -11 - what does it mean?" | vesc-project/node/909 | HIGH |
+| "Autodetection values way off each time" | vesc-project/node/943 | HIGH |
+| "How to detect big/high-power motors?" | vesc-project/node/52 | MEDIUM |
+| "Sensor detection failed on HPM5000B motor" | vesc-project/node/3602 | MEDIUM |
+| "What switching frequency for motor detection?" | vesc-project | MEDIUM |
+
+**KB Coverage:** Mostly covered in motor-detection-troubleshooting.md, but "-11 error" and "R=0" edge cases may need explicit mention.

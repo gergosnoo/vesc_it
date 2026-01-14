@@ -6,7 +6,7 @@
 
 This guide walks you through tuning your Refloat/Float package from first ride to confident cruiser. Follow this progression over your first 10-20 rides.
 
-**Source:** Community best practices, refloat/refloat.c defaults, pev.dev guides
+**Source:** `refloat/src/conf/datatypes.h` (parameters), `refloat/src/main.c` (defaults: kp=8.0, kp_brake=1.0)
 
 ---
 

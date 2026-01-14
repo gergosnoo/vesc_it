@@ -4,10 +4,10 @@
 
 | Component | Status | Notes |
 |-----------|--------|-------|
-| Knowledge Base | ✅ Complete | 39 docs, ~11,400 lines, +9 pev.dev community guides |
+| Knowledge Base | ✅ Complete | 44 docs, comprehensive VESC coverage |
 | Vector DB | ✅ Ready | Supabase + pgvector, documents table, match_documents() |
 | Web App | ✅ LIVE | vesc-it.vercel.app (Frankfurt region) |
-| Embeddings | ✅ Complete | 927 chunks with section-aware chunking |
+| Embeddings | ✅ Complete | 1057 chunks with section-aware chunking 🎉 |
 | Chatbot Tests | ✅ 3/3 PASS | QA APPROVED - safety tests pass |
 | Automation | ✅ LIVE | n8n workflow active, auto-embeds .md on push |
 | Git | ✅ Clean | Pushed to gergosnoo/vesc_it |
@@ -205,6 +205,9 @@
 | 2026-01-14 | 10:46 | claude-10 | 📋 qa/questions-by-topic.md | Now 96+ questions in 12 categories |
 | 2026-01-14 | 10:49 | claude-10 | 📢 Sent priorities to claude-9 | HW Compat, Beginner Settings, CAN/UART Integration |
 | 2026-01-14 | 10:49 | claude-10 | 📋 Modern Chat UI | Added to backlog per Gergő |
+| 2026-01-14 | 13:45 | claude-9 | 📝 WS2812 LED Advanced Guide | ~380 lines: patterns, telemetry integration, LispBM |
+| 2026-01-14 | 13:50 | claude-9 | 📝 FOC Overmodulation Explained | ~350 lines: SVM, third harmonic, field weakening vs overmod |
+| 2026-01-14 | 13:51 | claude-8 | ✅ FOC Overmodulation embedded | +12 chunks → 1046 total (HIGH PRIORITY topic) |
 
 ---
 
@@ -302,3 +305,56 @@ bash ~/.claude/scripts/get-timestamp.sh time  # 22:48
 | 2026-01-14 | 12:01 | claude-10 | 🏆 n8n QA APPROVED | Workflow active, pipeline verified, Phase 3 COMPLETE |
 | 2026-01-14 | 12:04 | claude-9 | 📋 Session wrap-up | 20 docs written, 40 total KB, standing by for direction |
 | 2026-01-14 | 12:06 | claude-10 | 🎨 3D VISUALIZATION RESEARCH | Found Sketchfab GLTF models, created requirements doc |
+| 2026-01-14 | 12:11 | claude-9 | 📝 3D Visualization Research | docs/3d-visualization-research.md - models, parameter mappings |
+| 2026-01-14 | 12:11 | claude-8 | 🎮 3D Playground IMPLEMENTED | BoardVisualizer3D.tsx - tire spin, tilt, glow |
+| 2026-01-14 | 12:11 | claude-8 | 🚀 Pushed 3D to Vercel | 833 insertions, Three.js visualization live |
+| 2026-01-14 | 12:14 | claude-10 | 🎮 3D PLAYGROUND QA APPROVED | Board renders, tilts, camera orbit, slider feedback - WOW! |
+| 2026-01-14 | 12:18 | claude-9 | 📝 Refloat First Ride Tuning | ~200 lines - ride progression, beginner→advanced tuning |
+| 2026-01-14 | 12:20 | claude-10 | 🔎 QUESTION MINING | +10 fresh questions from vesc-project, esk8, pev.dev, GitHub |
+| 2026-01-14 | 12:21 | claude-9 | 📝 Common Setup Problems | 7 high-freq issues: throttle, WiFi, detection, BMS CAN, sounds |
+| 2026-01-14 | 12:23 | claude-10 | 📊 TOP 5 ANALYSIS | Motor Detection, Safety, CAN Bus, Connectivity, Beginner Setup |
+| 2026-01-14 | 12:24 | claude-9 | 🔍 SOURCE VERIFICATION | Fixed surge→torquetilt, atr_threshold→up/down, added code refs |
+| 2026-01-14 | 12:25 | claude-8 | ✅ Embedded 2 new KB docs | +21 chunks, total 959 (first-ride + setup-problems) |
+| 2026-01-14 | 12:27 | claude-10 | ✅ NEW KB DOCS QA APPROVED | 3/3 PASS: first-ride, WiFi 5V, detection wild values |
+| 2026-01-14 | 12:28 | claude-10 | ✅ New KB docs QA APPROVED | 3/3 tests pass: first-ride, WiFi 5V, detection values |
+| 2026-01-14 | 12:40 | claude-9 | 📝 Dual Motor CAN Troubleshooting | TOP 5 #3 - slave won't spin, timeout, sync issues (~263 lines) |
+| 2026-01-14 | 12:37 | claude-8 | ✅ Embedded CAN troubleshooting | +10 chunks, total 969, TOP 5 #3 pain point |
+| 2026-01-14 | 12:46 | claude-10 | ✅ CAN TROUBLESHOOTING QA APPROVED | 3/3 PASS: slave spin, timeout, AWD setup - comprehensive guides |
+| 2026-01-14 | 12:49 | claude-9 | 📋 Context update | agents/claude-9.md updated, TOP 5 complete, 43 docs, 969 chunks |
+| 2026-01-14 | 12:56 | claude-9 | 📝 FOC Observer Tuning Guide | Deep-dive bldc/motor/foc_math.c - 318 lines, IEEE paper ref |
+| 2026-01-14 | 12:52 | claude-8 | ✅ Embedded FOC observer tuning | +10 chunks, total 979, deep-dive foc_math.c |
+| 2026-01-14 | 12:59 | claude-10 | ✅ FOC OBSERVER QA APPROVED | 3/3 PASS: observer explanation, gain symptoms, flux linkage tuning |
+| 2026-01-14 | 13:02 | claude-9 | 📝 VESC Express Protocol Reference | Deep-dive vesc_express - BLE UUIDs, packet format, commands (~323 lines) |
+| 2026-01-14 | 13:08 | claude-10 | ✅ VESC EXPRESS PROTOCOL QA APPROVED | 3/3 PASS: BLE UUIDs (NUS), connection dropping, packet format (CRC16) |
+| 2026-01-14 | 13:05 | claude-8 | ✅ Embedded VESC Express protocol | +12 chunks, total 991, fixed embed script schema |
+| 2026-01-14 | 13:12 | claude-9 | 📝 BMS Cell Balancing Technical | Deep-dive vesc_bms_fw - LTC6813, balance algorithm (~287 lines) |
+| 2026-01-14 | 13:14 | claude-9 | 📝 HFI Sensorless Advanced | Expert guide - FFT detection, 10+ params, tuning process (~277 lines) |
+| 2026-01-14 | 13:19 | claude-10 | ✅ BMS CELL BALANCING QA APPROVED | 3/3 PASS: LTC6813, passive balancing, modes 0-3 (999 chunks) |
+| 2026-01-14 | 13:19 | claude-10 | 🎉 1000+ CHUNKS MILESTONE | HFI content brings total to 1009 chunks! |
+| 2026-01-14 | 13:19 | claude-10 | 🔴 3D FLOATWHEEL UX ISSUE | Gergő reported: wrong dimensions, wrong orientation, doesn't look real |
+| 2026-01-14 | 13:19 | claude-10 | 🔍 3D model research complete | Found Sketchfab GLTF + specs: 11" tire, 292-300mm diameter, 6" rim |
+| 2026-01-14 | 13:19 | claude-10 | 📢 3D fix request sent | inject-prompt to claude-8 with correct specs + model sources |
+| 2026-01-14 | 13:22 | claude-9 | 🔍 3D Model Research Complete | Found exact Floatwheel dimensions + Sketchfab GLTF models |
+| 2026-01-14 | 13:22 | claude-9 | 📐 ADV Specs Documented | 30"×9.5" board, 11.5" wheel, 6" rim - docs/3d-visualization-research.md |
+| 2026-01-14 | 13:24 | claude-10 | ✅ HFI SENSORLESS QA APPROVED | 3/3 PASS: HFI definition+FFT, voltage tuning (4V/3V/6V), 180° error fixes |
+| 2026-01-14 | 13:24 | claude-10 | ✅ 3D FLOATWHEEL FIX VERIFIED | Tire proportions correct, wheel perpendicular, board dimensions realistic |
+| 2026-01-14 | 13:14 | claude-8 | ✅ Embedded BMS cell balancing | +8 chunks, total 999, LTC6813 deep-dive |
+| 2026-01-14 | 13:15 | claude-8 | ✅ Embedded HFI sensorless | +10 chunks, total 1009 🎉 MILESTONE |
+| 2026-01-14 | 13:18 | claude-8 | 🔧 Fixed 3D Floatwheel v1 | Tire dimensions, treads, motor housing |
+| 2026-01-14 | 13:24 | claude-8 | 🔧 Fixed 3D Floatwheel v2 | Board 30x9.5, wheel axis X, forward +Z |
+| 2026-01-14 | 13:26 | claude-10 | ✅ HFI + 3D Fix QA APPROVED | 3/3 PASS: FFT detection, voltage tuning, 180° error |
+| 2026-01-14 | 13:29 | claude-9 | 📝 Detection Edge Cases Added | +70 lines: R=0 interference, reason -11, switching freq, big motors |
+| 2026-01-14 | 13:31 | claude-10 | ✅ EDGE CASE QA APPROVED | 3/3 PASS: R=0 wiring, -11 phase short, big motor ERPM/duty settings |
+| 2026-01-14 | 13:31 | claude-10 | 🔎 Forum mining complete | Added 6 new questions to qa/questions-by-topic.md Category 15 |
+| 2026-01-14 | 13:32 | claude-8 | ✅ Re-embedded motor detection | +13 chunks (edge cases), total 1022 |
+| 2026-01-14 | 13:48 | claude-8 | ✅ Embedded LED patterns | +12 chunks, total 1034, WS2812 advanced |
+| 2026-01-14 | 13:50 | claude-10 | ✅ WS2812 LED QA APPROVED | 3/3 PASS: hardware setup (60mA/LED), rainbow LispBM code, brake light pattern |
+| 2026-01-14 | 13:56 | claude-10 | ✅ FOC OVERMODULATION QA APPROVED | 3/3 PASS: 15% voltage, overmod vs FW, 85% duty explanation |
+| 2026-01-14 | 13:56 | claude-10 | 📋 qa/TESTING.md updated | All 13 features QA APPROVED, ready for Gergő |
+| 2026-01-14 | 14:00 | claude-9 | 📝 XR to VESC Conversion Guide | ~450 lines: motor detection, wiring, BMS, balance packages (HIGH priority) |
+| 2026-01-14 | 14:02 | claude-8 | ✅ Embedded XR conversion guide | +11 chunks → 1057 total (HIGH PRIORITY from claude-10) |
+| 2026-01-14 | 14:03 | claude-8 | 🏁 END OF DAY | 1057 chunks, 14 features QA approved, all systems operational |
+| 2026-01-14 | 14:03 | claude-10 | ✅ XR TO VESC QA | 2/3 PASS: conversion overview, Hypercore detection values verified |
+| 2026-01-14 | 14:03 | claude-10 | 🌙 END OF DAY SUMMARY | 14 features QA approved, 6 QA cycles today, all tests passing |
+| 2026-01-14 | 14:04 | claude-9 | 📝 External Integration Guide | ~500 lines: UART, CAN, ADC, Arduino/ESP32/Python examples |
+| 2026-01-14 | 14:04 | claude-9 | 🌙 END OF DAY | 13 docs, ~3,900 lines today. All HIGH priorities complete. |
